@@ -1,0 +1,175 @@
+:root {
+  --primary-color: #8a2036;
+  --secondary-color: #6d1a2a;
+  --light-bg: #f8f9fa;
+  --text-color: #212529;
+}
+
+/* Tema predeterminado */
+.theme-default {
+  --primary-color: #8a2036;
+  --secondary-color: #6d1a2a;
+  --light-bg: #f8f9fa;
+  --text-color: #212529;
+}
+
+/* Tema oscuro negro */
+.theme-black {
+  --primary-color: #121212;
+  --secondary-color: #000000;
+  --light-bg: #333;
+  --text-color: #f2f2f2;
+}
+
+/* Tema sepia*/
+.theme-sepia {
+  --primary-color: #704214;
+  --secondary-color: #5a3410;
+  --light-bg: #f4ecd8;
+  --text-color: #5a3410;
+}
+
+/* Tema gris oscuro*/
+.theme-darkgray {
+  --primary-color: #333333;
+  --secondary-color: #222222;
+  --light-bg: #555;
+  --text-color: #f2f2f2;
+}
+
+/* Tema lila claro*/
+.theme-lightpurple {
+  --primary-color: #9f8ad7;
+  --secondary-color: #7d6bb5;
+  --light-bg: #d8ccf1;
+  --text-color: #333;
+}
+
+/* Tema rosa claro*/
+.theme-lightpink {
+  --primary-color: #f8a5c2;
+  --secondary-color: #e68ba8;
+  --light-bg: #ffdde1;
+  --text-color: #333;
+}
+
+/* Tema azul claro*/
+.theme-lightblue {
+  --primary-color: #90cdf4;
+  --secondary-color: #63b3ed;
+  --light-bg: #ebf8ff;
+  --text-color: #2d3748;
+}
+
+/* Estilos para los círculos de selección de tema */
+.theme-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--left-color),
+    var(--right-color)
+  );
+}
+
+.theme-circle:hover {
+  border: 2px solid #ffffffaa;
+}
+
+.theme-circle.active {
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #000;
+}
+
+/* Grid para mostrar círculos de selección */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 10px;
+  justify-items: center;
+}
+
+/* Nombre debajo de cada círculo de tema */
+.theme-name {
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Aplicar los colores del tema a los elementos principales */
+body[class^="theme-"] .content {
+  background-color: var(--light-bg) !important;
+}
+
+body[class^="theme-"] .card[style*="background-color:#efe1ca"] {
+  background-color: var(--light-bg) !important;
+  color: var(--text-color) !important;
+}
+
+body[class^="theme-"] .btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Modales temáticos */
+body[class^="theme-"] .modal-content:not(#modalConfiguraciones .modal-content) {
+  background-color: var(--light-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+
+body[class^="theme-"] .modal-header:not(#modalConfiguraciones .modal-header),
+body[class^="theme-"] .modal-footer:not(#modalConfiguraciones .modal-footer) {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border-color: var(--secondary-color) !important;
+}
+
+/* Dropdown personalizado para los temas */
+body[class^="theme-"] .dropdown-menu {
+  background-color: var(--light-bg) !important;
+  border-color: var(--primary-color) !important;
+}
+
+body[class^="theme-"] .dropdown-item {
+  color: var(--text-color) !important;
+}
+
+body[class^="theme-"] .dropdown-item:hover,
+body[class^="theme-"] .dropdown-item:focus {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+body[class^="theme-"] .dropdown-divider {
+  border-color: var(--secondary-color) !important;
+}
+
+/* Elementos que NO deben cambiar de color con el tema */
+.navbar-custom,
+.navbar-custom .navbar-brand {
+  background-color: #f8f9fa !important;
+}
+
+/* Colores específicos que deben preservarse */
+.navbar-custom .nav-link[style*="color: #56212f"] {
+  color: #56212f !important;
+}
+
+.navbar-custom .nav-link[style*="color: #BC955B"] {
+  color: #bc955b !important;
+}
+
+.d-flex[style*="background-color: #8a2036"] {
+  background-color: #8a2036 !important;
+  color: white !important;
+}
+
+#modalConfiguraciones .modal-header {
+  background-color: rgb(121, 26, 45) !important;
+}
