@@ -1,0 +1,198 @@
+/* Variables de color */
+:root {
+  --primary-color: #8a2036;
+  --secondary-color: #f8f9fa;
+  --accent-color: #d4af37;
+  --text-color: #333;
+  --light-text: #6c757d;
+}
+
+/* Estilos generales */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Header estilos */
+.admin-title {
+  font-size: 15px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: var(--secondary-color);
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.hero-section h1 {
+  color: var(--primary-color);
+}
+
+/* Section Tituulos */
+.section-title {
+  font-weight: 700;
+  color: var(--primary-color);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
+}
+
+.section-subtitle {
+  color: var(--light-text);
+  font-size: 1.1rem;
+}
+
+/* Feature Cards */
+.feature-card {
+  background: white;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+/* Elementos requeridos */
+.requirement-item {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(138, 32, 54, 0.05);
+}
+
+.requirement-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Pasos del proceso */
+.process-step {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Tarjetas */
+.project-card {
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card .card-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1.25rem;
+  border-bottom: none;
+}
+
+.project-features {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-features li {
+  margin-bottom: 0.5rem;
+}
+
+.project-features i {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+/* Sección de contactos */
+.contact-method {
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.contact-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+/* Ajustes de responsividad */
+@media (max-width: 768px) {
+  .hero-section {
+    text-align: center;
+  }
+
+  .hero-section .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .hero-section .d-flex {
+    flex-direction: column;
+  }
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature-card,
+.project-card,
+.contact-method {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.feature-card:nth-child(2),
+.project-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.feature-card:nth-child(3),
+.project-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
