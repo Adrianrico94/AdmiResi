@@ -385,14 +385,14 @@ WHERE u_alumno.correo_electronico = ?";
   </div>
 </nav>
 
-  <!-- Modal -->
-<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+  <!-- Modal Cargando -->
+  <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true"> 
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-center">
 
       <!-- Encabezado del modal -->
       <div class="modal-header border-0">
-        <h5 class="modal-title w-100" id="miModalLabel">¡Bienvenido al Alumno del TESCI!</h5>
+        <h5 class="modal-title w-100" id="miModalLabel">¡Bienvenido Alumno al Sistema TESCI!</h5>
       </div>
 
       <!-- Cuerpo del modal -->
@@ -408,17 +408,32 @@ WHERE u_alumno.correo_electronico = ?";
           style="width: 120px; height: auto; border-radius: 10px; margin: 0 auto 15px;"
         ></video>
 
-        <!-- Mensaje de espera -->
-        <p class="mt-2 mb-3">Cargando... Por favor espera</p>
-
-        <!-- Barra de carga de izquierda a derecha -->
-        <div class="progress" style="height: 10px;">
+        <!-- Barra de carga con porcentaje -->
+        <div class="progress" style="height: 20px; position: relative;">
           <div
-            class="progress-bar progress-bar-striped progress-bar-animated"
+            id="barraProgreso"
+            class="progress-bar progress-bar-striped progress-bar-animated text-white"
             role="progressbar"
-            style="width: 0%; background-color: #8a2036; animation: grow 6s linear forwards;"
+            style="width: 0%; background-color: #8a2036;"
             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-          ></div>
+          >
+            <span id="porcentajeTexto" style="position: absolute; left: 3%; transform: translateX(-3%); font-size: 13px;">
+              0%
+            </span>
+          </div>
+        </div>
+
+        <!-- Texto y animación de carga -->
+        <div class="d-flex align-items-center mt-3">
+          <strong role="status">Cargando... Por favor espera</strong>
+
+          <div class="spinner-border spinner-border-sm ms-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+
+          <div class="spinner-grow spinner-grow-sm ms-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
 
       </div>
@@ -426,28 +441,34 @@ WHERE u_alumno.correo_electronico = ?";
   </div>
 </div>
 
-<!-- Animación para que la barra crezca de 0% a 100% -->
-<style>
-  @keyframes grow {
-    from { width: 0%; }
-    to { width: 100%; }
-  }
-</style>
-
-<!-- Script para mostrar el modal y cerrarlo automáticamente -->
+<!-- Script para animar la barra y cerrar el modal -->
 <script>
   window.onload = function () {
     const miModal = new bootstrap.Modal(document.getElementById('miModal'));
     miModal.show();
 
-    setTimeout(() => {
-      miModal.hide();
-    }, 6000); // 6000 milisegundos = 6 segundos
+    let progreso = 0;
+    const barra = document.getElementById('barraProgreso');
+    const texto = document.getElementById('porcentajeTexto');
+
+    const intervalo = setInterval(() => {
+      if (progreso >= 100) {
+        clearInterval(intervalo);
+        setTimeout(() => {
+          miModal.hide();
+        }, 500); // opcional: espera 0.5s más al llegar al 100%
+      } else {
+        progreso++;
+        barra.style.width = progreso + '%';
+        barra.setAttribute('aria-valuenow', progreso);
+        texto.innerText = progreso + '%';
+      }
+    }, 30); // velocidad de carga: ajusta este número si quieres más rápido o lento
   };
 </script>
 
 
-
+  <!--Fin Modal Cargando -->
 
 
   <!-- Modal -->
