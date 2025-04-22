@@ -328,9 +328,33 @@ WHERE u_alumno.correo_electronico = ?";
     </div>
 
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-      <li class="nav-item">
-        <a class="nav-link" style="color: black; font-size: 18px" href="#" title="Visualiza notificaciones."><i class="bi bi-bell-fill"></i></a>
-      </li>
+        <div class="dropdown">
+          <a class="btn m-2 d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php
+            if ($notificacion === null){    
+              echo "<i class='bi bi-bell'></i>";                       
+            }else{
+              echo "<i class='bi bi-bell-fill text-danger'></i>"; }
+          ?>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">NOTIFICACIÓNES</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <?php
+              if ($notificacion === null){
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> ¡Bienvenido! recuerda enviar tu propuesta de proyecto</a></li>";                            
+              }elseif ($notificacion == 1) {
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-check-circle-fill'></i> Tu proyecto ha sido <strong>aceptado</strong>. Puedes empezar a trabajar.</a></li>";              
+              }elseif ($notificacion == 0) {
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-x-circle-fill'></i> Tu proyecto ha sido <strong>rechazado</strong>. Revísalo y haz las modificaciónes necesarias.</a></li>";              
+              }elseif ($notificacion == 3) {
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong>{$alumno['nombre_completo']}</strong> ha propuesto un nuevo proyecto.</a></li>";              
+              }
+            ?>            
+          </ul>
+        </div>
 
       <div class="dropdown">
         <a class="btn btn-outline-dark dropdown-toggle btn m-2 d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
