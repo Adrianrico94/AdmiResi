@@ -88,7 +88,7 @@ if (isset($_SESSION['user_email'])) {
 
     // Consulta para obtener los alumnos asignados al docente
     $sql_alumnos = "SELECT a.id_alumno, a.matricula, CONCAT(u.nombre, ' ', u.apellido_paterno, ' ', u.apellido_materno) AS nombre_completo, 
-    a.carrera, a.horario_asignado, u.correo_electronico, a.observaciones, a.avance, a.documento
+    a.carrera, a.horario_asignado, u.correo_electronico, a.observaciones, a.avance, a.documento, a.notificacion
     FROM Alumnos a 
     JOIN Asignaciones asg ON a.id_alumno = asg.id_alumno 
     JOIN Usuarios u ON a.id_alumno = u.id_usuario
@@ -98,6 +98,12 @@ if (isset($_SESSION['user_email'])) {
     $stmt_alumnos->bind_param("i", $id_docente);
     $stmt_alumnos->execute();
     $result_alumnos = $stmt_alumnos->get_result();
+
+    // Guarda todos los datos en un array
+    $alumnos = [];
+    while ($row = $result_alumnos->fetch_assoc()) {
+        $alumnos[] = $row;
+    }
 
     // Mostrar la tabla de alumnos
     if ($result_alumnos->num_rows > 0) {
@@ -285,9 +291,43 @@ if (isset($_SESSION['user_email'])) {
       </form>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item">
-          <a class="nav-link" style="color: black; font-size: 18px" href="#"><i class="bi bi-bell-fill"></i></a>
-        </li>
+        <?php
+        $hayNotificaciones = false;
+        foreach ($alumnos as $alumno) {
+          if ($alumno['notificacion'] !== null) {
+            $hayNotificaciones = true;
+            break; 
+          }
+        }
+        ?>
+        <div class="dropdown">
+          <a class="btn m-2 d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if ($hayNotificaciones): ?>
+              <i class="bi bi-bell-fill text-danger"></i> <!-- campana roja si hay notificaciones -->
+            <?php else: ?>
+              <i class="bi bi-bell"></i> <!-- campana normal -->
+            <?php endif; ?>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">NOTIFICACIÓNES</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <?php
+            foreach ($alumnos as $alumno) {
+              if ($alumno['notificacion'] === null){
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-person-fill'></i> Se le ha asignado a <strong>{$alumno['nombre_completo']}</strong> como nuevo alumno. Revise su propuesta para el proyecto</a></li>";                            
+              }elseif ($alumno['notificacion'] == 6) {
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-person-fill'></i> El alumno <strong>{$alumno['nombre_completo']}</strong> ha sido eliminado.</a></li>";              
+              }elseif ($alumno['notificacion'] == 3) {
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> Se ha recibido un documento nuevo de <strong>{$alumno['nombre_completo']}</strong>.</a></li>";              
+              }elseif ($alumno['notificacion'] == 2) {
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong>{$alumno['nombre_completo']}</strong> ha propuesto un nuevo proyecto.</a></li>";              
+              }
+            }
+            ?>            
+          </ul>
+        </div>
 
         <div class="dropdown">
           <a class="btn btn-outline-dark dropdown-toggle btn m-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -426,35 +466,35 @@ if (isset($_SESSION['user_email'])) {
                     </thead>
                     <tbody>';
 
-            while ($row_alumno = $result_alumnos->fetch_assoc()) {
-              $per = ($row_alumno['avance'] / 31) * 100;
+            foreach ($alumnos as $alumno) {
+              $per = ($alumno['avance'] / 31) * 100;
               echo "<tr>
-                        <td>{$row_alumno['matricula']}</td>
-                        <td>{$row_alumno['nombre_completo']}</td>
-                        <td>{$row_alumno['carrera']}</td>
-                        <td>{$row_alumno['horario_asignado']}</td>
-                        <td>{$row_alumno['correo_electronico']}</td>
+                        <td>{$alumno['matricula']}</td>
+                        <td>{$alumno['nombre_completo']}</td>
+                        <td>{$alumno['carrera']}</td>
+                        <td>{$alumno['horario_asignado']}</td>
+                        <td>{$alumno['correo_electronico']}</td>
                         <td>
                             <!-- Botón para abrir el Modal -->
-                            <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modal_{$row_alumno['id_alumno']}'>
+                            <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modal_{$alumno['id_alumno']}'>
                                 Mostrar
                             </button>
                             <!-- Modal -->
-                            <div class='modal fade' id='modal_{$row_alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$row_alumno['id_alumno']}' aria-hidden='true'>
+                            <div class='modal fade' id='modal_{$alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden='true'>
                                 <div class='modal-dialog'>
                                     <div class='modal-content'>
                                         <!-- Cabecera del Modal -->
                                         <div class='modal-header'>
-                                            <h5 class='modal-title' id='modalLabel_{$row_alumno['id_alumno']}'>Detalles del Alumno</h5>
+                                            <h5 class='modal-title' id='modalLabel_{$alumno['id_alumno']}'>Detalles del Alumno</h5>
                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                         </div>
                                         <!-- Cuerpo del Modal -->
                                         <div class='modal-body'>
-                                            <p><strong>Matrícula:</strong> {$row_alumno['matricula']}</p>
-                                            <p><strong>Nombre Completo:</strong> {$row_alumno['nombre_completo']}</p>
-                                            <p><strong>Carrera:</strong> {$row_alumno['carrera']}</p>
-                                            <p><strong>Horario Asignado:</strong> {$row_alumno['horario_asignado']}</p>
-                                            <p><strong>Correo:</strong> {$row_alumno['correo_electronico']}</p>
+                                            <p><strong>Matrícula:</strong> {$alumno['matricula']}</p>
+                                            <p><strong>Nombre Completo:</strong> {$alumno['nombre_completo']}</p>
+                                            <p><strong>Carrera:</strong> {$alumno['carrera']}</p>
+                                            <p><strong>Horario Asignado:</strong> {$alumno['horario_asignado']}</p>
+                                            <p><strong>Correo:</strong> {$alumno['correo_electronico']}</p>
 
                                             <!-- Mostrar las observaciones en el modal -->
                                            <div class='mb-3'>
@@ -465,7 +505,7 @@ if (isset($_SESSION['user_email'])) {
                                                         rows='4' 
                                                         readonly 
                                                         style='resize: none; overflow-y: scroll;'>
-{$row_alumno['observaciones']}
+{$alumno['observaciones']}
                                                     </textarea>
                                             </div>
                                         </div>
@@ -475,13 +515,13 @@ if (isset($_SESSION['user_email'])) {
 
                                             <!-- Botón para Aceptar el Proyecto y actualizar la notificación -->
                                             <form action='' method='POST' class='d-inline'>
-                                                <input type='hidden' name='id_alumno' value='{$row_alumno['id_alumno']}'>
+                                                <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
                                                 <button type='submit' name='aceptar_proyecto' class='btn btn-success'>Aceptar Proyecto</button>
                                             </form>
 
                                             <!-- Botón para Rechazar el Proyecto y actualizar la notificación a 0 -->
                                             <form action='' method='POST' class='d-inline'>
-                                                <input type='hidden' name='id_alumno' value='{$row_alumno['id_alumno']}'>
+                                                <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
                                                 <button type='submit' name='rechazar_proyecto' class='btn btn-danger'>Rechazar Proyecto</button>
                                             </form>
                                         </div>
@@ -490,16 +530,16 @@ if (isset($_SESSION['user_email'])) {
                             </div>
                         </td><td>
                             <!-- Botón para abrir el Modal -->
-                            <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modal2_{$row_alumno['id_alumno']}'>
+                            <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modal2_{$alumno['id_alumno']}'>
                                 Ver avance
                             </button>
                             <!-- Modal -->
-                            <div class='modal fade' id='modal2_{$row_alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$row_alumno['id_alumno']}' aria-hidden='true'>
+                            <div class='modal fade' id='modal2_{$alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden='true'>
                                 <div class='modal-dialog'>
                                     <div class='modal-content'>
                                         <!-- Cabecera del Modal -->
                                         <div class='modal-header'>
-                                            <h5 class='modal-title' id='modalLabel_{$row_alumno['id_alumno']}'>Documentos del proyecto</h5>
+                                            <h5 class='modal-title' id='modalLabel_{$alumno['id_alumno']}'>Documentos del proyecto</h5>
                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                         </div>
                                         <!-- Cuerpo del Modal -->
@@ -507,7 +547,7 @@ if (isset($_SESSION['user_email'])) {
                                             <p><strong>Avanze de proyecto:</strong></p>
                                             <div class='progress' role='progressbar' aria-label='Success example'>
                                             
-                                            <div class='progress-bar text-bg-success' style='width: $per%'>{$row_alumno['avance']}/31</div>
+                                            <div class='progress-bar text-bg-success' style='width: $per%'>{$alumno['avance']}/31</div>
                                           </div>
                                         </div>
                                         <!-- Pie del Modal -->
@@ -515,16 +555,16 @@ if (isset($_SESSION['user_email'])) {
                                           
 
                                             <!-- Botón para Abrir documentos -->
-                                            <button type='submit' name='abrir documentos' onclick=\"openf('{$row_alumno['matricula']}', '{$row_alumno['documento']}')\" class='btn btn-primary'>Ver ultimo documento</button>
+                                            <button type='submit' name='abrir documentos' onclick=\"openf('{$alumno['matricula']}', '{$alumno['documento']}')\" class='btn btn-primary'>Ver ultimo documento</button>
 
                                             <!-- Botón para Aceptar el documento -->
                                             <form action='' method='POST' class='d-inline'>
-                                                <input type='hidden' name='id_alumno' value='{$row_alumno['id_alumno']}'>
+                                                <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
                                                 <button type='submit' name='aceptar_documento' class='btn btn-success'>Aceptar</button>
                                             </form>
                                             <!-- Botón para Rechazar el documento -->
                                             <form action='' method='POST' class='d-inline'>
-                                                <input type='hidden' name='id_alumno' value='{$row_alumno['id_alumno']}'>
+                                                <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
                                                 <button type='submit' name='rechazar_documento' class='btn btn-danger'>Rechazar</button>
                                             </form>
                                         </div>

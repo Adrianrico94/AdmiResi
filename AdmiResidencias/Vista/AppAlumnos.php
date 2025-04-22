@@ -350,7 +350,7 @@ WHERE u_alumno.correo_electronico = ?";
               }elseif ($notificacion == 0) {
                 echo "<li><a class='dropdown-item' href='#'><i class='bi bi-x-circle-fill'></i> Tu proyecto ha sido <strong>rechazado</strong>. Revísalo y haz las modificaciónes necesarias.</a></li>";              
               }elseif ($notificacion == 3) {
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong>{$alumno['nombre_completo']}</strong> ha propuesto un nuevo proyecto.</a></li>";              
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong></strong> ha propuesto un nuevo proyecto.</a></li>";              
               }
             ?>            
           </ul>
