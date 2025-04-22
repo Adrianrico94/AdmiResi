@@ -361,6 +361,70 @@ WHERE u_alumno.correo_electronico = ?";
   </div>
 </nav>
 
+  <!-- Modal -->
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+
+      <!-- Encabezado del modal -->
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="miModalLabel">¡Bienvenido al Alumno del TESCI!</h5>
+      </div>
+
+      <!-- Cuerpo del modal -->
+      <div class="modal-body">
+
+        <!-- Video animado tipo loader -->
+        <video
+          src="..\Recursos\Banners\fotos-largas\gif.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          style="width: 120px; height: auto; border-radius: 10px; margin: 0 auto 15px;"
+        ></video>
+
+        <!-- Mensaje de espera -->
+        <p class="mt-2 mb-3">Cargando... Por favor espera</p>
+
+        <!-- Barra de carga de izquierda a derecha -->
+        <div class="progress" style="height: 10px;">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            style="width: 0%; background-color: #8a2036; animation: grow 6s linear forwards;"
+            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+          ></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Animación para que la barra crezca de 0% a 100% -->
+<style>
+  @keyframes grow {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+</style>
+
+<!-- Script para mostrar el modal y cerrarlo automáticamente -->
+<script>
+  window.onload = function () {
+    const miModal = new bootstrap.Modal(document.getElementById('miModal'));
+    miModal.show();
+
+    setTimeout(() => {
+      miModal.hide();
+    }, 6000); // 6000 milisegundos = 6 segundos
+  };
+</script>
+
+
+
+
 
   <!-- Modal -->
   <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
