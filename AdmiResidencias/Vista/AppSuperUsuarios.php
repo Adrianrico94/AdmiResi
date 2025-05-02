@@ -260,10 +260,44 @@ $result = $conn->query($sql);
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-search"></i></span>
                     <input class="form-control search-bar me-2" type="search" placeholder="Buscar"
-                        aria-label="Buscar" />
+                        aria-label="Buscar" id="buscar"/>
                 </div>
                 <button class="btn btn-search" type="submit">Buscar</button>
             </form>
+
+            <script>
+                //Busqueda de datos
+                document.getElementById("buscar").addEventListener("input",onInputChangue);
+                function onInputChangue(){
+                let inputText = document.getElementById("buscar").value.toString().toLowerCase();
+                //console.log(inputText);
+                let tablaAlu = document.getElementById("alumnos");
+                let filasAlu = tablaAlu.getElementsByTagName("tr");
+                for (let i = 0; i < filasAlu.length; i++) {
+                    let aluNombre = filasAlu[i].cells[1].textContent.toString().toLowerCase();
+                    let aluNumero = filasAlu[i].cells[2].textContent.toString().toLowerCase();
+                    let aluAP = filasAlu[i].cells[3].textContent.toString().toLowerCase();
+                    let aluAM = filasAlu[i].cells[4].textContent.toString().toLowerCase();
+                    if (aluNombre.indexOf(inputText)===-1 && aluNumero.indexOf(inputText)===-1 && aluAP.indexOf(inputText)===-1 && aluAM.indexOf(inputText)===-1){
+                    filasAlu[i].style.visibility="collapse";
+                    }else{
+                    filasAlu[i].style.visibility="";
+                    }
+                }
+                let tablaProf = document.getElementById("profesores");
+                let filasProf = tablaProf.getElementsByTagName("tr");
+                for (let i = 0; i < filasProf.length; i++) {
+                    let proNombre = filasProf[i].cells[7].textContent.toString().toLowerCase();
+                    let proAP = filasProf[i].cells[8].textContent.toString().toLowerCase();
+                    let proAM = filasProf[i].cells[9].textContent.toString().toLowerCase();
+                    if (proNombre.indexOf(inputText)===-1 && proAP.indexOf(inputText)===-1 && proAM.indexOf(inputText)===-1){
+                    filasProf[i].style.visibility="collapse";
+                    }else{
+                    filasProf[i].style.visibility="";
+                    }
+                }
+                }
+            </script>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
                 <li class="nav-item">
@@ -579,7 +613,7 @@ $result = $conn->query($sql);
 
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="alumnos">
                                         <?php
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
@@ -818,7 +852,7 @@ ON
 
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="profesores">
                                         <?php
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
