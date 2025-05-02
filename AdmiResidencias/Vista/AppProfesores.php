@@ -285,10 +285,30 @@ if (isset($_SESSION['user_email'])) {
       <form class="d-flex">
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-search"></i></span>
-          <input class="form-control search-bar me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+          <input class="form-control search-bar me-2" type="search" placeholder="Buscar" aria-label="Buscar" id="buscar"/>
         </div>
         <button class="btn btn-search" type="submit">Buscar</button>
       </form>
+
+      <script>
+        //Busqueda de datos
+        document.getElementById("buscar").addEventListener("input",onInputChangue);
+        function onInputChangue(){
+          let inputText = document.getElementById("buscar").value.toString().toLowerCase();
+          //console.log(inputText);
+          let tabla = document.getElementById("cuerpo");
+          let filas = tabla.getElementsByTagName("tr");
+          for (let i = 0; i < filas.length; i++) {
+            let conNombre = filas[i].cells[1].textContent.toString().toLowerCase();
+            let conNumero = filas[i].cells[0].textContent.toString().toLowerCase();
+            if (conNombre.indexOf(inputText)===-1 && conNumero.indexOf(inputText)===-1){
+              filas[i].style.visibility="collapse";
+            }else{
+              filas[i].style.visibility="";
+            }
+          }
+        }
+      </script>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
         <?php
@@ -554,7 +574,7 @@ if (isset($_SESSION['user_email'])) {
                             <th>Documentos</th>
                         </tr>
                     </thead>
-                    <tbody>';
+                    <tbody id="cuerpo">';
 
             foreach ($alumnos as $alumno) {
               $per = ($alumno['avance'] / 31) * 100;
