@@ -1076,7 +1076,7 @@ de residencia profesionales."
                         <div class="col-md-6">
                             <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <input type="text" name="numControl" placeholder="No. Control" class="form-control" required>
                         </div>
                     </div>
@@ -1155,7 +1155,8 @@ de residencia profesionales."
 
                     <!-- Avance y Observaciones -->
                     <h4>Avance y Observaciones</h4>
-                    <input type="text" name="numAvance" placeholder="Avance" class="form-control mb-2" required>
+                    <input type="number" name="numAvance" placeholder="Avance"   min="1" step="1" class="form-control mb-2" required>
+
                     <input type="text" name="observacionesAsesorInt" placeholder="Observaciones del Asesor Interno" class="form-control mb-2" required>
 
                     <button type="submit" class="btn btn-secondary" title="Generar documento Word con la información ingresada">Generar Word</button>
@@ -1169,8 +1170,73 @@ de residencia profesionales."
   <!-- 6 -->
   <div class="modal fade" id="modalEvaluacion1" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog"><div class="modal-content">
-      <div class="modal-header"><h5 class="modal-title">Evaluación 1</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-      <div class="modal-body">Contenido del modal: Evaluación 1.</div>
+      <div class="modal-header"><h5 class="modal-title">Evaluación </h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">  
+        <form action="../../Evaluacion.php" method="POST">
+      <h4>Datos de evaluación de Residente</h4>
+
+                    <!-- Fecha -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label>Fecha de llenado</label>
+                            <input type="date" name="fechaLlenado" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Alumno -->
+                    <h4>Datos del Alumno</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="numControl" placeholder="No. Control" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Proyecto -->
+                    <h4>Proyecto</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreProyecto" placeholder="Nombre del Proyecto" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="programaEducativo" placeholder="Programa Educativo" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Fecha y Hora -->
+                     <h4>Periodo de Residencias Profesionales</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Fecha Inicio </label>
+                            <input type="date" name="fechaInicio" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Fecha de Final</label>
+                            <input type="date" name="fechaFinal" class="form-control" required>
+                        </div>
+
+                    </div>
+
+                   
+
+                    
+                    <!-- Avance y Observaciones -->
+                    <h4>Nombres asesor</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreAsesorExte" placeholder="Nombre del asesor externo" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                        <input type="text" name="nombreAsesorInterno" placeholder="Nombre del asesor interno" class="form-control" required>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-secondary" title="Generar documento Word con la información ingresada">Generar Word</button>
+                </form>
+              </div>
     </div></div>
   </div>
 
