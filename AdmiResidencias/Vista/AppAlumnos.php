@@ -1087,16 +1087,19 @@ de residencia profesionales."
                         <div class="col-md-6">
                             <input type="text" name="nombreProyecto" placeholder="Nombre del Proyecto" class="form-control" required>
                         </div>
+                        <div class="col-md-6">
+                            <input type="text" name="nombreEmpresa" placeholder="Nombre de la empresa" class="form-control" required>
+                        </div>
                     </div>
 
                     <!-- Fecha y Hora -->
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label>Fecha de inicio</label>
+                            <label>Fecha de reporte</label>
                             <input type="date" name="fechaInicio" class="form-control" required>
                         </div>
                         <div class="col-md-6">
-                            <label>Hora de inicio</label>
+                            <label>Hora</label>
                             <input type="time" name="horaInicio" class="form-control" required>
                         </div>
                     </div>
@@ -1128,19 +1131,19 @@ de residencia profesionales."
                     <!-- Selección de Seguimientos (solo uno puede ser seleccionado) -->
                     <h4>Seguimientos</h4>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="seguimiento" value="Primer Seguimiento" required>
+                        <input class="form-check-input" type="checkbox" name="pri" value="Teléfono">
                         <label class="form-check-label">Primer Seguimiento</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="seguimiento" value="Segundo Seguimiento">
+                        <input class="form-check-input" type="checkbox" name="seg" value="Correo Electrónico">
                         <label class="form-check-label">Segundo Seguimiento</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="seguimiento" value="Tercer Seguimiento">
+                        <input class="form-check-input" type="checkbox" name="ter" value="In Situ">
                         <label class="form-check-label">Tercer Seguimiento</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="seguimiento" value="Cuarto Seguimiento">
+                        <input class="form-check-input" type="checkbox" name="cuarto" value="In Situ">
                         <label class="form-check-label">Cuarto Seguimiento</label>
                     </div>
 

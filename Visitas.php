@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $template->setValue('numControl', $_POST['numControl']);
 
     // Datos del Proyecto
-    $template->setValue('nombreProyecto', $_POST['nombreProyecto']);
-
+    $template->setValue('nombreProyecto', $_POST['nombreProyecto']); 
+    $template->setValue('nombreEmpresa', $_POST['nombreEmpresa']);
     // Fecha y hora
     $inicio = explode('-', $_POST['fechaInicio']);
     $template->setValue('numDiaInicio', $inicio[2]);
@@ -38,10 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $template->setValue('otros', isset($_POST['otros']) ? '✔' . $_POST['otrosTexto'] : '');
 
     // Selección de Seguimiento: Solo dejar la palomita de los seleccionados y limpiar los demás
-    $template->setValue('PriS', isset($_POST['seguimiento']) && $_POST['seguimiento'] == 'Primer Seguimiento' ? '✔ ' : '');
-    $template->setValue('SegS', isset($_POST['seguimiento']) && $_POST['seguimiento'] == 'Segundo Seguimiento' ? '✔' : '');
-    $template->setValue('TerS', isset($_POST['seguimiento']) && $_POST['seguimiento'] == 'Tercer Seguimiento' ? '✔ Tercer Seguimiento' : '');
-    $template->setValue('CuaS', isset($_POST['seguimiento']) && $_POST['seguimiento'] == 'Cuarto Seguimiento' ? '✔ Cuarto Seguimiento' : '');
+    $template->setValue('pri', isset($_POST['pri']) ? '✔' : '');
+    $template->setValue('seg', isset($_POST['seg']) ? '✔' : '');
+    $template->setValue('ter', isset($_POST['ter']) ? '✔' : '');
+    $template->setValue('cuarto', isset($_POST['cuarto']) ? '✔' : '');
+
+
+
 
     // Asesor Externo
     $template->setValue('nombreAsesorExt', $_POST['nombreAsesorExt']);
