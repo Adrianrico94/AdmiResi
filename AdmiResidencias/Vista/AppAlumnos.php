@@ -1054,11 +1054,114 @@ de residencia profesionales."
 
   <!-- 5 -->
   <div class="modal fade" id="modalVisita" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content">
-      <div class="modal-header"><h5 class="modal-title">Visita</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-      <div class="modal-body">Contenido del modal: Visita.</div>
-    </div></div>
-  </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Visita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../../Visitas.php" method="POST">
+                    <!-- Fecha -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label>Fecha de llenado</label>
+                            <input type="date" name="fechaLlenado" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Alumno -->
+                    <h4>Datos del Alumno</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="numControl" placeholder="No. Control" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Proyecto -->
+                    <h4>Proyecto</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreProyecto" placeholder="Nombre del Proyecto" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Fecha y Hora -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Fecha de inicio</label>
+                            <input type="date" name="fechaInicio" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Hora de inicio</label>
+                            <input type="time" name="horaInicio" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Descripción del Proyecto -->
+                    <h4>Descripción del Proyecto</h4>
+                    <input type="text" name="objetivoProyecto" placeholder="Objetivo del Proyecto" class="form-control mb-2" required>
+
+                    <!-- Contacto -->
+                    <h4>Tipo de Entrevista</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tel" value="Teléfono">
+                        <label class="form-check-label">Teléfono</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="Corr" value="Correo Electrónico">
+                        <label class="form-check-label">Correo Electrónico</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="InS" value="In Situ">
+                        <label class="form-check-label">In Situ</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="otros" value="Otros">
+                        <label class="form-check-label">Otros</label>
+                        <input type="text" name="otrosTexto" placeholder="Especificar" class="form-control mt-2">
+                    </div>
+
+                    <!-- Selección de Seguimientos (solo uno puede ser seleccionado) -->
+                    <h4>Seguimientos</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="seguimiento" value="Primer Seguimiento" required>
+                        <label class="form-check-label">Primer Seguimiento</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="seguimiento" value="Segundo Seguimiento">
+                        <label class="form-check-label">Segundo Seguimiento</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="seguimiento" value="Tercer Seguimiento">
+                        <label class="form-check-label">Tercer Seguimiento</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="seguimiento" value="Cuarto Seguimiento">
+                        <label class="form-check-label">Cuarto Seguimiento</label>
+                    </div>
+
+                    <!-- Asesor Externo -->
+                    <h4>Asesor Externo</h4>
+                    <input type="text" name="nombreAsesorExt" placeholder="Nombre del Asesor Externo" class="form-control mb-2" required>
+                    <input type="text" name="CargoEncargado" placeholder="Cargo del Encargado" class="form-control mb-2" required>
+                    <input type="text" name="observacionesAsesorExt" placeholder="Observaciones del Asesor Externo" class="form-control mb-2" required>
+
+                    <!-- Avance y Observaciones -->
+                    <h4>Avance y Observaciones</h4>
+                    <input type="text" name="numAvance" placeholder="Avance" class="form-control mb-2" required>
+                    <input type="text" name="observacionesAsesorInt" placeholder="Observaciones del Asesor Interno" class="form-control mb-2" required>
+
+                    <button type="submit" class="btn btn-secondary" title="Generar documento Word con la información ingresada">Generar Word</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
   <!-- 6 -->
   <div class="modal fade" id="modalEvaluacion1" tabindex="-1" aria-hidden="true">
