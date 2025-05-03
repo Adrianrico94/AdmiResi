@@ -659,25 +659,58 @@ if (isset($_SESSION['user_email'])) {
                                             
                                             <div class='progress-bar text-bg-success' style='width: $per%'>{$alumno['avance']}/31</div>
                                           </div>
-                                        </div>
-                                        <!-- Pie del Modal -->
-                                        <div class='modal-footer d-flex justify-content-center'>
-                                          
+                                            <table class='table table-striped table-hover table-bordered mt-3'>
+                                                <tr>
+                                                    <th>Orden</th>
+                                                    <th>Ver</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                          ";
+                                          $directorio = "C:/xampp/htdocs/generarword/Alumnos/{$alumno['matricula']}/";
+                                          if (is_dir($directorio)){
+                                          $archivos = array_diff(scandir($directorio), array('.', '..'));
 
-                                            <!-- Botón para Abrir documentos -->
-                                            <button type='submit' name='abrir documentos' onclick=\"openf('{$alumno['matricula']}', '{$alumno['documento']}')\" class='btn btn-primary'>Ver ultimo documento</button>
+                                          // Obtener las fechas de creación asociadas a cada archivo
+                                          $fechas = [];
+                                          foreach ($archivos as $archivo) {
+                                              $rutaCompleta = $directorio . $archivo;
+                                              $fechas[$archivo] = filectime($rutaCompleta); // Puedes usar filemtime() si prefieres fecha de modificación
+                                          }
 
-                                            <!-- Botón para Aceptar el documento -->
+                                          // Ordenar por fecha descendente (más reciente primero)
+                                          asort($fechas);
+                                          $n = 0;
+                                          foreach ($fechas as $archivo => $fecha) {
+                                            //$fechaFormateada = date("Y-m-d H:i:s", $fecha);
+                                            if ($archivo !== '.' && $archivo !== '..') {
+                                              $n ++;
+                                              $ruta = htmlspecialchars("C:/xampp/htdocs/generarword/Alumnos/{$alumno['matricula']}/$archivo");
+                                                echo "<tr>
+                                                        <td>$n</td>
+                                                        <td>
+                                                            <form action='$ruta' method='post' target='_blank'>
+                                                                <button class='btn' type='submit' onclick=\"openf('{$alumno['matricula']}', '$archivo')\">$archivo</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>";
+                                                        if ($n-1 == $alumno['avance']){echo "<!-- Botón para Aceptar el documento -->
                                             <form action='' method='POST' class='d-inline'>
                                                 <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
-                                                <button type='submit' name='aceptar_documento' class='btn btn-success'>Aceptar</button>
+                                                <button type='submit' name='aceptar_documento' class='btn btn-success rounded-pill'><i class='bi bi-check-lg'></i></button>
                                             </form>
                                             <!-- Botón para Rechazar el documento -->
-                                            <form action='' method='POST' class='d-inline'>
-                                                <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
-                                                <button type='submit' name='rechazar_documento' class='btn btn-danger'>Rechazar</button>
-                                            </form>
+                                            <form action='' method='POST' class='d-inline' onsubmit=\"return confirm('¿Seguro que deseas eliminar este archivo?');\">
+                                                <input type='hidden' name='archivo' value='$ruta'>
+                                                <button type='submit' name='rechazar_documento' class='btn btn-danger rounded-pill'><i class='bi bi-trash-fill'></i></button>";
+                                                        }else if ($n-1< $alumno['avance']){echo "Revisado";
+                                                        }else{echo "Por revisar";}
+                                                        echo "</form></td>
+                                                      </tr>";
+                                            }
+                                        }}echo "
+                                        </table>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -840,7 +873,21 @@ if (isset($_SESSION['user_email'])) {
 
             // Código PHP para procesar la actualización al hacer clic en "Rechazar Documento"
             if (isset($_POST['rechazar_documento'])) {
-              $id_alumno = $_POST['id_alumno'];
+              $mensaje='';
+                $archivo = basename($_POST['archivo']); // Evita rutas maliciosas
+                $ruta = $_POST['archivo'];
+            
+                if (file_exists($ruta)) {
+                    if (unlink($ruta)) {
+                        $mensaje = "Archivo <strong>$archivo</strong> eliminado correctamente.";
+                    } else {
+                        $mensaje = "No se pudo eliminar el archivo <strong>$archivo</strong>.";
+                    }
+                } else {
+                    $mensaje = "El archivo <strong>$archivo</strong> no existe.";
+                }
+            
+              /*$id_alumno = $_POST['id_alumno'];
 
               // Configuración de la conexión a la base de datos
               $servername = "localhost";
@@ -885,11 +932,22 @@ if (isset($_SESSION['user_email'])) {
               }
 
               $stmt->close();
-              $conn->close();
+              $conn->close();*/
             }
             ?>
 
             <script>
+              function bloquear(button) {
+                alert("La acción se ha enviado correctamente.");
+                
+                // Deshabilita el botón que fue clicado
+                button.disabled = true;
+
+                // Encuentra el contenedor (la celda <td>) y deshabilita también el otro botón
+                const container = button.closest('td');
+                const buttons = container.querySelectorAll('button');
+                buttons.forEach(btn => btn.disabled = true);
+            }
                 function openf(control,documento) {
                   fetch("../Modelo/AbrirCarpeta.php", {
                     method: "POST",
