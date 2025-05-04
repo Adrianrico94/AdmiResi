@@ -667,16 +667,10 @@ de residencia profesionales."
         <li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modalAsesoria" title="Haz clic para generar tus asesorias.">Asesoría</li>
         <li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modalVisita" title="Haz clic para generar tus visitas.">Visita</li>
         <li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modalEvaluacion1" title="Haz clic para generar tus dos evaluaciones.">Evaluación</li>
-        <li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modalEvaluacion2" title="Haz clic para generar tu última evaluación">Evaluación</li>
+        <li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modalEvaluacion2" title="Haz clic para generar tu última evaluación">Evaluación Final</li>
         <li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modalCartaTermino" title="Haz clic para generar tu carta de término.">Carta Término</li>
       </ul>
 
-
-
-
-
-
-      
         
       </div>
     </div>
@@ -718,7 +712,8 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="numMatricula" class="form-label">Número de Matrícula</label>
-              <input type="text" class="form-control" id="numMatricula" name="numMatricula" required>
+              <input type="text" class="form-control" id="numMatricula" name="numMatricula"  maxlength="9" required
+              oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
             </div>
             
 
@@ -733,10 +728,11 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="PeríodoMínimodeMeses" class="form-label">Periodo mínimo (meses)</label>
-              <input type="number" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
+              
+              <input type="number"  min="1" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
             </div>
             <div class="col-md-6">
-              <label for="PeríodoMaximodeMeses" class="form-label">Periodo máximo (meses)</label>
+              <label for="PeríodoMaximodeMeses"  min="1" step="1" class="form-label">Periodo máximo (meses)</label>
               <input type="number" class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
             </div>
 
@@ -795,7 +791,8 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="numMatricula" class="form-label">Número de Matrícula</label>
-              <input type="text" class="form-control" id="numMatricula" name="numMatricula" required>
+              <input type="text" class="form-control" id="numMatricula" name="numMatricula"  maxlength="9" required
+              oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
             </div>
 
             <div class="col-md-6">
@@ -874,13 +871,14 @@ de residencia profesionales."
           <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
         </div>
         <div class="col-md-3">
-          <input type="text" name="numControl" placeholder="No. Control" class="form-control" required>
+          <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
+          oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
         </div>
         <div class="col-md-3">
           <input type="number" name="numSemestre" placeholder="Semestre" class="form-control" required>
         </div>
         <div class="col-md-3 mt-2">
-          <input type="number" name="numCreditos" placeholder="Créditos" class="form-control" required>
+          <input type="number"  min="1" step="1"   name="numCreditos" placeholder="Créditos" class="form-control" required>
         </div>
       </div>
 
@@ -989,8 +987,9 @@ de residencia profesionales."
           </div>
 
           <div class="col-md-6">
-            <label for="numControl" class="form-label">Número de Control</label>
-            <input type="text" class="form-control" id="numControl" name="numControl" required>
+            <label for="numControl"  class="form-label">Número de Control</label>
+            <input type="text" class="form-control" id="numControl" name="numControl"  maxlength="9" required
+            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
           </div>
 
           <div class="col-md-6">
@@ -1016,8 +1015,8 @@ de residencia profesionales."
           </div>
 
           <div class="col-md-6">
-            <label for="numAsesoria" class="form-label">Número de Asesoría</label>
-            <input type="number" class="form-control" id="numAsesoria" name="numAsesoria" required>
+            <label for="numAsesoria"  class="form-label">Número de Asesoría</label>
+            <input type="number"   min="1" step="1"  class="form-control" id="numAsesoria" name="numAsesoria" required>
           </div>
 
           <div class="col-md-6">
@@ -1054,7 +1053,7 @@ de residencia profesionales."
 
   <!-- 5 -->
   <div class="modal fade" id="modalVisita" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Visita</h5>
@@ -1077,7 +1076,8 @@ de residencia profesionales."
                             <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="numControl" placeholder="No. Control" class="form-control" required>
+                            <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
+                            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
                         </div>
                     </div>
 
@@ -1169,7 +1169,7 @@ de residencia profesionales."
 
   <!-- 6 -->
   <div class="modal fade" id="modalEvaluacion1" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-dialog modal-lg"><div class="modal-content">
       <div class="modal-header"><h5 class="modal-title">Evaluación </h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
       <div class="modal-body">  
         <form action="../../Evaluacion.php" method="POST">
@@ -1190,7 +1190,80 @@ de residencia profesionales."
                             <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="numControl" placeholder="No. Control" class="form-control" required>
+                            <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
+                            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
+                        </div>
+                    </div>
+
+                    <!-- Datos del Proyecto -->
+                    <h4>Proyecto</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreProyecto" placeholder="Nombre del Proyecto" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="programaEducativo" placeholder="Programa Educativo" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Fecha y Hora -->
+                     <h4>Periodo de Residencias Profesionales</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Fecha Inicio </label>
+                            <input type="date" name="fechaInicio" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Fecha de Final</label>
+                            <input type="date" name="fechaFinal" class="form-control" required>
+                        </div>
+
+                    </div>
+
+                   
+                    <!-- Avance y Observaciones -->
+                    <h4>Nombres asesor</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreAsesorExte" placeholder="Nombre del asesor externo" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                        <input type="text" name="nombreAsesorInterno" placeholder="Nombre del asesor interno" class="form-control" required>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-secondary" title="Generar documento Word con la información ingresada">Generar Word</button>
+                </form>
+              </div>
+    </div></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="modal fade" id="modalEvaluacion2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg"><div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Evaluación Final</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+      <form action="../../EvaluacionFinal.php" method="POST">
+      <h4>Datos de evaluación de Residente</h4>
+
+                    <!-- Fecha -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label>Fecha de llenado</label>
+                            <input type="date" name="fechaLlenado" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Alumno -->
+                    <h4>Datos del Alumno</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
+                            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
                         </div>
                     </div>
 
@@ -1236,15 +1309,7 @@ de residencia profesionales."
 
                     <button type="submit" class="btn btn-secondary" title="Generar documento Word con la información ingresada">Generar Word</button>
                 </form>
-              </div>
-    </div></div>
-  </div>
-
-  <!-- 7 -->
-  <div class="modal fade" id="modalEvaluacion2" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content">
-      <div class="modal-header"><h5 class="modal-title">Evaluación 2</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-      <div class="modal-body">Contenido del modal: Evaluación 2.</div>
+      </div>
     </div></div>
   </div>
 
