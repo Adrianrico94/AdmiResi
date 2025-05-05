@@ -1,0 +1,106 @@
+/* Barra de navegación fija */
+.navbar-custom {
+  background-color: #f8f9fa;
+  position: sticky;
+  /* Esto hace que se quede fija en la parte superior */
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+  color: #000;
+}
+
+.search-bar {
+  max-width: 200px;
+}
+
+.btn-search {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-register {
+  background-color: #007bff;
+  color: white;
+}
+
+.profile-name {
+  color: #000;
+  font-weight: bold;
+}
+
+/* Estilos para el menú lateral estilo Teams */
+.sidebar {
+  position: fixed;
+  /* Esto hace que la barra lateral se quede fija */
+  height: 100vh;
+  width: 80px;
+  background-color: #1b1e21;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  z-index: 999;
+  /* Asegura que la barra lateral esté encima del contenido */
+}
+
+.sidebar a {
+  color: #b0b3b8;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.sidebar a i {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: #ffffff;
+  background-color: #3a3f44;
+  border-radius: 10px;
+}
+
+/* Espacio para el contenido principal */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+  margin-left: 80px;
+  /* Para que el contenido no se solape con la barra lateral */
+  margin-top: 70px;
+  /* Ajuste para evitar que el contenido quede debajo de la barra de navegación fija */
+}
+
+/* Estilos personalizados para el footer */
+footer {
+  background-color: #1b1e21;
+  color: white;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #adb5bd;
+}
+
+.footer-icons a {
+  color: white;
+}
+
+.footer-icons a:hover {
+  color: #adb5bd;
+}
