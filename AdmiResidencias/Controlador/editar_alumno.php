@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       $observaciones, $horario_asignado, $id_alumno);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Registro actualizado correctamente.'); window.location.href = 'AppSuperUsuarios.php';</script>";
+        echo "<script>alert('Registro actualizado correctamente.'); window.location.href = '../Vista/AppSuperUsuarios.php';</script>";
     } else {
         echo "<script>alert('Error al actualizar el registro: " . $stmt->error . "'); window.history.back();</script>";
     }

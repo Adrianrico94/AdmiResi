@@ -305,19 +305,7 @@ $result = $conn->query($sql);
                             class="bi bi-bell-fill"></i></a>
                 </li>
                 <!-- Filtro (menú desplegable) -->
-                <li class="nav-item">
-                    <select class="form-select me-2 " aria-label="Filtro" id="seccionSelect" onchange="redirigir()">
-                        <option value="">--Selecciona--</option>
-                        <!-- Esta opción no hace nada -->
-                        <option value="#insert">Insertar Alumno</option>
-                        <option value="#Actuali">Editar Alumno</option>
-                        <option value="#Elim">Eliminar Alumno</option>
-                        <option disabled>──────────</option>
-                        <option value="#InsertProf">Insertar Docente</option>
-                        <option value="#ActualiProf">Editar Docente</option>
-                        <option value="#eliminarProfe">Eliminar Docente</option>
-
-                    </select>
+               
                 </li>
                 <li class="nav-item">
                     <a class="nav-link profile-name" href="#"><i class="bi bi-person-circle me-1"
@@ -510,6 +498,9 @@ $result = $conn->query($sql);
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarUsuarios">
                     Eliminar Usuarios
                 </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAsignarEmpresa">
+                    Asignar Empresa 
+                </button>
             </div>
 
 
@@ -565,6 +556,44 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             </div>
+                     <!-- Modal: Asignar empresa Alumno -->
+         
+
+
+
+
+
+
+
+
+
+
+            <div class="modal fade" id="modalAsignarEmpresa" tabindex="-1" aria-labelledby="modalAsignarAlumnoLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAsignarAlumnoLabel">Asignar Empresa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <div class="mb-3">
+                                    <label for="id_alumno" class="form-label">ID del Alumno</label>
+                                    <input type="text" class="form-control" id="id_alumno" name="id_alumno" placeholder="Ingresa el ID del alumno" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_docente" class="form-label">ID del Empresa</label>
+                                    <input type="text" class="form-control" id="id_docente" name="id_docente" placeholder="Ingresa el ID de la empresa" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Asignar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
             <script>
                 // Función para mostrar/ocultar la sección
 
@@ -691,7 +720,7 @@ $result = $conn->query($sql);
                                                         <h5 class='modal-title' id='editModalLabel_{$row['id_alumno']}'>Editar Información</h5>
                                                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                     </div>
-                                                    <form method='POST' action='editar_alumno.php'>
+                                                    <form method='POST' action='../Controlador/editar_alumno.php'>
                                                         <div class='modal-body' style='text-align: left;'>
                                                             <input type='hidden' name='id_alumno' value='{$row['id_alumno']}'>
                                                             <div class='mb-3'>
