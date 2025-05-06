@@ -104,6 +104,7 @@ $result = $conn->query($sql);
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Styles/styleAppSuperUsuarios.css">
 
 
     <script>
@@ -124,118 +125,6 @@ $result = $conn->query($sql);
         window.ontouchstart = resetTimer;
         window.onscroll = resetTimer;
     </script>
-
-
-
-
-    <style>
-        /* Barra de navegación fija */
-        .navbar-custom {
-            background-color: #f8f9fa;
-            position: sticky;
-            /* Esto hace que se quede fija en la parte superior */
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar-custom .nav-link,
-        .navbar-custom .navbar-brand {
-            color: #000;
-        }
-
-        .search-bar {
-            max-width: 200px;
-        }
-
-        .btn-search {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .btn-register {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .profile-name {
-            color: #000;
-            font-weight: bold;
-        }
-
-        /* Estilos para el menú lateral estilo Teams */
-        .sidebar {
-            position: fixed;
-            /* Esto hace que la barra lateral se quede fija */
-            height: 100vh;
-            width: 80px;
-            background-color: #1b1e21;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-            z-index: 999;
-            /* Asegura que la barra lateral esté encima del contenido */
-        }
-
-        .sidebar a {
-            color: #b0b3b8;
-            font-size: 14px;
-            text-decoration: none;
-            margin: 20px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: color 0.3s ease, background-color 0.3s ease;
-            width: 100%;
-            padding: 10px 0;
-        }
-
-        .sidebar a i {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .sidebar a:hover,
-        .sidebar a.active {
-            color: #ffffff;
-            background-color: #3a3f44;
-            border-radius: 10px;
-        }
-
-        /* Espacio para el contenido principal */
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: #f8f9fa;
-            margin-left: 80px;
-            /* Para que el contenido no se solape con la barra lateral */
-            margin-top: 70px;
-            /* Ajuste para evitar que el contenido quede debajo de la barra de navegación fija */
-        }
-
-        /* Estilos personalizados para el footer */
-        footer {
-            background-color: #1b1e21;
-            color: white;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: #adb5bd;
-        }
-
-        .footer-icons a {
-            color: white;
-        }
-
-        .footer-icons a:hover {
-            color: #adb5bd;
-        }
-    </style>
 </head>
 
 <body>
@@ -330,10 +219,10 @@ $result = $conn->query($sql);
                     ¿Estás seguro de que deseas cerrar sesión?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Haz clic para cancelar el cierre de sesión.">
                         Cancelar
                     </button>
-                    <button type="button" class="btn btn-danger" onclick="cerrarSesion()">Cerrar sesión</button>
+                    <button type="button" class="btn btn-danger" onclick="cerrarSesion()" title="Haz clic para cierrar de sesión y volver a la página de inicio.">Cerrar sesión</button>
 
                 </div>
             </div>
@@ -357,15 +246,15 @@ $result = $conn->query($sql);
                 <span>Inicio</span>
             </a>
             <!-- Enlace en el menú lateral -->
-            <a href="#" class="text-center" onclick="showSection('SecAlumno', 'SecDocente')">
+            <a href="#" class="text-center" onclick="showSection('SecAlumno', 'SecDocente')" title="Visualiza los datos de los alumnos.">
                 <i class="bi bi-mortarboard-fill"></i>
                 <span>Alumno</span>
             </a>
-            <a href="#" class="text-center" onclick="showSection('SecDocente', 'SecAlumno')">
+            <a href="#" class="text-center" onclick="showSection('SecDocente', 'SecAlumno')" title="Visualiza todos los dados de los profesores.">
                 <i class="bi bi-person-fill"></i>
                 <span>Docente</span>
             </a>
-            <a href="#" class="text-center" data-bs-toggle="modal" data-bs-target="#logoutModal">
+            <a href="#" class="text-center" data-bs-toggle="modal" data-bs-target="#logoutModal" title="Haz clic para cerrar sesión.">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Salir</span>
             </a>
@@ -607,18 +496,16 @@ $result = $conn->query($sql);
                     hideSection.style.display = 'none';
                 }
             </script>
-
             <div class="col-12 mt-2" id="SecAlumno">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
-                        <h3>ALUMNOS</h3>
-
-                        <div class="container m-0 p-0">
-                            <div class="shadow-lg rounded m-0 p-0 " style="width: 1210px;">
+                        <h3>ALUMNOS</h3>                        <div class="container-fluid d-flex justify-content-center">
+                            <div class="shadow-lg rounded" style="width: 100%; max-width: 1350px; margin: 0 auto;">
                                 <!-- Contenedor con el scroll en la tabla -->
-                                <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%;  display: block; max-height: 400px; overflow: scroll;">
-                                    <thead class="bg-secondary text-white" style=" position: sticky; top: 0; z-index: 1;">
-                                        <tr>
+                                 <div style="width: 100%; overflow-x: auto;">
+                                    <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%; max-height: 400px; overflow-y: auto;">
+                                        <thead class="bg-secondary text-white" style="position: sticky; top: 0; z-index: 1;">
+                                            <tr>
                                             
                                             <th class="text-center" style="width: auto;  color: white;">ID Alumno</th>
                                             <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Matrícula</th>
@@ -801,20 +688,16 @@ $result = $conn->query($sql);
                                             echo "<tr><td colspan='13' class='text-center'>No hay registros</td></tr>";
                                         }
                                         ?>
-
-
-                                    </tbody>
-
-                                </table>
-
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-
+                        <div class="mb-4"></div> <!-- Espacio adicional en la parte inferior -->
                     </div>
                 </div>
-
-
             </div>
+
 
 
 
@@ -850,16 +733,17 @@ ON
 
             $result = $conn->query($sql);
             ?>
-
+            
             <div class="col-12 mt-2" id="SecDocente">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
                         <h3>DOCENTES</h3>
-                        <div class="container m-0 p-0" id=" Docentes">
-                            <div class="shadow-lg rounded m-0 p-0" style="width: 1210px;">
-                                <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%; display: block; max-height: 400px; overflow: scroll;">
-                                    <thead class="bg-secondary text-white" style="position: sticky; top: 0; z-index: 1;">
-                                        <tr>
+                        <div class="container-fluid d-flex justify-content-center">
+                            <div class="shadow-lg rounded" style="width: 100%; max-width: 1350px; margin: 0 auto;">
+                                <div style="width: 100%; overflow-x: auto;">
+                                    <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%; max-height: 400px; overflow-y: auto;">
+                                        <thead class="bg-secondary text-white" style="position: sticky; top: 0; z-index: 1;">
+                                            <tr>
                                             <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Id docente</th>
                                             <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Clave Profesor</th>
 
@@ -991,14 +875,16 @@ ON
                                             echo "<tr><td colspan='6' class='text-center'>No hay docentes registrados.</td></tr>";
                                         }
                                         ?>
-
+                                        
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <div class="mb-4"></div> <!-- Espacio adicional en la parte inferior -->
                 </div>
             </div>
+        </div>
 
             <?php
             $conn->close();
@@ -1050,18 +936,7 @@ ON
         </div>
     </footer>
     <!-- Funcion para menu header -->
-    <script>
-        // Función que redirige al ancla correspondiente al seleccionar una opción
-        function redirigir() {
-            var select = document.getElementById("seccionSelect"); // Obtiene el <select> por su id
-            var valorSeleccionado = select.value; // Obtiene el valor seleccionado
-
-            if (valorSeleccionado) {
-                // Si se selecciona una opción, redirige a la parte correspondiente
-                window.location.href = valorSeleccionado;
-            }
-        }
-    </script>
+    <script src="../Controlador/jsRedirigirAppSuperUsuarios.js"></script>
     <!-- Final funcion -->
 
     <!-- Scripts de Bootstrap -->

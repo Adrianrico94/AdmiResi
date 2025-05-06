@@ -694,13 +694,11 @@ if (isset($_SESSION['user_email'])) {
                                                         </td>
                                                         <td>";
                                                         if ($n-1 == $alumno['avance']){echo "<!-- Botón para Aceptar el documento -->
-                                            <form action='' method='POST' class='d-inline'>
-                                                <input type='hidden' name='id_alumno' value='{$alumno['id_alumno']}'>
-                                                <button type='submit' name='aceptar_documento' class='btn btn-success rounded-pill'><i class='bi bi-check-lg'></i></button>
+                                            <form data-id-alumno='{$alumno['id_alumno']}' method='POST' class='d-inline form-btns aceD'>
+                                                <button type='submit' name='aceptar_documento' class='btn btn-success rounded-pill' id='Btn{$alumno['id_alumno']}'><i class='bi bi-check-lg'></i></button>
                                             </form>
                                             <!-- Botón para Rechazar el documento -->
-                                            <form action='' method='POST' class='d-inline' onsubmit=\"return confirm('¿Seguro que deseas eliminar este archivo?');\">
-                                                <input type='hidden' name='archivo' value='$ruta'>
+                                            <form data-id-alumno='{$alumno['id_alumno']}' data-ruta='$ruta' method='POST' class='d-inline form-btns reD'>
                                                 <button type='submit' name='rechazar_documento' class='btn btn-danger rounded-pill'><i class='bi bi-trash-fill'></i></button>";
                                                         }else if ($n-1< $alumno['avance']){echo "Revisado";
                                                         }else{echo "Por revisar";}
@@ -873,95 +871,107 @@ if (isset($_SESSION['user_email'])) {
 
             // Código PHP para procesar la actualización al hacer clic en "Rechazar Documento"
             if (isset($_POST['rechazar_documento'])) {
-              $mensaje='';
-                $archivo = basename($_POST['archivo']); // Evita rutas maliciosas
+              //$mensaje='';
+            //$archivo = basename($_POST['archivo']); // Evita rutas maliciosas
                 $ruta = $_POST['archivo'];
             
                 if (file_exists($ruta)) {
                     if (unlink($ruta)) {
-                        $mensaje = "Archivo <strong>$archivo</strong> eliminado correctamente.";
+                        /*$mensaje = "Archivo <strong>$archivo</strong> eliminado correctamente.";
                     } else {
                         $mensaje = "No se pudo eliminar el archivo <strong>$archivo</strong>.";
-                    }
-                } else {
-                    $mensaje = "El archivo <strong>$archivo</strong> no existe.";
+                    }*/
+                } /*else {
+                    $mensaje = "El archivo <strong>$archivo</strong> no existe.";*/
                 }
-            
-              /*$id_alumno = $_POST['id_alumno'];
-
-              // Configuración de la conexión a la base de datos
-              $servername = "localhost";
-              $username = "root";
-              $password = "";
-              $dbname = "residencias_db";
-
-              $conn = new mysqli($servername, $username, $password, $dbname);
-
-              // Verificar si hay errores de conexión
-              if ($conn->connect_error) {
-                die("Conexión fallida: " . $conn->connect_error);
-              }
-
-              // Verificar si el ID del alumno existe
-              $check_sql = "SELECT * FROM alumnos WHERE id_alumno = ?";
-              $check_stmt = $conn->prepare($check_sql);
-              $check_stmt->bind_param("i", $id_alumno);
-              $check_stmt->execute();
-              $result = $check_stmt->get_result();
-
-              if ($result->num_rows == 0) {
-                echo "<script>alert('El ID del alumno no existe.');</script>";
-                exit();
-              }
-
-              // Si el alumno existe, proceder con la actualización
-              $sql = "UPDATE alumnos SET avance = avance - 1 WHERE id_alumno = ?";
-              $stmt = $conn->prepare($sql);
-
-              if ($stmt === false) {
-                die('Error en la preparación de la consulta: ' . $conn->error);
-              }
-
-              $stmt->bind_param("i", $id_alumno);
-              $stmt->execute();
-
-              if ($stmt->affected_rows > 0) {
-                // Actualización exitosa
-              } else {
-                echo "<script>alert('No se pudo actualizar la notificación.');</script>";
-              }
-
-              $stmt->close();
-              $conn->close();*/
             }
             ?>
 
             <script>
-              function bloquear(button) {
-                alert("La acción se ha enviado correctamente.");
-                
-                // Deshabilita el botón que fue clicado
-                button.disabled = true;
+              document.addEventListener("DOMContentLoaded", () => {
+                  const forms = document.querySelectorAll(".form-btns");
+                  forms.forEach(form => {
+                      form.addEventListener("submit", function(e) {
+                          e.preventDefault(); // evita el reinicio de la página
+                          const B = this.dataset.idAlumno;
+                          const button = document.getElementById('Btn'+B);
+                          // Deshabilita el botón que fue clicado
+                          button.disabled = true;
 
-                // Encuentra el contenedor (la celda <td>) y deshabilita también el otro botón
-                const container = button.closest('td');
-                const buttons = container.querySelectorAll('button');
-                buttons.forEach(btn => btn.disabled = true);
-            }
-                function openf(control,documento) {
-                  fetch("../Modelo/AbrirCarpeta.php", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: `control=${encodeURIComponent(control)}&documento=${encodeURIComponent(documento)}`
-                  })
-                  .then(response => response.text())
-                  (error => {
-                    console.error("Error:", error);
-                  });
-                }
-              </script>
+                          // Encuentra el contenedor (la celda <td>) y deshabilita también el otro botón
+                          const container = button.closest('td');
+                          const buttons = container.querySelectorAll('button');
+                          buttons.forEach(btn => btn.disabled = true);
+              });});}); 
+              document.addEventListener("DOMContentLoaded", () => {
+                  const forms = document.querySelectorAll(".aceD");
+                  forms.forEach(form => {
+                      form.addEventListener("submit", function(e) {
+                          e.preventDefault(); // evita el reinicio de la página
+                          if (confirm('Este documento se guardará permanentemente.')) {
+                            try {
+                              const formData = new FormData();
+                              formData.append('id_alumno', this.dataset.idAlumno);
+                              formData.append('aceptar_documento', true);
+
+                              fetch('', {
+                                  method: 'POST',
+                                  body: formData
+                              })
+                              .then(response => response.json())
+                              .then(data => {
+                                  // Actualiza el DOM con los nuevos datos sin recargar la página
+                                  console.log(data);
+                              });
+                              alert("Documento guardado.");
+                            } catch (error) {
+                                
+                            }
+                          }
+                          
+              });});}); 
+              document.addEventListener("DOMContentLoaded", () => {
+                  const forms = document.querySelectorAll(".reD");
+                  forms.forEach(form => {
+                      form.addEventListener("submit", function(e) {
+                          e.preventDefault(); // evita el reinicio de la página
+                          if (confirm('¡Este documento se borrará permanentemente!')) {
+                            try {
+                              const formData = new FormData();
+                              formData.append('archivo', this.dataset.ruta);
+                              formData.append('rechazar_documento', true);
+
+                              fetch('', {
+                                  method: 'POST',
+                                  body: formData
+                              })
+                              .then(response => response.json())
+                              .then(data => {
+                                  // Actualiza el DOM con los nuevos datos sin recargar la página
+                                  console.log(data);
+                              });
+                              alert("Documento borrado.");
+                            } catch (error) {
+                                
+                            }
+                          }
+                          
+              });});}); 
+
+              function openf(control,documento) {
+                fetch("../Modelo/AbrirCarpeta.php", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  },
+                  body: `control=${encodeURIComponent(control)}&documento=${encodeURIComponent(documento)}`
+                })
+                .then(response => response.text())
+                (error => {
+                  console.error("Error:", error);
+                });
+              }
+            </script>
 
 
 
