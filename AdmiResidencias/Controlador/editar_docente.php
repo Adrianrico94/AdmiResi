@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Ejecutar las actualizaciones
     if ($stmt_docente->execute() && $stmt_usuario->execute()) {
-        echo "<script>alert('Registro actualizado exitosamente.'); window.location.href = 'AppSuperUsuarios.php';</script>";
+        echo "<script>alert('Registro actualizado exitosamente.'); window.location.href = '../Vista/AppSuperUsuarios.php';</script>";
     } else {
         echo "<script>alert('Error al actualizar el registro: {$stmt_docente->error} | {$stmt_usuario->error}'); window.history.back();</script>";
     }

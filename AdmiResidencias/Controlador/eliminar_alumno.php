@@ -45,7 +45,7 @@ if (isset($_POST['id_alumno'])) {
         $conn->commit();
 
         // Redirigir a la página de éxito o mostrar mensaje de éxito
-        header("Location: AppSuperUsuarios.php ?eliminado=success");
+        header("Location: ../Vista/AppSuperUsuarios.php ?eliminado=success");
         exit();
     } catch (Exception $e) {
         // Si ocurre algún error, deshacer los cambios

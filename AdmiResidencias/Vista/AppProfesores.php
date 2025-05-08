@@ -994,7 +994,7 @@ if (isset($_SESSION['user_email'])) {
       <div class="row">
         <div class="col-md-4 pt-4">
           <p style="font-size: 12px">
-            © 2024 Tecnológico de Estudios Superiores de Cuautitlán Izcalli.
+            ©2024 Valdez Rico Adrian Job.
             Todos los derechos reservados.
           </p>
         </div>

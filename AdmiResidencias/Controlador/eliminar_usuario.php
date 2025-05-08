@@ -42,7 +42,7 @@ if (isset($_POST['idUsuario']) && !empty($_POST['idUsuario'])) {
         // Si todo se ejecuta correctamente, hacer commit de la transacción
         $conn->commit();
         
-        echo "<script>alert('Usuario y sus relaciones eliminadas exitosamente.'); window.location.href = 'Index.html';</script>";
+        echo "<script>alert('Usuario y sus relaciones eliminadas exitosamente.'); window.location.href = '../Vista/AppSuperUsuarios.php';</script>";
     } catch (Exception $e) {
         // Si ocurre un error, hacer rollback de la transacción
         $conn->rollback();

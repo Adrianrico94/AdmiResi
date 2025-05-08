@@ -60,13 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Redirigir a la página de superusuarios con un mensaje de éxito
         echo "<script>
                 alert('Usuario registrado exitosamente.');
-                window.location.href = 'AppSuperUsuarios.php';
+                window.location.href = '../Vista/AppSuperUsuarios.php';
               </script>";
     } else {
         // Mostrar el error en un alert
         echo "<script>
                 alert('$error');
-                window.location.href = 'AppSuperUsuarios.php';
+                window.location.href = '../Vista/AppSuperUsuarios.php';
               </script>";
     }
 }

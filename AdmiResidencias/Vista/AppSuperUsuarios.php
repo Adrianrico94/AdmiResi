@@ -3,7 +3,7 @@ session_start();
 
 
 // Tiempo de inactividad máximo (en segundos)
-$inactive_time = 60; // 10 minutos
+$inactive_time = 6000; // 10 minutos
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive_time) {
     session_unset();
     session_destroy();
@@ -115,7 +115,7 @@ $result = $conn->query($sql);
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 window.location.href = "logout.php"; // Redirige al cerrar sesión
-            }, 100000); // 1 minuto = 60000 ms
+            }, 600000); // 1 minuto = 60000 ms
         }
 
         // Eventos para detectar movimiento o clics
@@ -264,7 +264,7 @@ $result = $conn->query($sql);
 
         <!-- Contenido principal -->
         <div class="content pt-0 mt-2">
-            <div class="text-center border border-2 rounded p-3  text-white" style="background-color: #8a2036;">
+            <div class="text-center col-12 col-md-9 mt-2  border border-2 rounded p-3  text-white" style="background-color: #8a2036;">
                 <h1>SECCIÓN DE ALUMNOS</h1>
             </div>
 
@@ -284,7 +284,7 @@ $result = $conn->query($sql);
                             </div>
                             <div class="modal-body">
                                 <!-- Formulario de registro de usuario -->
-                                <form id="formularioInsertar" action="insertar_usuario.php" method="POST">
+                                <form id="formularioInsertar" action="../Controlador/insertar_usuario.php" method="POST">
                                     <!-- Campo para seleccionar tipo de usuario -->
                                     <div class="mb-3">
                                         <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
@@ -434,7 +434,7 @@ $result = $conn->query($sql);
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="eliminar_usuario.php" method="POST">
+                            <form action="../Controlador/eliminar_usuario.php" method="POST">
                                 <div class="mb-3">
                                     <label for="idUsuario" class="form-label">ID del Usuario</label>
                                     <input type="text" class="form-control" id="idUsuario" name="idUsuario" placeholder="Ingresa el ID del usuario" required>
@@ -496,7 +496,7 @@ $result = $conn->query($sql);
                     hideSection.style.display = 'none';
                 }
             </script>
-            <div class="col-12 mt-2" id="SecAlumno">
+            <div class="col-12 col-md-9 mt-2 ps-5" id="SecAlumno">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
                         <h3>ALUMNOS</h3>                        <div class="container-fluid d-flex justify-content-center">
@@ -675,7 +675,7 @@ $result = $conn->query($sql);
                                                 </div>
                                                 <div class='modal-footer'>
                                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                    <form action='eliminar_alumno.php' method='POST'>
+                                                    <form action='../Controlador/eliminar_alumno.php' method='POST'>
                                                         <input type='hidden' name='id_alumno' value='{$row['id_alumno']}'>
                                                         <button type='submit' class='btn btn-danger'>Eliminar</button>
                                                     </form>
@@ -734,7 +734,7 @@ ON
             $result = $conn->query($sql);
             ?>
             
-            <div class="col-12 mt-2" id="SecDocente">
+            <div class="col-12 col-md-9 mt-4 ps-5" id="SecDocente">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
                         <h3>DOCENTES</h3>
@@ -792,9 +792,9 @@ ON
                                                     </button>";
 
                                                 // Botón para eliminar
-                                                echo "<button class='btn btn-danger btn-sm' title='Eliminar' data-bs-toggle='modal' data-bs-target='#deletedocente_{$row['id_docente']}'>
-                                                            <i class='bi bi-trash'></i>
-                                                        </button>";
+                                                //echo "<button class='btn btn-danger btn-sm' title='Eliminar' data-bs-toggle='modal' data-bs-target='#deletedocente_{$row['id_docente']}'>
+                                                      //      <i class='bi bi-trash'></i>
+                                                     //   </button>";
                                                 echo "</td>";
                                                 echo "</tr>";
 
@@ -806,7 +806,7 @@ ON
                                                                 <h5 class='modal-title' id='editModalLabel_{$row['id_docente']}'>Editar Información del Docente</h5>
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
-                                                            <form method='POST' action='editar_docente.php'>
+                                                            <form method='POST' action='../Controlador/editar_docente.php'>
                                                                 <div class='modal-body' style='text-align: left;'>
                                                                     <input type='hidden' name='id_docente' value='{$row['id_docente']}'>
 
@@ -910,7 +910,7 @@ ON
             <div class="row">
                 <div class="col-md-4 pt-4">
                     <p style="font-size: 12px">
-                        © 2024 Tecnológico de Estudios Superiores de Cuautitlán Izcalli.
+                        © 2024 Valdez Rico Adrian Job.
                         Todos los derechos reservados.
                     </p>
                 </div>
