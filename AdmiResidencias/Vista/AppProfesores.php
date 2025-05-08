@@ -135,7 +135,9 @@ if (isset($_SESSION['user_email'])) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
+      <!-- Alondra -->
+      <link rel="stylesheet" href="Styles/stylesCambioTemaProfesores.css" />
+      <!-- Fin alondra -->
 
   <script>
     // Función para cerrar sesión si no hay actividad del ratón
@@ -373,6 +375,11 @@ if (isset($_SESSION['user_email'])) {
 
             <li><a class="dropdown-item" href="#"><?php echo "<p>Teléfono: $telefono_docente</p>"; ?></a></li>
             </a></li>
+            <li>
+              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalConfiguraciones" title="Cambia el color de la página a tu gusto.">
+               <i class="bi bi-gear-fill"></i> Configuraciones
+              </a>
+          </li>
 
           </ul>
         </div>
@@ -466,6 +473,70 @@ if (isset($_SESSION['user_email'])) {
   };
 </script>
 
+<!-- Modal de Configuraciones ALONDRA -->
+<div class="modal fade" id="modalConfiguraciones" tabindex="-1" aria-labelledby="modalConfiguracionesLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content rounded-4 shadow">
+                <div class="modal-header text-white" style="background-color:rgb(121, 26, 45);">
+                  <h5 class="modal-title" id="modalConfiguracionesLabel">Configuraciones de perfil</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body bg-dark text-white">
+                  <div class="nav flex-column nav-pills mb-3">
+                    <button class="nav-link bg-dark text-white border mb-2 active" data-bs-toggle="pill" data-bs-target="#themeTab">Color y tema</button>
+                  </div>
+                  
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active" id="themeTab">
+                      <h6 class="text-white mb-3">Selecciona un tema:</h6>
+                      <div class="theme-grid">
+                        <!-- Tema predeterminado - Original -->
+                         <div class="theme-item">
+                          <div class="theme-circle active" data-theme="theme-default" style="--left-color: #8a2036; --right-color: #6d1a2a"></div>
+                          <div class="theme-name text-white">Predeterminado</div>
+                        </div>
+                        <!-- Negro -->
+                         <div class="theme-item">
+                          <div class="theme-circle" data-theme="theme-black" style="--left-color: #121212; --right-color: #000000"></div>
+                          <div class="theme-name text-white">Negro</div>
+                        </div>
+                        <!-- Sepia -->
+                         <div class="theme-item">
+                          <div class="theme-circle" data-theme="theme-sepia" style="--left-color: #f4ecd8; --right-color: #e0c9a6"></div>
+                          <div class="theme-name text-white">Sepia</div>
+                        </div>
+                        <!-- Gris oscuro -->
+                         <div class="theme-item">
+                          <div class="theme-circle" data-theme="theme-darkgray" style="--left-color: #333333; --right-color: #222222"></div>
+                          <div class="theme-name text-white">Gris oscuro</div>
+                        </div>
+                        <!-- Morado claro -->
+                         <div class="theme-item">
+                          <div class="theme-circle" data-theme="theme-lightpurple" style="--left-color: #d8ccf1; --right-color: #9f8ad7"></div>
+                          <div class="theme-name text-white">Morado claro</div>
+                        </div>
+                        <!-- Rosa claro -->
+                         <div class="theme-item">
+                          <div class="theme-circle" data-theme="theme-lightpink" style="--left-color: #ffdde1; --right-color: #f8a5c2"></div>
+                          <div class="theme-name text-white">Rosa claro</div>
+                        </div>
+                        <!-- Azul claro -->
+                         <div class="theme-item">
+                          <div class="theme-circle" data-theme="theme-lightblue" style="--left-color: #d4f1f9; --right-color: #90cdf4"></div>
+                          <div class="theme-name text-white">Azul claro</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Haz clic para cancelar los cambios y mantener el tema actual.">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="saveThemeChanges"title="Haz clic para aplicar y guardar el tema seleccionado.">Guardar cambios</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fin Modal de Configuraciones -->
 
 
   <!--Fin Modal Cargando web -->
@@ -1022,6 +1093,9 @@ if (isset($_SESSION['user_email'])) {
 
   <!-- Scripts de Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <!-- CAMBIO DE COLOR Alondra-->
+   <script src="../Controlador/jsCambioTemaProfesores.js"></script>
+  <!-- CAMBIO DE COLOR FIN-->
 </body>
 
 </html>

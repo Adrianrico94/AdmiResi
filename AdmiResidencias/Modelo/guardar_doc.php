@@ -2,7 +2,7 @@
     try {//Guardar documento
         $file = $_FILES['evidencia'];
         $mat = $_POST['Matricula'];
-        $dir='C:/xampp/htdocs/generarword/Alumnos/'.$mat;
+        $dir='C:/xampp/htdocs/generarword-Git/Alumnos/'.$mat;
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }

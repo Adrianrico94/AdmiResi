@@ -5,7 +5,7 @@ $dbname = "residencias_db";
 $username = "root"; // Cambia esto si tu usuario de MySQL es diferente
 $password = ""; // Cambia esto si tienes una contraseña para MySQL
 
-$directorio='C:/xampp/htdocs/generarword/Alumnos/'.$matricula;
+$directorio='C:/xampp/htdocs/generarword-Git/Alumnos/'.$matricula;
     if (!file_exists($directorio)) {
       mkdir($directorio, 0777, true);
     }
@@ -62,7 +62,7 @@ try {
         ':telefono' => $telefono,
         ':observaciones' => $observaciones
     ]);
-    $directorio='C:/xampp/htdocs/generarword/Alumnos/'.$matricula;
+    $directorio='C:/xampp/htdocs/generarword-Git/Alumnos/'.$matricula;
     if (!file_exists($directorio)) {
       mkdir($directorio, 0777, true);
     }
