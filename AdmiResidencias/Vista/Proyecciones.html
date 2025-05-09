@@ -115,154 +115,304 @@
     </div>
   </div>
 </div>
-
-<!-- Modal de Registro -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center w-100" id="registerModalLabel">
-          Registro de alumnos residencias profesionales
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body" style="max-height: 80vh; overflow-y: auto">
-        <!-- Formulario de Inserción de Alumno -->
-        <form action="process_form.php" method="POST">
-          <div class="row">
-            <!-- Correo Institucional con Icono -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="institutionalEmail" class="form-label">Correo Institucional</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                <input type="email" class="form-control" id="institutionalEmail" name="institutionalEmail"
-                  placeholder="Ingrese el correo institucional" required />
-              </div>
-            </div>
-
-            <!-- Crear Contraseña con Icono -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="createPassword" class="form-label">Crear Contraseña</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                <input type="password" class="form-control" id="createPassword" name="createPassword"
-                  placeholder="Ingrese una contraseña" required />
-              </div>
-            </div>
-
-            <!-- Nombre Empresa -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
-              <input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa"
-                placeholder="Ingrese el nombre de la empresa" required />
-            </div>
-
-            <!-- Proyecto asignado -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="proyectoAsignado" class="form-label">Proyecto asignado</label>
-              <input type="text" class="form-control" id="proyectoAsignado" name="proyectoAsignado"
-                placeholder="Ingrese el proyecto asignado" required />
-            </div>
-
-            <!-- Matrícula -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="matricula" class="form-label">Matrícula</label>
-              <input type="text" class="form-control" id="matricula" name="matricula"
-                placeholder="Ingrese la matrícula" required />
-            </div>
-
-            <!-- Nombre -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre"
-                required />
-            </div>
-
-            <!-- Apellido Paterno -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno"
-                placeholder="Ingrese el apellido paterno" required />
-            </div>
-
-            <!-- Apellido Materno -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno"
-                placeholder="Ingrese el apellido materno" required />
-            </div>
-
-            <!-- Carrera -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="carrera" class="form-label">Carrera</label>
-              <select class="form-select" id="carrera" name="carrera" required>
-                <option value="">Selecciona una carrera</option>
-                <option value="1">
-                  Ingeniería en Sistemas Computacionales
-                </option>
-                <option value="2">
-                  Ingeniería en Tecnologías de la Información y
-                  Comunicaciones
-                </option>
-                <option value="3">Contador Público</option>
-                <option value="4">Ingeniería en Logística</option>
-                <option value="5">Ingeniería Mecatrónica</option>
-                <option value="6">
-                  Ingeniería en Gestión Empresarial
-                </option>
-                <option value="7">Licenciatura en Administración</option>
-                <option value="8">Ingeniería Química</option>
-                <option value="9">Ingeniería Industrial</option>
-              </select>
-            </div>
-
-            <!-- Teléfono -->
-            <div class="col-12 col-md-6 mb-3">
-              <label for="telefono" class="form-label">Teléfono</label>
-              <input type="text" class="form-control" id="telefono" name="telefono"
-                placeholder="Ingrese el número de teléfono" required />
-            </div>
-
-            <!-- Observaciones -->
-            <div class="col-12 mb-3">
-              <label for="observaciones" class="form-label">Observaciones</label>
-              <textarea class="form-control" id="observaciones" name="observaciones" rows="3"
-                placeholder="Ingrese observaciones adicionales" required></textarea>
-            </div>
-             <!-- Aviso de privacidad  -->
-
-             <div class="col-12 mb-3 text-center">
-              <input
-                type="checkbox"
-                id="avisoPrivacidad"
-                name="avisoPrivacidad"
-                required
-              />
-              <label class="form-check-label" for="avisoPrivacidad">
-                He leído y acepto el
-                <a href="#" data-bs-toggle="modal" data-bs-target="#modalAviso">
-                  Aviso de Privacidad
-                </a>
-              </label>
-            </div>
-            
-            
-
-              <!-- FIN Aviso de privacidad  -->
-               
-
-            <!-- Botón Enviar -->
-            <div class="col-12 text-center">
-              <button style="width: 200px" type="submit" class="btn btn-primary">
-                Enviar
-              </button>
-            </div>
+   <!-- Modal de Registro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center w-100" id="registerModalLabel">
+              Registro de alumnos residencias profesionales
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
-        </form>
+          <div class="modal-body" style="max-height: 80vh; overflow-y: auto">
+            <!-- Formulario de Inserción de Alumno -->
+            <form action="process_form.php" method="POST">
+              <div class="row">
+                <!-- Correo Institucional con Icono -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="institutionalEmail" class="form-label">Correo Institucional</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="email" class="form-control" id="institutionalEmail" name="institutionalEmail"
+                      placeholder="Ingrese el correo institucional" required />
+                  </div>
+                </div>
+
+                <!-- Crear Contraseña con Icono -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="createPassword" class="form-label">Crear Contraseña</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="createPassword" name="createPassword"
+                      placeholder="Ingrese una contraseña" required />
+                  </div>
+                </div>
+
+                <!-- Nombre Empresa -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
+                  <input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa"
+                    placeholder="Ingrese el nombre de la empresa" required />
+                </div>
+
+                <!-- Proyecto asignado -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="proyectoAsignado" class="form-label">Proyecto asignado</label>
+                  <input type="text" class="form-control" id="proyectoAsignado" name="proyectoAsignado"
+                    placeholder="Ingrese el proyecto asignado" required />
+                </div>
+
+                <!-- Matrícula -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="matricula" class="form-label">Matrícula</label>
+                  <input type="text" class="form-control" id="matricula" name="matricula"
+                    placeholder="Ingrese la matrícula" maxlength="9" required
+                            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);"/>
+                </div>
+
+                <!-- Nombre -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre"
+                    required />
+                </div>
+
+                <!-- Apellido Paterno -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+                  <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno"
+                    placeholder="Ingrese el apellido paterno" required />
+                </div>
+
+                <!-- Apellido Materno -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+                  <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno"
+                    placeholder="Ingrese el apellido materno" required />
+                </div>
+
+                <!-- Carrera -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="carrera" class="form-label">Carrera</label>
+                  <select class="form-select" id="carrera" name="carrera" required>
+                    <option value="">Selecciona una carrera</option>
+                    <option value="Ingeniería en Sistemas Computacionales">
+                      Ingeniería en Sistemas Computacionales
+                    </option>
+                    <!-- <option value="2">
+                      Ingeniería en Tecnologías de la Información y
+                      Comunicaciones
+                    </option>
+                    <option value="3">Contador Público</option>
+                    <option value="4">Ingeniería en Logística</option>
+                    <option value="5">Ingeniería Mecatrónica</option>
+                    <option value="6">
+                      Ingeniería en Gestión Empresarial
+                    </option>
+                    <option value="7">Licenciatura en Administración</option>
+                    <option value="8">Ingeniería Química</option>
+                    <option value="9">Ingeniería Industrial</option> -->
+                  </select>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="col-12 col-md-6 mb-3">
+                  <label for="telefono" class="form-label">Teléfono</label>
+                  <input type="text" class="form-control" id="telefono" name="telefono"
+                    placeholder="Ingrese el número de teléfono" maxlength="10"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required />
+
+                </div>
+
+                <!-- Observaciones -->
+                <div class="col-12 mb-3">
+                  <label for="observaciones" class="form-label">Descripción del proyecto</label>
+                  <textarea class="form-control" id="observaciones" name="observaciones" rows="3"
+                    placeholder="Ingrese observaciones adicionales" required></textarea>
+                </div>
+                <!-- Aviso de privacidad  -->
+
+                <div class="col-12 mb-3 text-center">
+                  <input type="checkbox" id="avisoPrivacidad" name="avisoPrivacidad" required />
+                  <label class="form-check-label" for="avisoPrivacidad">
+                    He leído y acepto el
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAviso">
+                      Aviso de Privacidad
+                    </a>
+                  </label>
+                </div>
+
+                <!-- FIN Aviso de privacidad  -->
+
+                <!-- Botón Enviar -->
+                <div class="col-12 text-center">
+                  <button style="width: 200px" type="submit" class="btn btn-primary">
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Aviso de privacidad Modal -->
+    <div class="modal fade" id="modalAviso" tabindex="-1" aria-labelledby="modalAvisoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="container-privacidad">
+              <div class="encabezado-privacidad">
+                <h2>DECLARACIÓN DE PRIVACIDAD Y TÉRMINOS DE USO</h2>
+                <p>Sistema de Gestión de Residencias Profesionales</p>
+              </div>
+              <div class="body-privacidad">
+                <h3 class="seccion-titulo">AVISO DE PRIVACIDAD INTEGRAL</h3>
+                <p>
+                  El presente sistema de gestión de residencias profesionales,
+                  implementado con fines estrictamente académicos e
+                  institucionales, recopila y procesa información personal con
+                  el único propósito de facilitar el seguimiento, evaluación y
+                  administración de los proyectos de residencia profesional de
+                  los estudiantes matriculados.
+                </p>
+
+                <h4>Finalidades del tratamiento de datos:</h4>
+                <ul class="lista-privacidad">
+                  <li>
+                    Registro y seguimiento del progreso académico en proyectos
+                    de residencia.
+                  </li>
+                  <li>
+                    Asignación de tutores académicos y empresariales para
+                    supervisión.
+                  </li>
+                  <li>
+                    Establecimiento de canales de comunicación entre alumnos,
+                    docentes y coordinadores.
+                  </li>
+                  <li>
+                    Almacenamiento y gestión de documentos oficiales,
+                    evidencias y entregables.
+                  </li>
+                  <li>
+                    Evaluación del desempeño conforme a los lineamientos
+                    institucionales.
+                  </li>
+                </ul>
+
+                <p>
+                  La información proporcionada permanecerá bajo estricta
+                  confidencialidad y no será transferida a terceros sin el
+                  consentimiento explícito del titular, salvo en los casos
+                  previstos por la legislación aplicable o cuando sea
+                  requerido por autoridades educativas competentes en
+                  ejercicio de sus funciones.
+                </p>
+
+                <p>
+                  Este aviso se emite en cumplimiento con la
+                  <strong>Ley Federal de Protección de Datos Personales en Posesión
+                    de los Particulares (LFPDPPP)</strong>
+                  y su Reglamento. El titular podrá ejercer sus derechos ARCO
+                  (Acceso, Rectificación, Cancelación y Oposición) mediante
+                  solicitud formal dirigida a la coordinación académica.
+                </p>
+
+                <div class="divisor"></div>
+
+                <h3 class="seccion-titulo">TÉRMINOS Y CONDICIONES DE USO</h3>
+                <p>
+                  El presente documento establece el marco normativo bajo el
+                  cual los estudiantes, docentes y personal administrativo
+                  pueden hacer uso del sistema de gestión de residencias
+                  profesionales. Al registrarse y utilizar esta plataforma, el
+                  usuario manifiesta su aceptación plena de los siguientes
+                  términos, en conformidad con el
+                  <strong>Código Civil Federal</strong>, la
+                  <strong>Ley Federal de Protección al Consumidor</strong> y
+                  demás legislación aplicable.
+                </p>
+
+                <h4>1. Naturaleza de la relación contractual</h4>
+                <p>
+                  El uso de esta plataforma constituye un acuerdo vinculante
+                  entre el usuario y la institución educativa, destinado
+                  exclusivamente al cumplimiento de funciones académicas
+                  relacionadas con el programa de residencias profesionales.
+                </p>
+
+                <h4>2. Alcance y propósito del sistema</h4>
+                <p>
+                  Esta plataforma está diseñada únicamente para el registro,
+                  gestión, seguimiento y evaluación de proyectos académicos de
+                  residencia profesional. Cualquier utilización para fines
+                  distintos queda expresamente prohibida.
+                </p>
+
+                <h4>3. Restricciones de uso</h4>
+                <ul class="lista-privacidad">
+                  <li>
+                    Queda prohibida la publicación de contenido ofensivo,
+                    discriminatorio o que infrinja derechos de autor.
+                  </li>
+                  <li>
+                    Se prohíbe terminantemente la alteración, falsificación o
+                    manipulación de información académica.
+                  </li>
+                  <li>
+                    No se permite la utilización de la plataforma con fines de
+                    lucro, comerciales o propagandísticos.
+                  </li>
+                  <li>
+                    Está prohibido compartir credenciales de acceso o permitir
+                    el uso no autorizado del sistema.
+                  </li>
+                </ul>
+
+                <h4>4. Limitación de responsabilidad</h4>
+                <p>
+                  La institución educativa no asumirá responsabilidad por
+                  interrupciones temporales en el servicio, fallos técnicos,
+                  pérdida de información por causas ajenas a su control, ni
+                  por el uso indebido que los usuarios puedan hacer de los
+                  contenidos o funcionalidades de la plataforma.
+                </p>
+
+                <h4>5. Modificaciones a los términos</h4>
+                <p>
+                  La institución se reserva el derecho de actualizar o
+                  modificar el presente documento en cualquier momento,
+                  conforme a necesidades académicas, administrativas, técnicas
+                  o legales, sin necesidad de notificación previa.
+                </p>
+
+                <h4>6. Marco normativo</h4>
+                <p>
+                  Este sistema opera en cumplimiento con los principios
+                  establecidos en la legislación mexicana, particularmente la
+                  Ley Federal de Protección al Consumidor, garantizando la
+                  transparencia en el uso, condiciones y características del
+                  servicio proporcionado.
+                </p>
+
+                <p class="texto-secundario">
+                  Si no está de acuerdo con alguno de los términos aquí
+                  establecidos, deberá abstenerse de utilizar esta plataforma.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
     <!-- Contenido Principal-->

@@ -737,7 +737,7 @@ if (isset($_SESSION['user_email'])) {
                                                     <th>Estado</th>
                                                 </tr>
                                           ";
-                                          $directorio = "C:/xampp/htdocs/generarword/Alumnos/{$alumno['matricula']}/";
+                                          $directorio = "C:/xampp/htdocs/generarword-Git/Alumnos/{$alumno['matricula']}/";
                                           if (is_dir($directorio)){
                                           $archivos = array_diff(scandir($directorio), array('.', '..'));
 
