@@ -196,3 +196,27 @@ body {
 .project-card:nth-child(3) {
   animation-delay: 0.4s;
 }
+
+#apellidoMaterno {
+  text-transform: uppercase;
+}
+
+#apellidoMaterno::placeholder {
+  text-transform: none;
+}
+
+#nombre {
+  text-transform: uppercase;
+}
+
+#nombre::placeholder {
+  text-transform: none;
+}
+
+#apellidoPaterno {
+  text-transform: uppercase;
+}
+
+#apellidoPaterno::placeholder {
+  text-transform: none;
+}
