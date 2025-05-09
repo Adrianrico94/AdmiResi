@@ -445,34 +445,28 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             </div>
-                     <!-- Modal: Asignar empresa Alumno -->
-         
+        
+        
+        
+            <!-- Modal: Asignar empresa Alumno -->
 
 
-
-
-
-
-
-
-
-
-            <div class="modal fade" id="modalAsignarEmpresa" tabindex="-1" aria-labelledby="modalAsignarAlumnoLabel" aria-hidden="true">
+         <div class="modal fade" id="modalAsignarEmpresa" tabindex="-1" aria-labelledby="modalAsignarEmpresaLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalAsignarAlumnoLabel">Asignar Empresa</h5>
+                            <h5 class="modal-title" id="modalAsignarEmpresaLabel">Asignar Empresa</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="POST">
+                            <form action="procesar_asignar_empresa.php" method="POST">
                                 <div class="mb-3">
                                     <label for="id_alumno" class="form-label">ID del Alumno</label>
                                     <input type="text" class="form-control" id="id_alumno" name="id_alumno" placeholder="Ingresa el ID del alumno" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="id_docente" class="form-label">ID del Empresa</label>
-                                    <input type="text" class="form-control" id="id_docente" name="id_docente" placeholder="Ingresa el ID de la empresa" required>
+                                    <label for="id_empresa" class="form-label">ID de la Empresa</label>
+                                    <input type="text" class="form-control" id="id_empresa" name="id_empresa" placeholder="Ingresa el ID de la empresa" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Asignar</button>
                             </form>

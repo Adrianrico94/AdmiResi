@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $template->setValue('NombreJefadivision', $NombreJefadivision);
 
         // Guardar y enviar documento
-        $archivo = 'documento_generado.docx';
+        $archivo = 'Carta Presentación.docx';
         $template->saveAs($archivo);
 
         header("Content-Disposition: attachment; filename=$archivo");
