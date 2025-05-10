@@ -2,25 +2,12 @@
 // Configuración de la conexión a la base de datos
 $host = "localhost";
 $dbname = "residencias_db";
-$username = "root"; // Cambia esto si tu usuario de MySQL es diferente
-$password = ""; // Cambia esto si tienes una contraseña para MySQL
-
-$directorio='C:/xampp/htdocs/generarword-Git/Alumnos/'.$matricula;
-    if (!file_exists($directorio)) {
-      mkdir($directorio, 0777, true);
-    }
-
-// Conectar a la base de datos
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+$username = "root";
+$password = "";
 
 // Obtener los datos del formulario
 $correo_institucional = $_POST['institutionalEmail'];
-$contrasena = password_hash($_POST['createPassword'], PASSWORD_BCRYPT); // Cifra la contraseña
+$contrasena = password_hash($_POST['createPassword'], PASSWORD_BCRYPT);
 $nombre_empresa = $_POST['nombreEmpresa'];
 $proyecto_asignado = $_POST['proyectoAsignado'];
 $matricula = $_POST['matricula'];
@@ -31,8 +18,25 @@ $carrera = $_POST['carrera'];
 $telefono = $_POST['telefono'];
 $observaciones = $_POST['observaciones'];
 
-// Insertar en la tabla Usuarios
 try {
+    // Conectar a la base de datos
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Verificar si el correo ya existe
+    $verificarCorreo = $conn->prepare("SELECT COUNT(*) FROM Usuarios WHERE correo_electronico = :correo");
+    $verificarCorreo->execute([':correo' => $correo_institucional]);
+    $existe = $verificarCorreo->fetchColumn();
+
+    if ($existe > 0) {
+        echo "<script>
+                alert('El correo ya está registrado. Intente con otro.');
+                window.location.href = 'Index.html';
+              </script>";
+        exit;
+    }
+
+    // Insertar en la tabla Usuarios
     $sqlUsuarios = "INSERT INTO Usuarios (nombre, apellido_paterno, apellido_materno, correo_electronico, contrasena, tipo_usuario) 
                     VALUES (:nombre, :apellido_paterno, :apellido_materno, :correo_institucional, :contrasena, 'Alumno')";
     $stmtUsuarios = $conn->prepare($sqlUsuarios);
@@ -43,13 +47,9 @@ try {
         ':correo_institucional' => $correo_institucional,
         ':contrasena' => $contrasena
     ]);
-    $id_usuario = $conn->lastInsertId(); // Obtener el ID del usuario insertado
-} catch (PDOException $e) {
-    die("Error al insertar en Usuarios: " . $e->getMessage());
-}
+    $id_usuario = $conn->lastInsertId();
 
-// Insertar en la tabla Alumnos
-try {
+    // Insertar en la tabla Alumnos
     $sqlAlumnos = "INSERT INTO Alumnos (id_alumno, matricula, empresa, proyecto_asignado, carrera, telefono_alumno, observaciones) 
                    VALUES (:id_alumno, :matricula, :empresa, :proyecto_asignado, :carrera, :telefono, :observaciones)";
     $stmtAlumnos = $conn->prepare($sqlAlumnos);
@@ -62,18 +62,20 @@ try {
         ':telefono' => $telefono,
         ':observaciones' => $observaciones
     ]);
-    $directorio='C:/xampp/htdocs/generarword-Git/Alumnos/'.$matricula;
+
+    // Crear directorio del alumno si no existe
+    $directorio = 'C:/xampp/htdocs/generarword-Git/Alumnos/' . $matricula;
     if (!file_exists($directorio)) {
-      mkdir($directorio, 0777, true);
+        mkdir($directorio, 0777, true);
     }
+
+    echo "<script>
+            alert('Su registro fue realizado correctamente');
+            window.location.href = 'Index.html';
+          </script>";
 } catch (PDOException $e) {
-    die("Error al insertar en Alumnos: " . $e->getMessage());
+    die("Error en la operación: " . $e->getMessage());
 }
 
-// Confirmar inserción exitosa y cerrar conexión
-echo "<script>
-        alert('Su registro fue realizado correctamente');
-        window.location.href = 'Index.html';
-    </script>";
 $conn = null;
 ?>
