@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'fechaCompleta', // Nueva fecha desde calendario
         'nombreEmpresa',
         'Nombredelestudiante','numMatricula', 'area','NombreProyec',
-        'horaInicio','días', 'horaFinal', 'NombreJefadivision'
+        'horaInicio','dias', 'horaFinal', 'NombreJefadivision','nombredelEncargadoUN','areaEncargada'
     ];
 
     foreach ($campos as $campo) {
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $template->setValue('numMatricula', $numMatricula);
         $template->setValue('horaInicio', $horaInicio);
     
-        $template->setValue('días', $días);
+        $template->setValue('dias', $dias);
         $template->setValue('horaFinal', $horaFinal);
         $template->setValue('NombreJefadivision', $NombreJefadivision);
          $inicio = explode('-', $_POST['fechaInicio']);
@@ -65,15 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $template->setValue('numDiaFin', $inicio[2]);
     $template->setValue('numMesFin', $inicio[1]);
     $template->setValue('numAñoFin', $inicio[0]);
-
     $template->setValue('area', $area);
-
     $template->setValue('NombreProyec', $NombreProyec);
+    $template->setValue('areaEncargada', $areaEncargada);
 
 
 
         // Guardar y enviar documento
-        $archivo = 'Carta Termino.docx';
+        $archivo = 'Carta Tsdsdsrmino.docx';
         $template->saveAs($archivo);
 
         header("Content-Disposition: attachment; filename=$archivo");

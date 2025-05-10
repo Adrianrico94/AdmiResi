@@ -729,11 +729,11 @@ de residencia profesionales."
             <div class="col-md-6">
               <label for="PeríodoMínimodeMeses" class="form-label">Periodo mínimo (meses)</label>
               
-              <input type="number"  min="1" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
+              <input type="number"  min="1" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
             </div>
             <div class="col-md-6">
-              <label for="PeríodoMaximodeMeses"  min="1" step="1" class="form-label">Periodo máximo (meses)</label>
-              <input type="number" class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
+              <label for="PeríodoMaximodeMeses"   class="form-label">Periodo máximo (meses)</label>
+              <input type="number" min="1" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
             </div>
 
             <div class="col-md-6">
@@ -875,10 +875,10 @@ de residencia profesionales."
           oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
         </div>
         <div class="col-md-3">
-          <input type="number" name="numSemestre" placeholder="Semestre" class="form-control" required>
+          <input type="number" min="1" max="9" step="1" name="numSemestare" placeholder="Semestre" class="form-control" required>
         </div>
         <div class="col-md-3 mt-2">
-          <input type="number"  min="1" step="1"   name="numCreditos" placeholder="Créditos" class="form-control" required>
+          <input type="number"  name="numCreditos" placeholder="Créditos" class="form-control" required>
         </div>
       </div>
 
@@ -1384,15 +1384,19 @@ de residencia profesionales."
            
 
             <div class="col-md-6">
-              <label for="días" class="form-label">Días de asistencia</label>
-              <input type="text" class="form-control" id="días" name="días" placeholder="Ej: Lunes a Viernes" required oninput="this.value = this.value.toUpperCase();">
+              <label for="dias" class="form-label">Días de asistencia</label>
+              <input type="text" class="form-control" id="dias" name="dias" placeholder="Ej: Lunes a Viernes" required oninput="this.value = this.value.toUpperCase();">
             </div>
             
 
             <div class="col-md-6">
               <label for="nombredelEncargadoUN" class="form-label">Ingrese nombre encargado empresa</label>
               <input type="text" class="form-control" id="nombredelEncargadoUN" name="nombredelEncargadoUN" required oninput="this.value = this.value.toUpperCase();">
-            </div>
+            </div>  
+            <div class="col-md-6">
+              <label for="nombredelEncargadoUN" class="form-label">Ingrese nombre encargado empresa</label>
+              <input type="text" class="form-control" id="nombredelEncargadoUN" name="areaEncargada" required oninput="this.value = this.value.toUpperCase();">
+            </div>  
 
           </div>
 

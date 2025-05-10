@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
 
     // Guardar el documento generado
-    $archivo = 'Formato de evaluacion Final.docx';
+    $archivo = 'Formato evaluacion Final.docx';
     $template->saveAs($archivo);
 
     // Forzar la descarga del archivo generado

@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $template->setValue('observacionesAsesorInt', $_POST['observacionesAsesorInt']);
 
     // Guardar el documento generado
-    $archivo = 'Anteproyecto_Llenado.docx';
+    $archivo = 'Visita.docx';
     $template->saveAs($archivo);
 
     // Forzar la descarga del archivo generado

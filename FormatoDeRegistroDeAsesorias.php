@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $template->setValue('nombreAsesorInt', $nombreAsesorInt);
 
         // Generar documento
-        $archivo = 'documento_generado.docx';
+        $archivo = 'Asesoría.docx';
         $template->saveAs($archivo);
 
         header("Content-Disposition: attachment; filename=$archivo");

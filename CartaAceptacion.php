@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $template->setValue('areaEncargada', $areaEncargada);
         $template->setValue('diaAsistencia', $diaAsistencia);
 
-        $archivo = 'CartaAceptacion.docx';
+        $archivo = 'Carta de Aceptacion.docx';
         $template->saveAs($archivo);
 
         header("Content-Disposition: attachment; filename=$archivo");
