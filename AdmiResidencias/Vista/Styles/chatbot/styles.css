@@ -297,7 +297,7 @@ body.show-chat .chat-pop {
   }
 }
 
-#apellidoMaterno {
+/* #apellidoMaterno {
   text-transform: uppercase;
 }
 
@@ -319,4 +319,4 @@ body.show-chat .chat-pop {
 
 #apellidoPaterno::placeholder {
   text-transform: none;
-}
+} */
