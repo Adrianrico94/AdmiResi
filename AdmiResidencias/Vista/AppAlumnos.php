@@ -1313,11 +1313,95 @@ de residencia profesionales."
     </div></div>
   </div>
 
-  <!-- 8 -->
+  <!-- Carta Término -->
   <div class="modal fade" id="modalCartaTermino" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-dialog modal-lg"><div class="modal-content">
       <div class="modal-header"><h5 class="modal-title">Carta Término</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-      <div class="modal-body">Contenido del modal: Carta Término.</div>
+      <div class="modal-body">
+        <form action="../../CartaTermino.php" method="POST">
+          <div class="row g-3">
+          <div class="col-md-4">
+            <label for="fechaCompleta" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fechaCompleta" name="fechaCompleta" required>
+          </div>
+
+  
+
+            <div class="col-md-6">
+              <label for="NombreJefadivision" class="form-label">Ingresa nombre de la Jefa de división</label>
+              <input type="text" class="form-control" id="NombreJefadivision" name="NombreJefadivision" required oninput="this.value = this.value.toUpperCase();">
+
+            </div>
+
+            <div class="col-md-6">
+              <label for="nombreEmpresa" class="form-label">Ingresa nombre de la empresa o unida económica</label>
+              <input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa" required oninput="this.value = this.value.toUpperCase();">
+            </div>
+            <div class="col-md-6">
+              <label for="Nombredelestudiante" class="form-label">Nombre del Estudiante</label>
+              <input type="text" class="form-control" id="Nombredelestudiante" name="Nombredelestudiante" required oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="col-md-5">
+              <label for="numMatricula" class="form-label">Número de Matrícula</label>
+              <input type="text" class="form-control" id="numMatricula" name="numMatricula"  maxlength="9" required
+              oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9);">
+            </div>
+
+            <div class="col-md-6">
+              <label for="area" class="form-label">Área asignada</label>
+              <input type="text" class="form-control" id="area" name="area" required oninput="this.value = this.value.toUpperCase();">
+            </div>
+            
+            <div class="row mb-3 pt-3">
+                        <div class="col-md-3">
+                            <label>Fecha Inicio </label>
+                            <input type="date" name="fechaInicio" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Fecha de Final</label>
+                            <input type="date" name="fechaFinal" class="form-control" required>
+                        </div>
+            <div class="col-md-6">
+              <label for="NombreProyec" class="form-label">Nombre del Proyecto</label>
+              <input type="text" class="form-control" id="NombreProyec" name="NombreProyec" required oninput="this.value = this.value.toUpperCase();">
+            </div>
+            </div>
+            
+
+
+
+
+            <div class="col-md-6">
+              <label for="horaInicio" class="form-label">Hora de entrada</label>
+              <input type="time" class="form-control" id="horaInicio" name="horaInicio" required>
+            </div>
+            <div class="col-md-6">
+              <label for="horaFinal" class="form-label">Hora de salida</label>
+              <input type="time" class="form-control" id="horaFinal" name="horaFinal" required>
+            </div>
+
+           
+
+            <div class="col-md-6">
+              <label for="días" class="form-label">Días de asistencia</label>
+              <input type="text" class="form-control" id="días" name="días" placeholder="Ej: Lunes a Viernes" required oninput="this.value = this.value.toUpperCase();">
+            </div>
+            
+
+            <div class="col-md-6">
+              <label for="nombredelEncargadoUN" class="form-label">Ingrese nombre encargado empresa</label>
+              <input type="text" class="form-control" id="nombredelEncargadoUN" name="nombredelEncargadoUN" required oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+          </div>
+
+          <div class="mt-4 text-end">
+            <button type="submit" class="btn btn-success" title="Haz clic para generar el formato en Word con tu información actual.">Generar documento</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Haz clic para cancelar la generación del documento.">Cancelar</button>
+          </div>
+        </form>
+      </div>
     </div></div>
   </div>
 
