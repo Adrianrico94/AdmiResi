@@ -783,12 +783,12 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="NombreJefadivision" class="form-label">Nombre de la Jefa de División</label>
-              <input type="text" class="form-control" id="NombreJefadivision" name="NombreJefadivision" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="NombreJefadivision" name="NombreJefadivision" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             <div class="col-md-6">
               <label for="Nombredelestudiante" class="form-label">Nombre del Estudiante</label>
-              <input type="text" class="form-control" id="Nombredelestudiante" name="Nombredelestudiante" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="Nombredelestudiante" name="Nombredelestudiante" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             <div class="col-md-6">
@@ -830,7 +830,7 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="nombredelEncargadoUN" class="form-label">Nombre del Encargado (Asesor)</label>
-              <input type="text" class="form-control" id="nombredelEncargadoUN" name="nombredelEncargadoUN" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="nombredelEncargadoUN" name="nombredelEncargadoUN" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             <div class="col-md-6">
@@ -840,7 +840,7 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="diaAsistencia" class="form-label">Día de asistencia al Tec</label>
-              <input type="text" class="form-control" id="diaAsistencia" name="diaAsistencia" placeholder="Ej: MIÉRCOLES" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="diaAsistencia" name="diaAsistencia" placeholder="Ej: MIÉRCOLES" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
           </div>
 
