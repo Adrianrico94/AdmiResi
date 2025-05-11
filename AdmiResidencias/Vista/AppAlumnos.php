@@ -870,7 +870,7 @@ de residencia profesionales."
       <h4>Datos del Alumno</h4>
       <div class="row mb-3">
         <div class="col-md-6">
-          <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+          <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
         </div>
         <div class="col-md-3">
           <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
@@ -945,9 +945,9 @@ de residencia profesionales."
 
 
       <h4>Responsables</h4>
-      <input type="text" name="representanteEmpresa" placeholder="Representante de la Empresa" class="form-control mb-2" required>
-      <input type="text" name="nombreAsesorInt" placeholder="Nombre del Asesor Interno" class="form-control mb-2" required>
-      <input type="text" name="nombreJefaDeCarrera" placeholder="Nombre de la Jefa de Carrera" class="form-control mb-3" required>
+      <input type="text" name="representanteEmpresa" placeholder="Representante de la Empresa" class="form-control mb-2" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
+      <input type="text" name="nombreAsesorInt" placeholder="Nombre del Asesor Interno" class="form-control mb-2" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
+      <input type="text" name="nombreJefaDeCarrera" placeholder="Nombre de la Jefa de Carrera" class="form-control mb-3" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
       <h4>Descripción del proyecto</h4>
       <input type="text" name="objetivoProyecto" placeholder="Objetivo" class="form-control mb-2" required>
       <input type="text" name="justificaProyecto" placeholder="Justificación" class="form-control mb-2" required>
@@ -965,7 +965,7 @@ de residencia profesionales."
     </div></div>
   </div>
 
-  <!-- 4 -->
+  <!-- Asesoría -->
   <div class="modal fade" id="modalAsesoria" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg"><div class="modal-content">
       <div class="modal-header"><h5 class="modal-title">Asesoría</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
@@ -985,7 +985,7 @@ de residencia profesionales."
 
           <div class="col-md-6">
             <label for="nombreAlumno" class="form-label">Nombre del Alumno</label>
-            <input type="text" class="form-control" id="nombreAlumno" name="nombreAlumno" required oninput="this.value = this.value.toUpperCase();">
+            <input type="text" class="form-control" id="nombreAlumno" name="nombreAlumno" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
           </div>
 
           <div class="col-md-6">
@@ -1038,7 +1038,7 @@ de residencia profesionales."
 
           <div class="col-md-6">
             <label for="nombreAsesorInt" class="form-label">Nombre del Asesor Interno</label>
-            <input type="text" class="form-control" id="nombreAsesorInt" name="nombreAsesorInt" required oninput="this.value = this.value.toUpperCase();">
+            <input type="text" class="form-control" id="nombreAsesorInt" name="nombreAsesorInt" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
           </div>
 
         </div>
@@ -1053,7 +1053,7 @@ de residencia profesionales."
     </div></div>
   </div>
 
-  <!-- 5 -->
+  <!-- Visita -->
   <div class="modal fade" id="modalVisita" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -1075,7 +1075,7 @@ de residencia profesionales."
                     <h4>Datos del Alumno</h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                         <div class="col-md-6">
                             <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
@@ -1151,13 +1151,13 @@ de residencia profesionales."
 
                     <!-- Asesor Externo -->
                     <h4>Asesor Externo</h4>
-                    <input type="text" name="nombreAsesorExt" placeholder="Nombre del Asesor Externo" class="form-control mb-2" required>
-                    <input type="text" name="CargoEncargado" placeholder="Cargo del Encargado" class="form-control mb-2" required>
+                    <input type="text" name="nombreAsesorExt" placeholder="Nombre del Asesor Externo" class="form-control mb-2" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
+                    <input type="text" name="CargoEncargado" placeholder="Cargo del representante" class="form-control mb-2" required>
                     <input type="text" name="observacionesAsesorExt" placeholder="Observaciones del Asesor Externo" class="form-control mb-2" required>
 
                     <!-- Avance y Observaciones -->
                     <h4>Avance y Observaciones</h4>
-                    <input type="number" name="numAvance" placeholder="Avance"   min="1" step="1" class="form-control mb-2" required>
+                    <input type="number" name="numAvance" placeholder="Avance"   min="1" max="100" step="1" class="form-control mb-2" required>
 
                     <input type="text" name="observacionesAsesorInt" placeholder="Observaciones del Asesor Interno" class="form-control mb-2" required>
 
