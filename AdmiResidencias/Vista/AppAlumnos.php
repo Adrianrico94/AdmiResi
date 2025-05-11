@@ -1169,7 +1169,7 @@ de residencia profesionales."
 </div>
 
 
-  <!-- 6 -->
+  <!-- Evaluación -->
   <div class="modal fade" id="modalEvaluacion1" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg"><div class="modal-content">
       <div class="modal-header"><h5 class="modal-title">Evaluación </h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
@@ -1189,7 +1189,7 @@ de residencia profesionales."
                     <h4>Datos del Alumno</h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                         <div class="col-md-6">
                             <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
@@ -1227,10 +1227,10 @@ de residencia profesionales."
                     <h4>Nombres asesor</h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <input type="text" name="nombreAsesorExte" placeholder="Nombre del asesor externo" class="form-control" required>
+                            <input type="text" name="nombreAsesorExte" placeholder="Nombre del asesor externo" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                         <div class="col-md-6">
-                        <input type="text" name="nombreAsesorInterno" placeholder="Nombre del asesor interno" class="form-control" required>
+                        <input type="text" name="nombreAsesorInterno" placeholder="Nombre del asesor interno" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                     </div>
 
@@ -1261,7 +1261,7 @@ de residencia profesionales."
                     <h4>Datos del Alumno</h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required>
+                            <input type="text" name="nombreAlumno" placeholder="Nombre del Alumno" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                         <div class="col-md-6">
                             <input type="text" name="numControl" placeholder="No. Control" class="form-control"  maxlength="9" required
@@ -1301,10 +1301,10 @@ de residencia profesionales."
                     <h4>Nombres asesor</h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <input type="text" name="nombreAsesorExte" placeholder="Nombre del asesor externo" class="form-control" required>
+                            <input type="text" name="nombreAsesorExte" placeholder="Nombre del asesor externo" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                         <div class="col-md-6">
-                        <input type="text" name="nombreAsesorInterno" placeholder="Nombre del asesor interno" class="form-control" required>
+                        <input type="text" name="nombreAsesorInterno" placeholder="Nombre del asesor interno" class="form-control" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
                         </div>
                     </div>
 
@@ -1331,17 +1331,17 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="NombreJefadivision" class="form-label">Ingresa nombre de la Jefa de división</label>
-              <input type="text" class="form-control" id="NombreJefadivision" name="NombreJefadivision" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="NombreJefadivision" name="NombreJefadivision" oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
 
             </div>
 
             <div class="col-md-6">
               <label for="nombreEmpresa" class="form-label">Ingresa nombre de la empresa o unida económica</label>
-              <input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="nombreEmpresa" name="nombreEmpresa" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
             <div class="col-md-6">
               <label for="Nombredelestudiante" class="form-label">Nombre del Estudiante</label>
-              <input type="text" class="form-control" id="Nombredelestudiante" name="Nombredelestudiante" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="Nombredelestudiante" name="Nombredelestudiante" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             <div class="col-md-5">
@@ -1387,17 +1387,17 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="dias" class="form-label">Días de asistencia</label>
-              <input type="text" class="form-control" id="dias" name="dias" placeholder="Ej: Lunes a Viernes" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="dias" name="dias" placeholder="Ej: Lunes a Viernes" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
             
 
             <div class="col-md-6">
               <label for="nombredelEncargadoUN" class="form-label">Ingrese nombre encargado empresa</label>
-              <input type="text" class="form-control" id="nombredelEncargadoUN" name="nombredelEncargadoUN" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="nombredelEncargadoUN" name="nombredelEncargadoUN" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>  
             <div class="col-md-6">
               <label for="nombredelEncargadoUN" class="form-label">Ingrese nombre encargado empresa</label>
-              <input type="text" class="form-control" id="nombredelEncargadoUN" name="areaEncargada" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="nombredelEncargadoUN" name="areaEncargada" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>  
 
           </div>
