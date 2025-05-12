@@ -15,6 +15,8 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) >
 // Actualizar la hora de la última actividad
 $_SESSION['last_activity'] = time();
 
+
+
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_type'])) {
   header("Location: Index.html"); // Redirige si no está logueado
@@ -88,7 +90,7 @@ if (isset($_SESSION['user_email'])) {
 
     // Consulta para obtener los alumnos asignados al docente
     $sql_alumnos = "SELECT a.id_alumno, a.matricula, CONCAT(u.nombre, ' ', u.apellido_paterno, ' ', u.apellido_materno) AS nombre_completo, 
-    a.carrera, a.horario_asignado, u.correo_electronico, a.observaciones, a.avance, a.documento, a.notificacion
+    a.carrera, a.horario_asignado, u.correo_electronico, a.observaciones,a.proyecto_asignado, a.avance, a.documento, a.notificacion
     FROM Alumnos a 
     JOIN Asignaciones asg ON a.id_alumno = asg.id_alumno 
     JOIN Usuarios u ON a.id_alumno = u.id_usuario
@@ -660,6 +662,7 @@ if (isset($_SESSION['user_email'])) {
                             <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modal_{$alumno['id_alumno']}'>
                                 Mostrar
                             </button>
+                            
                             <!-- Modal -->
                             <div class='modal fade' id='modal_{$alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden='true'>
                                 <div class='modal-dialog'>
@@ -676,10 +679,12 @@ if (isset($_SESSION['user_email'])) {
                                             <p><strong>Carrera:</strong> {$alumno['carrera']}</p>
                                             <p><strong>Horario Asignado:</strong> {$alumno['horario_asignado']}</p>
                                             <p><strong>Correo:</strong> {$alumno['correo_electronico']}</p>
+                                            <p><strong>Proyecto Asignado:</strong> {$alumno['proyecto_asignado']}</p>
+
 
                                             <!-- Mostrar las observaciones en el modal -->
                                            <div class='mb-3'>
-                                                <label for='observaciones' class='form-label'><strong>Observaciones:</strong></label>
+                                                <label for='observaciones' class='form-label'><strong>Descripción del proyecto:</strong></label>
                                                     <textarea 
                                                         id='observaciones' 
                                                         class='form-control' 

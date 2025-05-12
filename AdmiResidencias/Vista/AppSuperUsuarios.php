@@ -579,7 +579,7 @@ $result = $conn->query($sql);
                                                             <p><strong>Teléfono alumno:</strong> {$row['telefono_alumno']}</p>
                                                             <p><strong>Teléfono empresa:</strong> {$row['telefono_profesor_asignado']}</p>
                                                             <p><strong>Horario asignado Tecnológico:</strong> {$row['horario_asignado']}</p>
-                                                            <p><strong>Observaciones:</strong></p>
+                                                            <p><strong>Descripción del proyecto:</strong></p>
                                                             <textarea readonly style='width: 100%; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px; text-align: left;'>"
                                                     . htmlspecialchars($row['observaciones']) .
                                                     "</textarea>
@@ -622,12 +622,13 @@ $result = $conn->query($sql);
                                                             </div>
                                                             <div class='mb-3'>
                                                                 <label for='ingreso' class='form-label'>Ingreso</label>
-                                                                <input type='text' class='form-control' id='ingreso' name='ingreso' value='{$row['ingreso']}'>
+<input type='date' class='form-control' id='ingreso' name='ingreso' value='{$row['ingreso']}'>
                                                             </div>
                                                             <div class='mb-3'>
                                                                 <label for='egreso' class='form-label'>Egreso</label>
-                                                                <input type='text' class='form-control' id='egreso' name='egreso' value='{$row['egreso']}'>
-                                                            </div>
+
+<input type='date' class='form-control' id='egreso' name='egreso' value='{$row['egreso']}'>
+                                                                </div>
                                                             <div class='mb-3'>
                                                                 <label for='telefono_alumno' class='form-label'>Teléfono Alumno</label>
                                                                 <input type='text' class='form-control' id='telefono_alumno' name='telefono_alumno' value='{$row['telefono_alumno']}'>
@@ -637,7 +638,7 @@ $result = $conn->query($sql);
                                                                 <input type='text' class='form-control' id='telefono_profesor_asignado' name='telefono_profesor_asignado' value='{$row['telefono_profesor_asignado']}'>
                                                             </div>
                                                             <div class='mb-3'>
-                                                                <label for='observaciones' class='form-label'>Observaciones</label>
+                                                                <label for='observaciones' class='form-label'>Descripción del proyecto</label>
                                                                 <textarea class='form-control' id='observaciones' name='observaciones'>{$row['observaciones']}</textarea>
                                                             </div>
                                                             <div class='mb-3'>

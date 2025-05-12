@@ -328,32 +328,64 @@ WHERE u_alumno.correo_electronico = ?";
     </div>
 
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-        <div class="dropdown">
-          <a class="btn m-2 d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <?php
-            if ($notificacion === null){    
-              echo "<i class='bi bi-bell'></i>";                       
-            }else{
-              echo "<i class='bi bi-bell-fill text-danger'></i>"; }
-          ?>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">NOTIFICACIÓNES</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <?php
-              if ($notificacion === null){
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> ¡Bienvenido! recuerda enviar tu propuesta de proyecto</a></li>";                            
-              }elseif ($notificacion == 1) {
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-check-circle-fill'></i> Tu proyecto ha sido <strong>aceptado</strong>. Puedes empezar a trabajar.</a></li>";              
-              }elseif ($notificacion == 0) {
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-x-circle-fill'></i> Tu proyecto ha sido <strong>rechazado</strong>. Revísalo y haz las modificaciónes necesarias.</a></li>";              
-              }elseif ($notificacion == 3) {
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong></strong> ha propuesto un nuevo proyecto.</a></li>";              
-              }
-            ?>            
-          </ul>
+  <div class="dropdown">
+    <a class="btn m-2 d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="notificacionesDropdown">
+    <?php
+      // Verificamos si hay notificación y si es nueva
+      $notificacion_nueva = isset($_SESSION['notificacion_nueva']) ? $_SESSION['notificacion_nueva'] : false;
+      
+      if ($notificacion === null){    
+        echo "<i class='bi bi-bell' id='iconoNotificacion'></i>";                       
+      } else {
+        // Si hay notificación y es nueva, mostramos en verde, si no, en negro
+        $color_clase = $notificacion_nueva ? 'text-success' : 'text-dark';
+        echo "<i class='bi bi-bell-fill $color_clase' id='iconoNotificacion'></i>";
+      }
+    ?>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><a class="dropdown-item" href="#">NOTIFICACIÓNES</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <?php
+        if ($notificacion === null){
+          echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> ¡Bienvenido! recuerda enviar tu propuesta de proyecto</a></li>";                            
+        } elseif ($notificacion == 1) {
+          echo "<li><a class='dropdown-item' href='#'><i class='bi bi-check-circle-fill'></i> Tu proyecto ha sido <strong>aceptado</strong>. Puedes empezar a trabajar.</a></li>";              
+        } elseif ($notificacion == 0) {
+          echo "<li><a class='dropdown-item' href='#'><i class='bi bi-x-circle-fill'></i> Tu proyecto ha sido <strong>rechazado</strong>. Revísalo y haz las modificaciónes necesarias.</a></li>";              
+        } elseif ($notificacion == 3) {
+          echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong></strong> ha propuesto un nuevo proyecto.</a></li>";              
+        }
+      ?>            
+    </ul>
+  </div>
+</ul>
+<!-- cambio de color notificaciones  -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Cuando se hace clic en el dropdown de notificaciones
+  var notificacionesDropdown = document.getElementById('notificacionesDropdown');
+  if (notificacionesDropdown) {
+    notificacionesDropdown.addEventListener('click', function() {
+      // Cambiar el color del icono a negro cuando se ve la notificación
+      var iconoNotificacion = document.getElementById('iconoNotificacion');
+      if (iconoNotificacion && iconoNotificacion.classList.contains('text-success')) {
+        iconoNotificacion.classList.remove('text-success');
+        iconoNotificacion.classList.add('text-dark');
+        
+        // Enviar solicitud AJAX para marcar como vistas
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'marcar_vistas.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('marcar=1');
+      }
+    });
+  }
+});
+</script>
+<!-- cambio de color notificaciones  -->
         </div>
 
       <div class="dropdown">
@@ -1717,16 +1749,16 @@ de residencia profesionales."
                         ?>
 
                         <?php
-                        echo '<li class="list-group-item"><strong>Nombre de la Empresa:</strong> ' . (!empty($correo_empresa) ? $correo_empresa : 'En proceso de revisión') . '</li>';
+                        echo '<li class="list-group-item"><strong>Correo empresa:</strong> ' . (!empty($correo_empresa) ? $correo_empresa : 'En proceso de revisión') . '</li>';
                         ?>
                         <?php
-                        echo '<li class="list-group-item"><strong>Nombre de la Empresa:</strong> ' . (!empty($contacto_empresa) ? $contacto_empresa : 'En proceso de revisión') . '</li>';
+                        echo '<li class="list-group-item"><strong>Contacto Tutor asignado empresa:</strong> ' . (!empty($contacto_empresa) ? $contacto_empresa : 'En proceso de revisión') . '</li>';
                         ?>
                         <?php
-                        echo '<li class="list-group-item"><strong>Nombre de la Empresa:</strong> ' . (!empty($tutor_asignado) ? $tutor_asignado : 'En proceso de revisión') . '</li>';
+                        echo '<li class="list-group-item"><strong>Tutor asignado empresa:</strong> ' . (!empty($tutor_asignado) ? $tutor_asignado : 'En proceso de revisión') . '</li>';
                         ?>
                         <?php
-                        echo '<li class="list-group-item"><strong>Nombre de la Empresa:</strong> ' . (!empty($horario_asistencia) ? $horario_asistencia : 'En proceso de revisión') . '</li>';
+                        echo '<li class="list-group-item"><strong>Horario Empresa:</strong> ' . (!empty($horario_asistencia) ? $horario_asistencia : 'En proceso de revisión') . '</li>';
                         ?>
 
                         <?php
