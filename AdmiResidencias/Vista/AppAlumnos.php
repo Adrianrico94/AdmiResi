@@ -42,7 +42,7 @@ if (isset($_SESSION['user_email'])) {
 
   // Consulta para obtener los datos del alumno
   $sql_alumno = "SELECT u.id_usuario, u.nombre, u.apellido_paterno, u.apellido_materno, u.correo_electronico, 
-                          a.telefono_alumno, a.matricula, a.proyecto_asignado, a.id_empresa,.a.notificacion, a.avance
+                          a.telefono_alumno, a.matricula, a.proyecto_asignado, a.id_empresa,.a.notificacion, a.avance, a.documento
                    FROM Usuarios u
                    JOIN Alumnos a ON u.id_usuario = a.id_alumno
                    WHERE u.correo_electronico = ?";
@@ -64,6 +64,7 @@ if (isset($_SESSION['user_email'])) {
     $proyecto_asignado = $row_alumno['proyecto_asignado']; // Obtener el proyecto asignado
     $id_empresa = $row_alumno['id_empresa'];  // Obtener el id de la empresa asociada
     $notificacion = $row_alumno['notificacion'];
+    $documento = $row_alumno['documento'];
 
     // Consulta para obtener los datos de la empresa asociada al alumno
     $sql_empresa = "SELECT e.nombre_empresa, e.correo_empresa, e.contacto_empresa, e.tutor_asignado, 
@@ -142,6 +143,10 @@ WHERE u_alumno.correo_electronico = ?";
   $stmt_alumno->close();
   $conn->close();
 }
+
+$carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/$matricula/";//Obtención de dirección de carpeta
+//echo $documento;
+$docs = json_decode($documento);
 ?>
 
 
@@ -353,9 +358,9 @@ WHERE u_alumno.correo_electronico = ?";
           echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> ¡Bienvenido! recuerda enviar tu propuesta de proyecto</a></li>";                            
         } elseif ($notificacion == 1) {
           echo "<li><a class='dropdown-item' href='#'><i class='bi bi-check-circle-fill'></i> Tu proyecto ha sido <strong>aceptado</strong>. Puedes empezar a trabajar.</a></li>";              
-        } elseif ($notificacion == 0) {
+        } elseif ($notificacion == 2) {
           echo "<li><a class='dropdown-item' href='#'><i class='bi bi-x-circle-fill'></i> Tu proyecto ha sido <strong>rechazado</strong>. Revísalo y haz las modificaciónes necesarias.</a></li>";              
-        } elseif ($notificacion == 3) {
+        } elseif ($notificacion == 0) {
           echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong></strong> ha propuesto un nuevo proyecto.</a></li>";              
         }
       ?>            
@@ -1585,78 +1590,140 @@ de residencia profesionales."
 
       
 
-      <!-- Subir Evidencias -->
-
-
-
-
-      <div class="card form-container my-4 shadow-lg rounded-4 border-0 mx-auto" style="max-width: 900px;">
+      
+<!-- Subir Evidencias -->
+<div class="card form-container my-4 shadow-lg rounded-4 border-0 mx-auto" style="max-width: 900px;">
     <div class="card-body p-4">
         <h2 class="text-center mb-4 fw-bold text-black">Subir Evidencias</h2>
+        <table class="table table-bordered mb-3 text-center">
+        <tr>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+            <th scope="col">5</th>
+            <th scope="col">6</th>
+            <th scope="col">7</th>
+            <th scope="col">8</th>
+            <th scope="col">9</th>
+            <th scope="col">10</th>
+        </tr><tr>
+            <?php Filas(1,11,$docs,$carpeta,$matricula); ?>
+        </tr>
+        </table><table class="table table-bordered mb-3 text-center">
+        <tr>
+            <th scope="col">11</th>
+            <th scope="col">12</th>
+            <th scope="col">13</th>
+            <th scope="col">14</th>
+            <th scope="col">15</th>
+            <th scope="col">16</th>
+            <th scope="col">17</th>
+            <th scope="col">18</th>
+            <th scope="col">19</th>
+            <th scope="col">20</th>
+        </tr><tr>
+            <?php Filas(11,21,$docs,$carpeta,$matricula); ?>
+        </tr>
+        </table><table class="table table-bordered mb-3 text-center">
+        <tr>
+            <th scope="col">21</th>
+            <th scope="col">22</th>
+            <th scope="col">23</th>
+            <th scope="col">24</th>
+            <th scope="col">25</th>
+            <th scope="col">26</th>
+            <th scope="col">27</th>
+            <th scope="col">28</th>
+            <th scope="col">29</th>
+            <th scope="col">30</th>
+            <th scope="col">31</th>
+        </tr><tr>
+            <?php Filas(21,32,$docs,$carpeta,$matricula); ?>
+        </tr>
+        </table>
 
-       <form enctype="multipart/form-data" method="POST" action="../Modelo/guardar_doc.php" id="uploadForm">
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-primary text-white border-0"><i class="bi bi-upload"></i></span>
-                <input class="form-control border-0 shadow-sm" type="file" name="evidencia" accept=".jpg, .jpeg, .png, .pdf" required id="fileInput" title="Haz clic para seleccionar tu evidencia."/>
-                <input type="hidden" id="Matricula" name="Matricula" value="<?php echo "$matricula"; ?>">
-                <input type="hidden" id="Alumno" name="Alumno" value="<?php echo "$id_alumno"; ?>">
-
+        <!-- Barra de carga -->
+        <div class="mt-3 d-none" id="progressContainer">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 1%;" id="progressBar"></div>
             </div>
-            <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-primary w-40 fw-bold shadow-sm btn-upload " type="submit" title="Haz clic para cargar tu evidencia.">
-                    <i class="bi bi-cloud-upload"></i> Subir Evidencia
-                </button>
-            </div>
+        </div>
 
-            <!-- Barra de carga -->
-            <div class="mt-3 d-none" id="progressContainer">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 1%;" id="progressBar"></div>
-                </div>
-            </div>
-        </form>
-        <script>//Envio de documentos
-          document.getElementById("uploadForm").addEventListener("submit", function(event) {
-          event.preventDefault(); // Evita el envío normal del formulario
+        <!-- Formulario con botón único -->
+        <?php
+        function Filas($a,$z,$doc,$car,$mat) {
+            for ($i=$a; $i < $z; $i++) { 
+                if (in_array($i, $doc)) {
+                    echo "<td><span onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-success border-0 rounded-pill'><i class='bi bi-check-lg'></i></span></td>";
+                }else{
+                    $archivos = glob($car . $i . '/*');
+                    if (!empty($archivos)) {
+                        echo "<td><button onclick=\"alert('Este archivo está en revision.')\" class='btn btn-secondary border-0 rounded-pill'><i class='bi bi-search'></i></span></td>";
+                    } else {
+                        //Botón de subida
+                        echo "<td><form id='formulario_$i'  data-n-doc='' action=\"guardar_doc.php\" method=\"post\" enctype=\"multipart/form-data\" class=\"form-btns\">
+                            <!-- Input de archivo oculto -->
+                            <input type=\"file\" name=\"evidencia\" id=\"fileInput_$i\" accept=\".jpg, .jpeg, .png, .pdf\" required style=\"display: none;\" required>
+                            <input type=\"hidden\" id=\"Archivo\" name=\"Archivo\" value=''>
+                            <input type='hidden' id=\"Matricula\" name=\"Matricula\" value=\"$mat/$i\">
 
-          const form = document.getElementById("uploadForm");
-          const formData = new FormData(form);
-          const progressContainer = document.getElementById("progressContainer");
-          const progressBar = document.getElementById("progressBar");
-          const fileInput = document.getElementById('fileInput');
-          const fileName = fileInput.files[0].name;
-            
-          // Mostrar la barra de progreso
-          progressContainer.classList.remove("d-none");
+                            <!-- Botón único que activa selección y subida -->
+                            <button type='button' onclick=\"document.getElementById('fileInput_$i').click();\" class='btn btn-primary border-0 rounded-pill' id=\"Btn_$i\"><i class='bi bi-upload'></i></button>
+                        </form></td>";
+                        //Proceso de subida
+                        echo "<script>
+                        document.getElementById('fileInput_$i').addEventListener('change', function () {//Envío de formulario
+                            if (this.files.length > 0) {
+                                event.preventDefault(); // Evita el envío normal del formulario
 
-          const xhr = new XMLHttpRequest();
-          xhr.open("POST", "../Modelo/guardar_doc.php", true);
+                                const form = document.getElementById(\"formulario_$i\");
+                                const formData = new FormData(form);
+                                const progressContainer = document.getElementById(\"progressContainer\");
+                                const progressBar = document.getElementById(\"progressBar\");
+                                const fileInput = document.getElementById('fileInput_$i');
+                                const fileName = fileInput.files[0].name;
+                                    
+                                // Mostrar la barra de progreso
+                                progressContainer.classList.remove(\"d-none\");
 
-          // Escuchar el progreso de carga
-          xhr.upload.onprogress = function(event) {
-              if (event.lengthComputable) {
-                  const percent = Math.round((event.loaded / event.total) * 100);
-                  progressBar.style.width = percent + "%";
-                  progressBar.innerText = percent + "%";
-              }
-          };
+                                const xhr = new XMLHttpRequest();
+                                xhr.open(\"POST\", \"../Modelo/guardar_doc.php\", true);
 
-          // Al finalizar la carga
-          xhr.onload = function() {
-              if (xhr.status === 200) {
-                  progressBar.classList.remove("progress-bar-animated");
-                  progressBar.classList.add("bg-success");
-                  progressBar.innerText = "¡"+fileName+" Subido!";
-              } else {
-                  progressBar.classList.add("bg-danger");
-                  progressBar.innerText = "Error al subir";
-              }
-          };
+                                // Escuchar el progreso de carga
+                                xhr.upload.onprogress = function(event) {
+                                    if (event.lengthComputable) {
+                                        const percent = Math.round((event.loaded / event.total) * 100);
+                                        progressBar.style.width = percent + \"%\";
+                                        progressBar.innerText = percent + \"%\";
+                                    }
+                                };
 
-          // Enviar datos
-          xhr.send(formData);
-      });
-      </script>
+                                // Al finalizar la carga
+                                xhr.onload = function() {
+                                    if (xhr.status === 200) {
+                                        progressBar.classList.remove(\"progress-bar-animated\");
+                                        progressBar.classList.add(\"bg-success\");
+                                        progressBar.innerText = \"¡\"+fileName+\" Subido!\";
+                                        const button = document.getElementById('Btn_$i');
+                                        // Deshabilita el botón que fue clicado
+                                        button.disabled = true;
+                                    } else {
+                                        progressBar.classList.add(\"bg-danger\");
+                                        progressBar.innerText = \"Error al subir\";
+                                    }
+                                };
+
+                                // Enviar datos
+                                xhr.send(formData);
+                            }
+                        });
+                        </script>";
+                    }
+                }
+            }
+        }
+        ?>
     </div>
 </div>
 
