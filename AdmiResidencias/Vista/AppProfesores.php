@@ -760,7 +760,7 @@ if (isset($_SESSION['user_email'])) {
                                             //$fechaFormateada = date("Y-m-d H:i:s", $fecha);
                                             if ($archivo !== '.' && $archivo !== '..') {
                                               $n ++;
-                                              $ruta = htmlspecialchars("C:/xampp/htdocs/generarword/Alumnos/{$alumno['matricula']}/$archivo");
+                                              $ruta = htmlspecialchars("C:/xampp/htdocs/generarword-Git/Alumnos/{$alumno['matricula']}/$archivo");
                                                 echo "<tr>
                                                         <td>$n</td>
                                                         <td>
