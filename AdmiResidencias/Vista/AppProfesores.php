@@ -339,13 +339,13 @@ if (isset($_SESSION['user_email'])) {
             </li>
             <?php
             foreach ($alumnos as $alumno) {
-              if ($alumno['notificacion'] === null){
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-person-fill'></i> Se le ha asignado a <strong>{$alumno['nombre_completo']}</strong> como nuevo alumno. Revise su propuesta para el proyecto</a></li>";                            
+              if ($alumno['notificacion'] == -1){
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-person-fill'></i> Se le ha asignado a <strong>{$alumno['nombre_completo']}</strong> como nuevo alumno. Espere su propuesta para el proyecto</a></li>";                            
               }elseif ($alumno['notificacion'] == 6) {
-                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-person-fill'></i> El alumno <strong>{$alumno['nombre_completo']}</strong> ha sido eliminado.</a></li>";              
+                echo "<li><a class='dropdown-item' href='#'><i class='bi bi-person-fill'></i> El alumno <strong>{$alumno['nombre_completo']}</strong> ha terminado su residencia.</a></li>";              
               }elseif ($alumno['notificacion'] == 3) {
                 echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> Se ha recibido un documento nuevo de <strong>{$alumno['nombre_completo']}</strong>.</a></li>";              
-              }elseif ($alumno['notificacion'] == 2) {
+              }elseif ($alumno['notificacion'] == 0) {
                 echo "<li><a class='dropdown-item' href='#'><i class='bi bi-file-earmark-text-fill'></i> <strong>{$alumno['nombre_completo']}</strong> ha propuesto un nuevo proyecto.</a></li>";              
               }
             }
