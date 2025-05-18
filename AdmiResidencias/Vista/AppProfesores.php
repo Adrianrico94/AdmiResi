@@ -121,7 +121,8 @@ if (isset($_SESSION['user_email'])) {
   echo "No se ha iniciado sesión.";
 }
 
-
+//Dirección del documento
+$carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/";
 ?>
 
 
@@ -266,6 +267,22 @@ if (isset($_SESSION['user_email'])) {
 
     .footer-icons a:hover {
       color: #adb5bd;
+    }
+
+    /* Tabla de documentos */
+    .tabla-botones {
+        width: 150px; /* Ajusta según necesidad */
+        height: 80px;  /* Altura fija para todas las celdas */
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .tabla-botones form {
+        margin: 0 5px;
+    }
+
+    .tabla-botones button {
+        margin: 0 3px;
     }
   </style>
 </head>
@@ -651,6 +668,8 @@ if (isset($_SESSION['user_email'])) {
 
             foreach ($alumnos as $alumno) {
               $per = ($alumno['avance'] / 31) * 100;
+              $docs = $alumno['documento'];
+
               echo "<tr>
                         <td>{$alumno['matricula']}</td>
                         <td>{$alumno['nombre_completo']}</td>
@@ -720,74 +739,49 @@ if (isset($_SESSION['user_email'])) {
                                 Ver avance
                             </button>
                             <!-- Modal -->
-                            <div class='modal fade' id='modal2_{$alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden='true'>
-                                <div class='modal-dialog'>
-                                    <div class='modal-content'>
-                                        <!-- Cabecera del Modal -->
-                                        <div class='modal-header'>
-                                            <h5 class='modal-title' id='modalLabel_{$alumno['id_alumno']}'>Documentos del proyecto</h5>
-                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                        </div>
-                                        <!-- Cuerpo del Modal -->
-                                        <div class='modal-body'>
-                                            <p><strong>Avanze de proyecto:</strong></p>
-                                            <div class='progress' role='progressbar' aria-label='Success example'>
-                                            
-                                            <div class='progress-bar text-bg-success' style='width: $per%'>{$alumno['avance']}/31</div>
-                                          </div>
-                                            <table class='table table-striped table-hover table-bordered mt-3'>
-                                                <tr>
-                                                    <th>Orden</th>
-                                                    <th>Ver</th>
-                                                    <th>Estado</th>
-                                                </tr>
-                                          ";
-                                          $directorio = "C:/xampp/htdocs/generarword-Git/Alumnos/{$alumno['matricula']}/";
-                                          if (is_dir($directorio)){
-                                          $archivos = array_diff(scandir($directorio), array('.', '..'));
+                            <div class=\"modal modal-xl fade\" id='modal2_{$alumno['id_alumno']}' tabindex=\"-1\" aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden=\"true\"> 
+  <div class=\"modal-dialog\">
+    <div class=\"modal-content text-center\">
 
-                                          // Obtener las fechas de creación asociadas a cada archivo
-                                          $fechas = [];
-                                          foreach ($archivos as $archivo) {
-                                              $rutaCompleta = $directorio . $archivo;
-                                              $fechas[$archivo] = filectime($rutaCompleta); // Puedes usar filemtime() si prefieres fecha de modificación
-                                          }
+      <!-- Cabecera del Modal -->
+            <div class='modal-header'>
+                <h5 class='modal-title' id='modalLabel'>Documentos del proyecto</h5>
+                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <!-- Cuerpo del Modal -->
+            <div class='modal-body'>
 
-                                          // Ordenar por fecha descendente (más reciente primero)
-                                          asort($fechas);
-                                          $n = 0;
-                                          foreach ($fechas as $archivo => $fecha) {
-                                            //$fechaFormateada = date("Y-m-d H:i:s", $fecha);
-                                            if ($archivo !== '.' && $archivo !== '..') {
-                                              $n ++;
-                                              $ruta = htmlspecialchars("C:/xampp/htdocs/generarword-Git/Alumnos/{$alumno['matricula']}/$archivo");
-                                                echo "<tr>
-                                                        <td>$n</td>
-                                                        <td>
-                                                            <form action='$ruta' method='post' target='_blank'>
-                                                                <button class='btn' type='submit' onclick=\"openf('{$alumno['matricula']}', '$archivo')\">$archivo</button>
-                                                            </form>
-                                                        </td>
-                                                        <td>";
-                                                        if ($n-1 == $alumno['avance']){echo "<!-- Botón para Aceptar el documento -->
-                                            <form data-id-alumno='{$alumno['id_alumno']}' method='POST' class='d-inline form-btns aceD'>
-                                                <button type='submit' name='aceptar_documento' class='btn btn-success rounded-pill' id='Btn{$alumno['id_alumno']}'><i class='bi bi-check-lg'></i></button>
-                                            </form>
-                                            <!-- Botón para Rechazar el documento -->
-                                            <form data-id-alumno='{$alumno['id_alumno']}' data-ruta='$ruta' method='POST' class='d-inline form-btns reD'>
-                                                <button type='submit' name='rechazar_documento' class='btn btn-danger rounded-pill'><i class='bi bi-trash-fill'></i></button>";
-                                                        }else if ($n-1< $alumno['avance']){echo "Revisado";
-                                                        }else{echo "Por revisar";}
-                                                        echo "</form></td>
-                                                      </tr>";
-                                            }
-                                        }}echo "
-                                        </table>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
+                <p><strong>Avanze de proyecto:</strong></p>
+                <div class='progress mb-3' role='progressbar' aria-label='Success example'>
+                    <div class='progress-bar text-bg-success' style='width: $per%'>{$alumno['avance']}/31</div>
+                </div>
+
+                <table class=\"table table-bordered mb-3 text-center\">
+                <tr>";
+                Cabezal(1,11,$carpeta,$alumno['matricula']);
+                echo "</tr><tr>";
+                Filas(1,11,$docs,$carpeta,$alumno['matricula']);
+                echo "</tr>
+                </table><table class=\"table table-bordered mb-3 text-center\">
+                <tr>";
+                Cabezal(11,21,$carpeta,$alumno['matricula']);
+                echo "</tr><tr>";
+                Filas(11,21,$docs,$carpeta,$alumno['matricula']);
+                echo " </tr>
+                </table><table class=\"table table-bordered mb-3 text-center\">
+                <tr>";
+                Cabezal(21,32,$carpeta,$alumno['matricula']);
+                echo "</tr><tr>";
+                Filas(21,32,$docs,$carpeta,$alumno['matricula']); 
+                echo "</tr>
+            </form>
+            </table>
+            </div>
+            
+        </div>
+
+      </div>
+    </div>
                         </td>
                     </tr>";
             }
@@ -898,6 +892,7 @@ if (isset($_SESSION['user_email'])) {
             // Código PHP para procesar la actualización al hacer clic en "Aceptar Documento"
             if (isset($_POST['aceptar_documento'])) {
               $id_alumno = $_POST['id_alumno'];
+              $num = $_POST['num'];
 
               // Configuración de la conexión a la base de datos
               $servername = "localhost";
@@ -913,33 +908,40 @@ if (isset($_SESSION['user_email'])) {
               }
 
               // Verificar si el ID del alumno existe
-              $check_sql = "SELECT * FROM alumnos WHERE id_alumno = ?";
-              $check_stmt = $conn->prepare($check_sql);
-              $check_stmt->bind_param("i", $id_alumno);
-              $check_stmt->execute();
-              $result = $check_stmt->get_result();
-
-              if ($result->num_rows == 0) {
-                echo "<script>alert('El ID del alumno no existe.');</script>";
-                exit();
-              }
-
               // Si el alumno existe, proceder con la actualización
-              $sql = "UPDATE alumnos SET avance = avance + 1 WHERE id_alumno = ?";
-              $stmt = $conn->prepare($sql);
+$sql = "UPDATE alumnos SET avance = avance + 1 WHERE id_alumno = ?";
+$stmt = $conn->prepare($sql);
 
-              if ($stmt === false) {
-                die('Error en la preparación de la consulta: ' . $conn->error);
-              }
+if ($stmt === false) {
+  die('Error en la preparación de la consulta: ' . $conn->error);
+}
 
-              $stmt->bind_param("i", $id_alumno);
-              $stmt->execute();
+$stmt->bind_param("i", $id_alumno);
+$stmt->execute();
 
-              if ($stmt->affected_rows > 0) {
-                // Actualización exitosa
-              } else {
-                echo "<script>alert('No se pudo actualizar el avanze.');</script>";
-              }
+if ($stmt->affected_rows > 0) {
+  // Actualización exitosa del avance
+
+  // Ahora actualizamos el campo JSON
+  $sql_json = "UPDATE alumnos SET documento = JSON_ARRAY_APPEND(documento, '$', ?) WHERE id_alumno = ?";
+  $stmt_json = $conn->prepare($sql_json);
+
+  if ($stmt_json === false) {
+    die('Error en la preparación de la consulta JSON: ' . $conn->error);
+  }
+
+  $stmt_json->bind_param("ii", $num, $id_alumno);
+  $stmt_json->execute();
+
+  if ($stmt_json->affected_rows == 0) {
+    echo "<script>alert('No se pudo actualizar el historial JSON.');</script>";
+  }
+
+  $stmt_json->close();
+  
+} else {
+  echo "<script>alert('No se pudo actualizar el avance.');</script>";
+}
 
               $stmt->close();
               $conn->close();
@@ -948,9 +950,8 @@ if (isset($_SESSION['user_email'])) {
             // Código PHP para procesar la actualización al hacer clic en "Rechazar Documento"
             if (isset($_POST['rechazar_documento'])) {
               //$mensaje='';
-            //$archivo = basename($_POST['archivo']); // Evita rutas maliciosas
+              //$archivo = basename($_POST['archivo']); // Evita rutas maliciosas
                 $ruta = $_POST['archivo'];
-            
                 if (file_exists($ruta)) {
                     if (unlink($ruta)) {
                         /*$mensaje = "Archivo <strong>$archivo</strong> eliminado correctamente.";
@@ -961,6 +962,45 @@ if (isset($_SESSION['user_email'])) {
                     $mensaje = "El archivo <strong>$archivo</strong> no existe.";*/
                 }
             }
+            //Código PHP para generar las tablas de documentos de cada alumno
+            
+        function Cabezal($a,$z,$car,$mat) {
+            for ($i=$a; $i < $z; $i++) { 
+                $archivos = glob($car . $mat . '/' . $i . '/*');
+                if (!empty($archivos)) {
+                    echo "<td><form action='$car' method='post' target='_blank'>
+                        <button class='btn btn-outline-primary' type='submit' onclick=\"openf('$mat/$i', '*')\">$i</button>
+                    </form></td>";
+                } else {
+                    echo "<td><button class='btn ' type='submit'>$i</button></td>";
+                }                 
+            }
+        }
+
+        function Filas($a,$z,$docs,$car,$mat) {
+            $doc = json_decode($docs);
+            for ($i=$a; $i < $z; $i++) { 
+                if (in_array($i, $doc)) {
+                    echo "<td class='tabla-botones'><span title='¡Archivo aceptado!' onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-primary border-0 rounded-pill'><i class='bi bi-file-earmark-check'></i></span></td>";
+                }else{
+                    $archivos = glob($car . $mat . '/' . $i . '/*');
+                    if (!empty($archivos)) {
+                        echo "<td class='tabla-botones'><!-- Botón para Aceptar el documento -->
+                        <form data-id-alumno='$mat' data-num='$i' method='POST' class='d-inline form-btns aceD'>
+                            <button title='Aceptar archivo' type='submit' name='aceptar_documento' class='btn btn-success rounded-pill' id='Btn$mat$i'><i class='bi bi-check-lg'></i></button>
+                        </form>
+                        <!-- Botón para Rechazar el documento -->
+                        <form data-id-alumno='$mat' data-num='$i' data-ruta='$car$mat/$i' method='POST' class='d-inline form-btns reD'>
+                            <button title='Rechazar archivo' type='submit' name='rechazar_documento' class='btn btn-danger rounded-pill'><i class='bi bi-trash-fill'></i></button>
+                        </form></td>";
+                    } else {
+                        //Botón de subida
+                        echo "<td class='tabla-botones'><button title='Archivo en espera.' onclick=\"alert('Este archivo aún no se ha subido.')\" class='btn btn-secondary border-0 rounded-pill'><i class='bi bi-clock'></i></span></td>";
+
+                    } //Cambiar Value de archivo por <?php //echo "$matricula";
+                }
+            }
+        }
             ?>
 
             <script>
@@ -970,7 +1010,8 @@ if (isset($_SESSION['user_email'])) {
                       form.addEventListener("submit", function(e) {
                           e.preventDefault(); // evita el reinicio de la página
                           const B = this.dataset.idAlumno;
-                          const button = document.getElementById('Btn'+B);
+                          const C = this.dataset.num;
+                          const button = document.getElementById('Btn'+B+C);
                           // Deshabilita el botón que fue clicado
                           button.disabled = true;
 
@@ -988,6 +1029,7 @@ if (isset($_SESSION['user_email'])) {
                             try {
                               const formData = new FormData();
                               formData.append('id_alumno', this.dataset.idAlumno);
+                              formData.append('num', this.dataset.num);
                               formData.append('aceptar_documento', true);
 
                               fetch('', {
@@ -1034,19 +1076,24 @@ if (isset($_SESSION['user_email'])) {
                           
               });});}); 
 
-              function openf(control,documento) {
-                fetch("../Modelo/AbrirCarpeta.php", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                  },
-                  body: `control=${encodeURIComponent(control)}&documento=${encodeURIComponent(documento)}`
-                })
-                .then(response => response.text())
-                (error => {
-                  console.error("Error:", error);
-                });
-              }
+              
+    function openf(control, documento) {
+        fetch("../Modelo/AbrirCarpeta.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `control=${encodeURIComponent(control)}&documento=${encodeURIComponent(documento)}`
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log("Respuesta:", data);
+            // puedes usar los datos aquí
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
             </script>
 
 
