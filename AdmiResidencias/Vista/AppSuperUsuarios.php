@@ -390,6 +390,10 @@ $result = $conn->query($sql);
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAsignarEmpresa">
                     Asignar Empresa 
                 </button>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAsignarEmpresa">
+                     Empresa
+                </button>
             </div>
 
 

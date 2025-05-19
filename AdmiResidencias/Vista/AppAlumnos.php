@@ -766,11 +766,11 @@ de residencia profesionales."
             <div class="col-md-6">
               <label for="PeríodoMínimodeMeses" class="form-label">Periodo mínimo (meses)</label>
               
-              <input type="number"  min="1" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
+              <input type="number"  min="4" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
             </div>
             <div class="col-md-6">
               <label for="PeríodoMaximodeMeses"   class="form-label">Periodo máximo (meses)</label>
-              <input type="number" min="1" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
+              <input type="number" min="4" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
             </div>
 
             <div class="col-md-6">
@@ -1597,9 +1597,9 @@ de residencia profesionales."
         <h2 class="text-center mb-4 fw-bold text-black">Subir Evidencias</h2>
         <table class="table table-bordered mb-3 text-center">
         <tr>
-            <th scope="col">1</th>
-            <th scope="col">2</th>
-            <th scope="col">3</th>
+            <th scope="col">Carta Presentación</th>
+            <th scope="col">Carta Aceptación</th>
+            <th scope="col">Carta Aceptación</th>
             <th scope="col">4</th>
             <th scope="col">5</th>
             <th scope="col">6</th>
@@ -1655,22 +1655,21 @@ de residencia profesionales."
         function Filas($a,$z,$doc,$car,$mat) {
             for ($i=$a; $i < $z; $i++) { 
                 if (in_array($i, $doc)) {
-                    echo "<td><span onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-success border-0 rounded-pill'><i class='bi bi-check-lg'></i></span></td>";
+echo "<td><span title='¡Arcivo aceptado!' onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-success border-0 rounded-pill'><i class='bi bi-check-lg'></i></span></td>";
                 }else{
                     $archivos = glob($car . $i . '/*');
                     if (!empty($archivos)) {
                         echo "<td><button onclick=\"alert('Este archivo está en revision.')\" class='btn btn-secondary border-0 rounded-pill'><i class='bi bi-search'></i></span></td>";
                     } else {
                         //Botón de subida
-                        echo "<td><form id='formulario_$i'  data-n-doc='' action=\"guardar_doc.php\" method=\"post\" enctype=\"multipart/form-data\" class=\"form-btns\">
+                        echo "<td><form id='formulario_$i'  data-n-doc='' action=\"../Modelo/guardar_doc.php\" method=\"post\" enctype=\"multipart/form-data\" class=\"form-btns\">
                             <!-- Input de archivo oculto -->
                             <input type=\"file\" name=\"evidencia\" id=\"fileInput_$i\" accept=\".jpg, .jpeg, .png, .pdf\" required style=\"display: none;\" required>
                             <input type=\"hidden\" id=\"Archivo\" name=\"Archivo\" value=''>
                             <input type='hidden' id=\"Matricula\" name=\"Matricula\" value=\"$mat/$i\">
 
                             <!-- Botón único que activa selección y subida -->
-                            <button type='button' onclick=\"document.getElementById('fileInput_$i').click();\" class='btn btn-primary border-0 rounded-pill' id=\"Btn_$i\"><i class='bi bi-upload'></i></button>
-                        </form></td>";
+<button type='button' title='Revisar archivo' onclick=\"document.getElementById('fileInput_$i').click();\" class='btn btn-primary border-0 rounded-pill' id=\"Btn_$i\"><i class='bi bi-upload'></i></button>                        </form></td>";
                         //Proceso de subida
                         echo "<script>
                         document.getElementById('fileInput_$i').addEventListener('change', function () {//Envío de formulario

@@ -721,7 +721,7 @@ if (isset($_SESSION['user_email'])) {
                             </button>
                             <!-- Modal -->
                             <div class='modal fade' id='modal2_{$alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden='true'>
-                                <div class='modal-dialog'>
+                                <div class='modal-dialog modal-lg'>
                                     <div class='modal-content'>
                                         <!-- Cabecera del Modal -->
                                         <div class='modal-header'>
