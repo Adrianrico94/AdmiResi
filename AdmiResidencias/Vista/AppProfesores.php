@@ -739,37 +739,9 @@ $carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/";
                                 Ver avance
                             </button>
                             <!-- Modal -->
-<<<<<<< HEAD
-                            <div class='modal fade' id='modal2_{$alumno['id_alumno']}' tabindex='-1' aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden='true'>
-                                <div class='modal-dialog modal-lg'>
-                                    <div class='modal-content'>
-                                        <!-- Cabecera del Modal -->
-                                        <div class='modal-header'>
-                                            <h5 class='modal-title' id='modalLabel_{$alumno['id_alumno']}'>Documentos del proyecto</h5>
-                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                        </div>
-                                        <!-- Cuerpo del Modal -->
-                                        <div class='modal-body'>
-                                            <p><strong>Avanze de proyecto:</strong></p>
-                                            <div class='progress' role='progressbar' aria-label='Success example'>
-                                            
-                                            <div class='progress-bar text-bg-success' style='width: $per%'>{$alumno['avance']}/31</div>
-                                          </div>
-                                            <table class='table table-striped table-hover table-bordered mt-3'>
-                                                <tr>
-                                                    <th>Orden</th>
-                                                    <th>Ver</th>
-                                                    <th>Estado</th>
-                                                </tr>
-                                          ";
-                                          $directorio = "C:/xampp/htdocs/generarword-Git/Alumnos/{$alumno['matricula']}/";
-                                          if (is_dir($directorio)){
-                                          $archivos = array_diff(scandir($directorio), array('.', '..'));
-=======
                             <div class=\"modal modal-xl fade\" id='modal2_{$alumno['id_alumno']}' tabindex=\"-1\" aria-labelledby='modalLabel_{$alumno['id_alumno']}' aria-hidden=\"true\"> 
   <div class=\"modal-dialog\">
     <div class=\"modal-content text-center\">
->>>>>>> 11e9bcf4fc94b3fbded775fa95873520c5a48a30
 
       <!-- Cabecera del Modal -->
             <div class='modal-header'>
