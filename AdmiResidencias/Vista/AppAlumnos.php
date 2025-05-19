@@ -766,11 +766,11 @@ de residencia profesionales."
             <div class="col-md-6">
               <label for="PeríodoMínimodeMeses" class="form-label">Periodo mínimo (meses)</label>
               
-              <input type="number"  min="4" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
+              <input type="number"  min="1" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
             </div>
             <div class="col-md-6">
               <label for="PeríodoMaximodeMeses"   class="form-label">Periodo máximo (meses)</label>
-              <input type="number" min="4" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
+              <input type="number" min="1" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
             </div>
 
             <div class="col-md-6">
@@ -1597,47 +1597,19 @@ de residencia profesionales."
         <h2 class="text-center mb-4 fw-bold text-black">Subir Evidencias</h2>
         <table class="table table-bordered mb-3 text-center">
         <tr>
-            <th scope="col">Carta Presentación</th>
-            <th scope="col">Carta Aceptación</th>
-            <th scope="col">Carta Aceptación</th>
-            <th scope="col">4</th>
-            <th scope="col">5</th>
-            <th scope="col">6</th>
-            <th scope="col">7</th>
-            <th scope="col">8</th>
-            <th scope="col">9</th>
-            <th scope="col">10</th>
+            <?php Cabezal(1,11,$carpeta,$matricula); ?>
         </tr><tr>
             <?php Filas(1,11,$docs,$carpeta,$matricula); ?>
         </tr>
         </table><table class="table table-bordered mb-3 text-center">
         <tr>
-            <th scope="col">11</th>
-            <th scope="col">12</th>
-            <th scope="col">13</th>
-            <th scope="col">14</th>
-            <th scope="col">15</th>
-            <th scope="col">16</th>
-            <th scope="col">17</th>
-            <th scope="col">18</th>
-            <th scope="col">19</th>
-            <th scope="col">20</th>
+                    <?php Cabezal(11,21,$carpeta,$matricula); ?>
         </tr><tr>
             <?php Filas(11,21,$docs,$carpeta,$matricula); ?>
         </tr>
         </table><table class="table table-bordered mb-3 text-center">
         <tr>
-            <th scope="col">21</th>
-            <th scope="col">22</th>
-            <th scope="col">23</th>
-            <th scope="col">24</th>
-            <th scope="col">25</th>
-            <th scope="col">26</th>
-            <th scope="col">27</th>
-            <th scope="col">28</th>
-            <th scope="col">29</th>
-            <th scope="col">30</th>
-            <th scope="col">31</th>
+                    <?php Cabezal(21,32,$carpeta,$matricula); ?>
         </tr><tr>
             <?php Filas(21,32,$docs,$carpeta,$matricula); ?>
         </tr>
@@ -1652,24 +1624,38 @@ de residencia profesionales."
 
         <!-- Formulario con botón único -->
         <?php
+        function Cabezal($a,$z,$car,$con) {
+            for ($i=$a; $i < $z; $i++) { 
+                $archivos = glob($car . $i . '/*');
+                if (!empty($archivos)) {
+                    echo "<td><form action='$car' method='post' target='_blank'>
+                        <button class='btn btn-outline-primary' type='submit' onclick=\"openf('$con/$i', '*')\">$i</button>
+                    </form></td>";
+                } else {
+                    echo "<td><button class='btn ' type='submit'>$i</button></td>";
+                }                 
+            }
+        }
+
         function Filas($a,$z,$doc,$car,$mat) {
             for ($i=$a; $i < $z; $i++) { 
                 if (in_array($i, $doc)) {
-echo "<td><span title='¡Arcivo aceptado!' onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-success border-0 rounded-pill'><i class='bi bi-check-lg'></i></span></td>";
+                    echo "<td><span title='¡Archivo aceptado!' onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-success border-0 rounded-pill'><i class='bi bi-check-lg'></i></span></td>";
                 }else{
                     $archivos = glob($car . $i . '/*');
                     if (!empty($archivos)) {
-                        echo "<td><button onclick=\"alert('Este archivo está en revision.')\" class='btn btn-secondary border-0 rounded-pill'><i class='bi bi-search'></i></span></td>";
+                        echo "<td><button title='Archivo en revisión' onclick=\"alert('Este archivo está en revision.')\" class='btn btn-secondary border-0 rounded-pill'><i class='bi bi-search'></i></span></td>";
                     } else {
                         //Botón de subida
-                        echo "<td><form id='formulario_$i'  data-n-doc='' action=\"../Modelo/guardar_doc.php\" method=\"post\" enctype=\"multipart/form-data\" class=\"form-btns\">
+                        echo "<td><form id='formulario_$i'  data-n-doc='' action=\"guardar_doc.php\" method=\"post\" enctype=\"multipart/form-data\" class=\"form-btns\">
                             <!-- Input de archivo oculto -->
                             <input type=\"file\" name=\"evidencia\" id=\"fileInput_$i\" accept=\".jpg, .jpeg, .png, .pdf\" required style=\"display: none;\" required>
                             <input type=\"hidden\" id=\"Archivo\" name=\"Archivo\" value=''>
                             <input type='hidden' id=\"Matricula\" name=\"Matricula\" value=\"$mat/$i\">
 
                             <!-- Botón único que activa selección y subida -->
-<button type='button' title='Revisar archivo' onclick=\"document.getElementById('fileInput_$i').click();\" class='btn btn-primary border-0 rounded-pill' id=\"Btn_$i\"><i class='bi bi-upload'></i></button>                        </form></td>";
+                            <button type='button' title='Sube tu archivo' onclick=\"document.getElementById('fileInput_$i').click();\" class='btn btn-primary border-0 rounded-pill' id=\"Btn_$i\"><i class='bi bi-upload'></i></button>
+                        </form></td>";
                         //Proceso de subida
                         echo "<script>
                         document.getElementById('fileInput_$i').addEventListener('change', function () {//Envío de formulario
@@ -1725,6 +1711,27 @@ echo "<td><span title='¡Arcivo aceptado!' onclick=\"alert('¡Este archivo ha si
         ?>
     </div>
 </div>
+
+<script>
+function openf(control, documento) {
+    fetch("../Modelo/AbrirCarpeta.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `control=${encodeURIComponent(control)}&documento=${encodeURIComponent(documento)}`
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Respuesta:", data);
+        // puedes usar los datos aquí
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
+</script>
 
 
       
