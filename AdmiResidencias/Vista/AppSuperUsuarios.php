@@ -482,30 +482,92 @@ $result = $conn->query($sql);
 
 
 
-            <!-- Agregar nueva empresa  -->
-                <div class="modal fade" id="AgregarEmpresa" tabindex="-1" aria-labelledby="modalAsignarEmpresaLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalAsignarEmpresaLabel">Asignar Empresa</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="procesar_asignar_empresa.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="id_alumno" class="form-label">ID del Alumnoaaaaaaaaaaa</label>
-                                    <input type="text" class="form-control" id="id_alumno" name="id_alumno" placeholder="Ingresa el ID del alumno" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="id_empresa" class="form-label">ID de la Empresa</label>
-                                    <input type="text" class="form-control" id="id_empresa" name="id_empresa" placeholder="Ingresa el ID de la empresa" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Asignar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Agregar nueva empresa  -->
+<div class="modal fade" id="AgregarEmpresa" tabindex="-1" aria-labelledby="modalAgregarEmpresaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAgregarEmpresaLabel">Agregar Empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="formAgregarEmpresa" action="procesar_asignar_empresa.php" method="POST" onsubmit="return mostrarAlertaEmpresa()">
+
+          <div class="mb-3">
+            <label for="matricula" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="matricula" name="matricula" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="empresa" class="form-label">Empresa</label>
+            <input type="text" class="form-control" id="empresa" name="empresa" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="proyecto_asignado" class="form-label">Proyecto Asignado</label>
+            <input type="text" class="form-control" id="proyecto_asignado" name="proyecto_asignado" required>
+          </div>
+
+          <div class="col-12 col-md-12 mb-3">
+            <label for="carrera" class="form-label">Carrera</label>
+            <select class="form-select" id="carrera" name="carrera" required>
+              <option value="">Selecciona una carrera</option>
+              <option value="Ingeniería en Sistemas Computacionales">
+                Ingeniería en Sistemas Computacionales
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="ingreso" class="form-label">Fecha de Ingreso</label>
+            <input type="date" class="form-control" id="ingreso" name="ingreso" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="egreso" class="form-label">Fecha de Egreso</label>
+            <input type="date" class="form-control" id="egreso" name="egreso" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefono_alumno" class="form-label">Teléfono del Alumno</label>
+            <input type="tel" class="form-control" id="telefono_alumno" name="telefono_alumno" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefono_profesor_asignado" class="form-label">Teléfono del Profesor Asignado</label>
+            <input type="tel" class="form-control" id="telefono_profesor_asignado" name="telefono_profesor_asignado" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="observaciones" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="observaciones" name="observaciones" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="horario_asignado" class="form-label">Horario Asignado</label>
+            <input type="text" class="form-control" id="horario_asignado" name="horario_asignado" placeholder="Ej. Lunes a Viernes 9am - 2pm" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Registrar</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript para mostrar el alert -->
+<script>
+  function mostrarAlertaEmpresa() {
+    alert("Registro de empresa exitoso");
+    return true; // permite que el formulario se envíe
+  }
+</script>
+
+
 
 
             
