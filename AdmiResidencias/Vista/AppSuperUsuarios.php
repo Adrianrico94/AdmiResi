@@ -7,13 +7,13 @@ $inactive_time = 6000; // 10 minutos
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive_time) {
     session_unset();
     session_destroy();
-    header("Location: Index.html");
+    header("Location: ../index.html");
     exit();
 }
 $_SESSION['last_activity'] = time();
 
 if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_type'])) {
-    header("Location: Index.html");
+    header("Location: ../index.html");
     exit();
 }
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt_update->bind_param("ii", $id_docente, $id_alumno);
 
         if ($stmt_update->execute()) {
-            echo "<script>alert('Asignación actualizada exitosamente.'); window.location.href = 'Index.html';</script>";
+            echo "<script>alert('Asignación actualizada exitosamente.'); window.location.href = '../index.html';</script>";
         } else {
             echo "<script>alert('Error al actualizar la asignación: {$stmt_update->error}'); window.history.back();</script>";
         }
