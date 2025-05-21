@@ -759,7 +759,7 @@ $carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/";
             <!-- Cuerpo del Modal -->
             <div class='modal-body'>
 
-                <p><strong>Avanze de proyecto:</strong></p>
+                <p><strong>Avance de proyecto:</strong></p>
                 <div class='progress mb-3' role='progressbar' aria-label='Success example'>
                     <div class='progress-bar text-bg-success' style='width: $per%'>{$alumno['avance']}/31</div>
                 </div>
