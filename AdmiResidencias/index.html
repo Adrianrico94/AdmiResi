@@ -200,21 +200,21 @@
                 <div class="col-12 col-md-6 mb-3">
                   <label for="nombre" class="form-label">Nombre</label>
                   <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre"
-                    required />
+                    required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();" />
                 </div>
 
                 <!-- Apellido Paterno -->
                 <div class="col-12 col-md-6 mb-3">
                   <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
                   <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno"
-                    placeholder="Ingrese el apellido paterno" required />
+                    placeholder="Ingrese el apellido paterno" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();"/>
                 </div>
 
                 <!-- Apellido Materno -->
                 <div class="col-12 col-md-6 mb-3">
                   <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
                   <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno"
-                    placeholder="Ingrese el apellido materno" required />
+                    placeholder="Ingrese el apellido materno" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();" />
                 </div>
 
                 <!-- Carrera -->

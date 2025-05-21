@@ -391,8 +391,8 @@ $result = $conn->query($sql);
                     Asignar Empresa 
                 </button>
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAsignarEmpresa">
-                     Empresa
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AgregarEmpresa">
+                     Agregar empresa
                 </button>
             </div>
 
@@ -466,6 +466,34 @@ $result = $conn->query($sql);
                             <form action="procesar_asignar_empresa.php" method="POST">
                                 <div class="mb-3">
                                     <label for="id_alumno" class="form-label">ID del Alumno</label>
+                                    <input type="text" class="form-control" id="id_alumno" name="id_alumno" placeholder="Ingresa el ID del alumno" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_empresa" class="form-label">ID de la Empresa</label>
+                                    <input type="text" class="form-control" id="id_empresa" name="id_empresa" placeholder="Ingresa el ID de la empresa" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Asignar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Agregar nueva empresa  -->
+                <div class="modal fade" id="AgregarEmpresa" tabindex="-1" aria-labelledby="modalAsignarEmpresaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAsignarEmpresaLabel">Asignar Empresa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="procesar_asignar_empresa.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="id_alumno" class="form-label">ID del Alumnoaaaaaaaaaaa</label>
                                     <input type="text" class="form-control" id="id_alumno" name="id_alumno" placeholder="Ingresa el ID del alumno" required>
                                 </div>
                                 <div class="mb-3">

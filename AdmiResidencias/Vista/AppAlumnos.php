@@ -766,11 +766,11 @@ de residencia profesionales."
             <div class="col-md-6">
               <label for="PeríodoMínimodeMeses" class="form-label">Periodo mínimo (meses)</label>
               
-              <input type="number"  min="1" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
+              <input type="number"  min="4" max="6" step="1" class="form-control" id="PeríodoMínimodeMeses" name="PeríodoMínimodeMeses" required>
             </div>
             <div class="col-md-6">
               <label for="PeríodoMaximodeMeses"   class="form-label">Periodo máximo (meses)</label>
-              <input type="number" min="1" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
+              <input type="number" min="4" max="6" step="1"  class="form-control" id="PeríodoMaximodeMeses" name="PeríodoMaximodeMeses" required>
             </div>
 
             <div class="col-md-6">
@@ -790,7 +790,7 @@ de residencia profesionales."
 
           <div class="mt-4 text-end">
             <button type="submit" class="btn btn-success" title="Haz clic para generar el formato en Word con tu información actual.">Generar documento</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Haz clic para cancelar la generación del documento.">Cancelar</button>
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Haz clic para cancelar la generación del documento.">Cancelar</button> -->
           </div>
         </form>
       </div>
@@ -855,12 +855,12 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="diaInicio" class="form-label">Día de inicio (semana)</label>
-              <input type="text" class="form-control" id="diaInicio" name="diaInicio" placeholder="Ej: LUNES" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="diaInicio" name="diaInicio" placeholder="Ej: LUNES" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             <div class="col-md-6">
               <label for="diaFinal" class="form-label">Día final (semana)</label>
-              <input type="text" class="form-control" id="diaFinal" name="diaFinal" placeholder="Ej: VIERNES" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="diaFinal" name="diaFinal" placeholder="Ej: VIERNES" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             
@@ -872,7 +872,7 @@ de residencia profesionales."
 
             <div class="col-md-6">
               <label for="areaEncargada" class="form-label">Área del Encargado</label>
-              <input type="text" class="form-control" id="areaEncargada" name="areaEncargada" required oninput="this.value = this.value.toUpperCase();">
+              <input type="text" class="form-control" id="areaEncargada" name="areaEncargada" required oninput="this.value = this.value.replace(/[^A-ZÁÉÍÓÚÑ\s]/gi, '').toUpperCase();">
             </div>
 
             <div class="col-md-6">
@@ -917,7 +917,7 @@ de residencia profesionales."
           <input type="number" min="1" max="9" step="1" name="numSemestare" placeholder="Semestre" class="form-control" required>
         </div>
         <div class="col-md-3 mt-2">
-          <input type="number"  name="numCreditos" placeholder="Créditos" class="form-control" required>
+          <input type="number"  min="1" name="numCreditos" placeholder="Créditos" class="form-control" required>
         </div>
       </div>
 
@@ -1835,7 +1835,7 @@ function openf(control, documento) {
                         ?>
 
                         <?php
-                        echo '<li class="list-group-item"><strong>Nombre de la Empresa:</strong> ' . (!empty($dias_asistencia) ? $dias_asistencia : 'En proceso de revisión') . '</li>';
+                        echo '<li class="list-group-item"><strong>Días laborables en la empresa:</strong> ' . (!empty($dias_asistencia) ? $dias_asistencia : 'En proceso de revisión') . '</li>';
                         ?>
 
 
