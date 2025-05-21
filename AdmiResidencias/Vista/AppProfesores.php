@@ -588,6 +588,14 @@ $carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/";
     </div>
   </div>
 
+  <script>
+        function cerrarSesion() {
+
+            // Redirige a logout.php para destruir la sesión
+            window.location.href = 'logout.php';
+        }
+    </script>
+
   <!-- Contenedor principal con el menú lateral y el contenido -->
   <div class="d-flex">
     <!-- Sidebar estilo Teams -->
