@@ -8,7 +8,7 @@ $inactive_time = 60; // 1 minuto
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive_time) {
   session_unset(); // Elimina todas las variables de sesión
   session_destroy(); // Destruye la sesión
-  header("Location: Index.html"); // Redirige a la página de inicio de sesión
+  header("Location: ../index.html"); // Redirige a la página de inicio de sesión
   exit();
 }
 
@@ -19,7 +19,7 @@ $_SESSION['last_activity'] = time();
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_type'])) {
-  header("Location: Index.html"); // Redirige si no está logueado
+  header("Location: ../index.html"); // Redirige si no está logueado
   exit();
 }
 
@@ -38,7 +38,7 @@ if (isset($_SESSION['user_email'])) {
 
   // Verificar si hay errores de conexión
   if ($conn->connect_error) {
-    echo "<script>alert('No se pudo conectar a la base de datos'); window.location.href='Index.html';</script>";
+    echo "<script>alert('No se pudo conectar a la base de datos'); window.location.href='../index.html';</script>";
     exit();
   }
 
@@ -149,7 +149,7 @@ $carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/";
     function resetTimer() {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        window.location.href = "logout.php"; // Redirige al cerrar sesión
+        window.location.href = "../index.html"; // Redirige al cerrar sesión
       }, 200000); // 1 minuto = 60000 ms
     }
 

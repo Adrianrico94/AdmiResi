@@ -188,7 +188,7 @@ $docs = json_decode($documento);
 
     //FUNCIÓN PARA CERRAR SESIÓN
     function cerrarSesion() {
-      window.location.href = "index.html";
+      window.location.href = "../index.html";
     }
   </script>
 
