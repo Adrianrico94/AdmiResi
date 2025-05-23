@@ -1625,16 +1625,32 @@ de residencia profesionales."
         <!-- Formulario con botón único -->
         <?php
         function Cabezal($a,$z,$car,$con) {
-            for ($i=$a; $i < $z; $i++) { 
-                $archivos = glob($car . $i . '/*');
-                if (!empty($archivos)) {
-                    echo "<td><form action='$car' method='post' target='_blank'>
-                        <button class='btn btn-outline-primary' type='submit' onclick=\"openf('$con/$i', '*')\">$i</button>
-                    </form></td>";
-                } else {
-                    echo "<td><button class='btn ' type='submit'>$i</button></td>";
-                }                 
+          $d='Documento';
+          for ($i=$a; $i < $z; $i++) {
+            switch (true) {
+              case ($i==1): $d="Autorización de Proyecto"; break;
+              case ($i==2): $d="Carta de Presentación"; break;
+              case ($i==3): $d="Carta de Aceptación"; break;
+              case ($i==4): $d="Anteproyecto"; break;
+              case ($i>=5 && $i<=20): $d="Asesoría ".$i-4; break;
+              case ($i>=21 && $i<=23): $d="Visita ".$i-20; break;
+              case ($i>=24 && $i<=26): $d="Evaluación ".$i-23; break;
+              case ($i==27): $d="Carta de Término"; break;
+              case ($i==28): $d="Portada de Informe"; break;
+              case ($i==29): $d="Carta de Liberación de Servicio Social"; break;
+              case ($i==30): $d="Carta de Liberación de Inglés"; break;
+              case ($i==31): $d="Constancia de actividades complementarias"; break;
+              default: $d="Documento"; break;
             }
+            $archivos = glob($car . $i . '/*');
+            if (!empty($archivos)) {
+                echo "<td><form action='$car' method='post' target='_blank'>
+                    <button title='$d' class='btn btn-outline-primary' type='submit' onclick=\"openf('$con/$i', '*')\">$i</button>
+                </form></td>";
+            } else {
+                echo "<td><button title='$d' class='btn ' type='submit'>$i</button></td>";
+            }                 
+          }
         }
 
         function Filas($a,$z,$doc,$car,$mat) {
