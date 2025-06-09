@@ -621,6 +621,7 @@ $result = $conn->query($sql);
                                         <?php
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
+                                                $per = ($row['avance'] / 31) * 100;
                                                 echo "<tr>";
                                             
                                                 echo "<td class='text-center'>" . $row["id_alumno"] . "</td>";
@@ -677,6 +678,10 @@ $result = $conn->query($sql);
                                                             <textarea readonly style='width: 100%; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px; text-align: left;'>"
                                                     . htmlspecialchars($row['observaciones']) .
                                                     "</textarea>
+                                                    
+                <div class='progress mb-3' role='progressbar' aria-label='Success example'>
+                    <div class='progress-bar text-bg-success' style='width: $per%'>{$row['avance']}/31</div>
+                </div>
                                                         </div>
                                                         <div class='modal-footer' style='justify-content: center;'>
                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' style='width: 150px;'>Cerrar</button>
