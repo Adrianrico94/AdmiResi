@@ -268,11 +268,13 @@ $result = $conn->query($sql);
 
 
         <!-- Contenido principal -->
-        <div class="content pt-0 mt-2">
-            <div class="text-center col-12 col-md-10 mt-2  border border-2 rounded p-3  text-white" style="background-color: #8a2036;">
+        <div class="content pt-0 mt-2 col-10">
+            <div class="text-center col-12 mt-2  border border-2 rounded p-3  text-white" style="background-color: #8a2036;">
                 <h1>SECCIÓN DE ALUMNOS</h1>
             </div>
-            <div class="d-flex flex-wrap gap-2 pt-2">
+
+            <!-- Seccion de botones -->
+            <div class="d-flex flex-wrap gap-2 pt-2 justify-content-center">
 
                 <!-- Agregar usuario -->
                 <button type="button" class="btn btn-success px-3" data-bs-toggle="modal" data-bs-target="#insertarModal">
@@ -607,7 +609,7 @@ $result = $conn->query($sql);
                     hideSection.style.display = 'none';
                 }
             </script>
-            <div class="col-12 col-md-9 mt-2 ps-5" id="SecAlumno">
+            <div class="col-12 mt-2" id="SecAlumno" >
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
                         <h3>ALUMNOS</h3>
@@ -636,31 +638,6 @@ $result = $conn->query($sql);
 
 
 
-<<<<<<< HEAD
-                                        </tr>
-                                    </thead>
-                                    <tbody id="alumnos">
-                                        <?php
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $per = ($row['avance'] / 31) * 100;
-                                                echo "<tr>";
-                                            
-                                                echo "<td class='text-center'>" . $row["id_alumno"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["matricula"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["nombre"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["apellido_paterno"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["apellido_materno"] . "</td>";
-                                                echo "<td>" . $row["empresa"] . "</td>";
-                                                echo "<td>" . $row["proyecto_asignado"] . "</td>";
-                                                echo "<td>" . $row["carrera"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["ingreso"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["egreso"] . "</td>";
-                                                
-                                                echo "<td class='text-center'>";
-                                                // Botón para Ver más detalle
-                                                echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#ver_{$row['id_alumno']}'>
-=======
 
 
 
@@ -686,7 +663,6 @@ $result = $conn->query($sql);
                                                     echo "<td class='text-center'>";
                                                     // Botón para Ver más detalle
                                                     echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#ver_{$row['id_alumno']}'>
->>>>>>> c016320f1a69ab8d0493ca4e35c59302eca5acf1
                                                             Ver más detalle
                                                         </button>";
                                                     echo "</td>";
@@ -725,17 +701,8 @@ $result = $conn->query($sql);
                                                             <p><strong>Horario asignado Tecnológico:</strong> {$row['horario_asignado']}</p>
                                                             <p><strong>Descripción del proyecto:</strong></p>
                                                             <textarea readonly style='width: 100%; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px; text-align: left;'>"
-<<<<<<< HEAD
-                                                    . htmlspecialchars($row['observaciones']) .
-                                                    "</textarea>
-                                                    
-                <div class='progress mb-3' role='progressbar' aria-label='Success example'>
-                    <div class='progress-bar text-bg-success' style='width: $per%'>{$row['avance']}/31</div>
-                </div>
-=======
                                                         . htmlspecialchars($row['observaciones']) .
                                                         "</textarea>
->>>>>>> c016320f1a69ab8d0493ca4e35c59302eca5acf1
                                                         </div>
                                                         <div class='modal-footer' style='justify-content: center;'>
                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' style='width: 150px;'>Cerrar</button>
@@ -882,7 +849,7 @@ ON
             $result = $conn->query($sql);
             ?>
 
-            <div class="col-12 col-md-9 mt-4 ps-5" id="SecDocente">
+            <div class="col-12 mt-4" id="SecDocente">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
                         <h3>DOCENTES</h3>
