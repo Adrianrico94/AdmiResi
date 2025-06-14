@@ -196,7 +196,7 @@ body {
 .project-card:nth-child(3) {
   animation-delay: 0.4s;
 }
-
+/* 
 #apellidoMaterno {
   text-transform: uppercase;
 }
@@ -219,4 +219,4 @@ body {
 
 #apellidoPaterno::placeholder {
   text-transform: none;
-}
+} */

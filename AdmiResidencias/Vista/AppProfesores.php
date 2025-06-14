@@ -917,39 +917,39 @@ $carpeta = "C:/xampp/htdocs/generarword-Git/Alumnos/";
 
               // Verificar si el ID del alumno existe
               // Si el alumno existe, proceder con la actualización
-$sql = "UPDATE alumnos SET avance = avance + 1 WHERE id_alumno = ?";
-$stmt = $conn->prepare($sql);
+              $sql = "UPDATE alumnos SET avance = avance + 1 WHERE id_alumno = ?";
+              $stmt = $conn->prepare($sql);
 
-if ($stmt === false) {
-  die('Error en la preparación de la consulta: ' . $conn->error);
-}
+              if ($stmt === false) {
+                die('Error en la preparación de la consulta: ' . $conn->error);
+              }
 
-$stmt->bind_param("i", $id_alumno);
-$stmt->execute();
+              $stmt->bind_param("i", $id_alumno);
+              $stmt->execute();
 
-if ($stmt->affected_rows > 0) {
-  // Actualización exitosa del avance
+              if ($stmt->affected_rows > 0) {
+                // Actualización exitosa del avance
 
-  // Ahora actualizamos el campo JSON
-  $sql_json = "UPDATE alumnos SET documento = JSON_ARRAY_APPEND(documento, '$', ?) WHERE id_alumno = ?";
-  $stmt_json = $conn->prepare($sql_json);
+                // Ahora actualizamos el campo JSON
+                $sql_json = "UPDATE alumnos SET documento = JSON_ARRAY_APPEND(documento, '$', ?) WHERE id_alumno = ?";
+                $stmt_json = $conn->prepare($sql_json);
 
-  if ($stmt_json === false) {
-    die('Error en la preparación de la consulta JSON: ' . $conn->error);
-  }
+                if ($stmt_json === false) {
+                  die('Error en la preparación de la consulta JSON: ' . $conn->error);
+                }
 
-  $stmt_json->bind_param("ii", $num, $id_alumno);
-  $stmt_json->execute();
+                $stmt_json->bind_param("ii", $num, $id_alumno);
+                $stmt_json->execute();
 
-  if ($stmt_json->affected_rows == 0) {
-    echo "<script>alert('No se pudo actualizar el historial JSON.');</script>";
-  }
+                if ($stmt_json->affected_rows == 0) {
+                  echo "<script>alert('No se pudo actualizar el historial JSON.');</script>";
+                }
 
-  $stmt_json->close();
-  
-} else {
-  echo "<script>alert('No se pudo actualizar el avance.');</script>";
-}
+                $stmt_json->close();
+                
+              } else {
+                echo "<script>alert('No se pudo actualizar el avance.');</script>";
+              }
 
               $stmt->close();
               $conn->close();
@@ -1007,16 +1007,29 @@ if ($stmt->affected_rows > 0) {
                 if (in_array($i, $doc)) {
                     echo "<td class='tabla-botones'><span title='¡Archivo aceptado!' onclick=\"alert('¡Este archivo ha sido aceptado!')\" class='btn btn-primary border-0 rounded-pill'><i class='bi bi-file-earmark-check'></i></span></td>";
                 }else{
+                    $ruta = $car . $mat . '/' . $i . '/';
                     $archivos = glob($car . $mat . '/' . $i . '/*');
                     if (!empty($archivos)) {
-                        echo "<td class='tabla-botones'><!-- Botón para Aceptar el documento -->
-                        <form data-id-alumno='$mat' data-num='$i' method='POST' class='d-inline form-btns aceD'>
-                            <button title='Aceptar archivo' type='submit' name='aceptar_documento' class='btn btn-success rounded-pill' id='Btn$mat$i'><i class='bi bi-check-lg'></i></button>
-                        </form>
-                        <!-- Botón para Rechazar el documento -->
-                        <form data-id-alumno='$mat' data-num='$i' data-ruta='$car$mat/$i' method='POST' class='d-inline form-btns reD'>
-                            <button title='Rechazar archivo' type='submit' name='rechazar_documento' class='btn btn-danger rounded-pill'><i class='bi bi-trash-fill'></i></button>
-                        </form></td>";
+                        $arch = basename($archivos[0]);
+                        $rutaArch = $ruta . $arch;
+                        $idBoton = 'btn_' . md5($rutaArch);
+                        echo "<td class='tabla-botones'>
+                        <!-- Botón para Aceptar el documento -->
+                        <button
+                          title='Aceptar documento'
+                          name='aceptar_documento' id='a$idBoton'
+                          class='btn btn-success rounded-pill' 
+                          onclick=\"aceptarArchivo('$mat', '$i', '$idBoton')\">
+                          <i class='bi bi-check-lg'></i></button>
+                        
+                        <!-- Botón para Rechazar el documento -->                        
+                        <button 
+                          id='$idBoton'
+                          title='Rechazar Documento' 
+                          class='btn btn-danger rounded-pill' 
+                          onclick=\"borrarArchivo('" . htmlspecialchars($rutaArch, ENT_QUOTES) . "', '$idBoton')\">
+                          <i class='bi bi-trash-fill'></i>
+                      </button></td>";
                     } else {
                         //Botón de subida
                         echo "<td class='tabla-botones'><button title='Archivo en espera.' onclick=\"alert('Este archivo aún no se ha subido.')\" class='btn btn-secondary border-0 rounded-pill'><i class='bi bi-clock'></i></span></td>";
@@ -1072,33 +1085,65 @@ if ($stmt->affected_rows > 0) {
                           }
                           
               });});}); 
-              document.addEventListener("DOMContentLoaded", () => {
-                  const forms = document.querySelectorAll(".reD");
-                  forms.forEach(form => {
-                      form.addEventListener("submit", function(e) {
-                          e.preventDefault(); // evita el reinicio de la página
-                          if (confirm('¡Este documento se borrará permanentemente!')) {
-                            try {
-                              const formData = new FormData();
-                              formData.append('archivo', this.dataset.ruta);
-                              formData.append('rechazar_documento', true);
 
-                              fetch('', {
-                                  method: 'POST',
-                                  body: formData
-                              })
-                              .then(response => response.json())
-                              .then(data => {
-                                  // Actualiza el DOM con los nuevos datos sin recargar la página
-                                  console.log(data);
-                              });
-                              alert("Documento borrado.");
-                            } catch (error) {
-                                
-                            }
-                          }
-                          
-              });});}); 
+              //Función para aceptar documento.
+              function aceptarArchivo(idAlumno, nuevoDocumento, botonId) {
+                if (!confirm('Este archivo se guardará de forma permantente')) return;
+
+                fetch('../Modelo/actualizar_docs.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'id_alumno=' + encodeURIComponent(idAlumno) + 
+                          '&documento=' + encodeURIComponent(nuevoDocumento)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    const boton = document.getElementById(botonId);
+                    if (boton) {
+                        const td = boton.closest('td'); // Encuentra el <td> contenedor
+                        if (td) {
+                            const botones = td.querySelectorAll('button');
+                            botones.forEach(b => b.disabled = true); // Deshabilita todos los botones
+                        }
+                    }
+                })
+                .catch(error => {
+                    alert('Error al eliminar el archivo');
+                    console.error(error);
+                });
+            }
+
+              //Función para rechazar documento.
+              function borrarArchivo(ruta, botonId) {
+                if (!confirm('¿Estás seguro de que deseas borrar este archivo?')) return;
+
+                fetch('../Modelo/borrar_doc.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'ruta=' + encodeURIComponent(ruta)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    const boton = document.getElementById(botonId);
+                    if (boton) {
+                        const td = boton.closest('td'); // Encuentra el <td> contenedor
+                        if (td) {
+                            const botones = td.querySelectorAll('button');
+                            botones.forEach(b => b.disabled = true); // Deshabilita todos los botones
+                        }
+                    }
+                })
+                .catch(error => {
+                    alert('Error al eliminar el archivo');
+                    console.error(error);
+                });
+            }
 
               
     function openf(control, documento) {
