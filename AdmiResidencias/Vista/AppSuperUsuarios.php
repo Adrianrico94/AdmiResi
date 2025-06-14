@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include 'datos_empresa.php'; // Aquí cargamos los datos en $empresas
 
 // Tiempo de inactividad máximo (en segundos)
 $inactive_time = 6000; // 10 minutos
@@ -106,6 +106,9 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="Styles/styleAppSuperUsuarios.css">
 
+    <!-- icono bostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- fin iconos  -->
 
     <script>
         // Función para cerrar sesión si no hay actividad del ratón
@@ -149,42 +152,43 @@ $result = $conn->query($sql);
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-search"></i></span>
                     <input class="form-control search-bar me-2" type="search" placeholder="Buscar"
-                        aria-label="Buscar" id="buscar"/>
+                        aria-label="Buscar" id="buscar" />
                 </div>
                 <button class="btn btn-search" type="submit">Buscar</button>
             </form>
 
             <script>
                 //Busqueda de datos
-                document.getElementById("buscar").addEventListener("input",onInputChangue);
-                function onInputChangue(){
-                let inputText = document.getElementById("buscar").value.toString().toLowerCase();
-                //console.log(inputText);
-                let tablaAlu = document.getElementById("alumnos");
-                let filasAlu = tablaAlu.getElementsByTagName("tr");
-                for (let i = 0; i < filasAlu.length; i++) {
-                    let aluNombre = filasAlu[i].cells[1].textContent.toString().toLowerCase();
-                    let aluNumero = filasAlu[i].cells[2].textContent.toString().toLowerCase();
-                    let aluAP = filasAlu[i].cells[3].textContent.toString().toLowerCase();
-                    let aluAM = filasAlu[i].cells[4].textContent.toString().toLowerCase();
-                    if (aluNombre.indexOf(inputText)===-1 && aluNumero.indexOf(inputText)===-1 && aluAP.indexOf(inputText)===-1 && aluAM.indexOf(inputText)===-1){
-                    filasAlu[i].style.visibility="collapse";
-                    }else{
-                    filasAlu[i].style.visibility="";
+                document.getElementById("buscar").addEventListener("input", onInputChangue);
+
+                function onInputChangue() {
+                    let inputText = document.getElementById("buscar").value.toString().toLowerCase();
+                    //console.log(inputText);
+                    let tablaAlu = document.getElementById("alumnos");
+                    let filasAlu = tablaAlu.getElementsByTagName("tr");
+                    for (let i = 0; i < filasAlu.length; i++) {
+                        let aluNombre = filasAlu[i].cells[1].textContent.toString().toLowerCase();
+                        let aluNumero = filasAlu[i].cells[2].textContent.toString().toLowerCase();
+                        let aluAP = filasAlu[i].cells[3].textContent.toString().toLowerCase();
+                        let aluAM = filasAlu[i].cells[4].textContent.toString().toLowerCase();
+                        if (aluNombre.indexOf(inputText) === -1 && aluNumero.indexOf(inputText) === -1 && aluAP.indexOf(inputText) === -1 && aluAM.indexOf(inputText) === -1) {
+                            filasAlu[i].style.visibility = "collapse";
+                        } else {
+                            filasAlu[i].style.visibility = "";
+                        }
                     }
-                }
-                let tablaProf = document.getElementById("profesores");
-                let filasProf = tablaProf.getElementsByTagName("tr");
-                for (let i = 0; i < filasProf.length; i++) {
-                    let proNombre = filasProf[i].cells[7].textContent.toString().toLowerCase();
-                    let proAP = filasProf[i].cells[8].textContent.toString().toLowerCase();
-                    let proAM = filasProf[i].cells[9].textContent.toString().toLowerCase();
-                    if (proNombre.indexOf(inputText)===-1 && proAP.indexOf(inputText)===-1 && proAM.indexOf(inputText)===-1){
-                    filasProf[i].style.visibility="collapse";
-                    }else{
-                    filasProf[i].style.visibility="";
+                    let tablaProf = document.getElementById("profesores");
+                    let filasProf = tablaProf.getElementsByTagName("tr");
+                    for (let i = 0; i < filasProf.length; i++) {
+                        let proNombre = filasProf[i].cells[7].textContent.toString().toLowerCase();
+                        let proAP = filasProf[i].cells[8].textContent.toString().toLowerCase();
+                        let proAM = filasProf[i].cells[9].textContent.toString().toLowerCase();
+                        if (proNombre.indexOf(inputText) === -1 && proAP.indexOf(inputText) === -1 && proAM.indexOf(inputText) === -1) {
+                            filasProf[i].style.visibility = "collapse";
+                        } else {
+                            filasProf[i].style.visibility = "";
+                        }
                     }
-                }
                 }
             </script>
 
@@ -194,7 +198,7 @@ $result = $conn->query($sql);
                             class="bi bi-bell-fill"></i></a>
                 </li>
                 <!-- Filtro (menú desplegable) -->
-               
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link profile-name" href="#"><i class="bi bi-person-circle me-1"
@@ -254,6 +258,7 @@ $result = $conn->query($sql);
                 <i class="bi bi-person-fill"></i>
                 <span>Docente</span>
             </a>
+            
             <a href="#" class="text-center" data-bs-toggle="modal" data-bs-target="#logoutModal" title="Haz clic para cerrar sesión.">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Salir</span>
@@ -264,15 +269,45 @@ $result = $conn->query($sql);
 
         <!-- Contenido principal -->
         <div class="content pt-0 mt-2">
-            <div class="text-center col-12 col-md-9 mt-2  border border-2 rounded p-3  text-white" style="background-color: #8a2036;">
+            <div class="text-center col-12 col-md-10 mt-2  border border-2 rounded p-3  text-white" style="background-color: #8a2036;">
                 <h1>SECCIÓN DE ALUMNOS</h1>
             </div>
+            <div class="d-flex flex-wrap gap-2 pt-2">
+
+                <!-- Agregar usuario -->
+                <button type="button" class="btn btn-success px-3" data-bs-toggle="modal" data-bs-target="#insertarModal">
+                    <i class="bi bi-person-fill-add fs-5 me-1"></i> Agregar usuario
+                </button>
+
+                <!-- Asignar Alumno -->
+                <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#modalAsignarAlumno">
+                    <i class="bi bi-people-fill fs-5 me-1"></i> Asignar Alumno
+                </button>
+
+                <!-- Eliminar Usuarios -->
+                <button type="button" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#modalEliminarUsuarios">
+                    <i class="bi bi-person-x-fill fs-5 me-1"></i> Eliminar Usuarios
+                </button>
+
+                <!-- Asignar Empresa -->
+                <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#modalAsignarEmpresa">
+                    <i class="bi bi-buildings-fill fs-5 me-1"></i> Asignar Empresa
+                </button>
+
+                <!-- Agregar Empresa -->
+                <button type="button" class="btn btn-success px-3" data-bs-toggle="modal" data-bs-target="#AgregarEmpresa">
+                    <i class="bi bi-building-fill-add fs-5 me-1"></i> Agregar Empresa
+                </button>
+
+                <!-- Eliminar Empresa -->
+                <button type="button" class="btn btn-danger px-3" data-bs-toggle="modal" data-bs-target="#EliminarEmpresa">
+                    <i class="bi bi-building-fill-x fs-5 me-1"></i> Eliminar Empresa
+                </button>
+
+            </div>
+
 
             <div class="container mt-3">
-                <!-- Botón que abre el Modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertarModal">
-                    Registrar usuario
-                </button>
 
                 <!-- Modal para insertar usuario -->
                 <div class="modal fade" id="insertarModal" tabindex="-1" aria-labelledby="insertarModalLabel" aria-hidden="true">
@@ -378,22 +413,9 @@ $result = $conn->query($sql);
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-                <!-- Botón: Asignar Alumno -->
-                <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalAsignarAlumno">
-                    Asignar Alumno
-                </button>
 
-                <!-- Botón: Eliminar Usuarios -->
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarUsuarios">
-                    Eliminar Usuarios
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAsignarEmpresa">
-                    Asignar Empresa 
-                </button>
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AgregarEmpresa">
-                     Agregar empresa
-                </button>
+
             </div>
 
 
@@ -449,13 +471,13 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             </div>
-        
-        
-        
+
+
+
             <!-- Modal: Asignar empresa Alumno -->
 
 
-         <div class="modal fade" id="modalAsignarEmpresa" tabindex="-1" aria-labelledby="modalAsignarEmpresaLabel" aria-hidden="true">
+            <div class="modal fade" id="modalAsignarEmpresa" tabindex="-1" aria-labelledby="modalAsignarEmpresaLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -482,95 +504,96 @@ $result = $conn->query($sql);
 
 
 
-<!-- Agregar nueva empresa  -->
-<div class="modal fade" id="AgregarEmpresa" tabindex="-1" aria-labelledby="modalAgregarEmpresaLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-    
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAgregarEmpresaLabel">Agregar Empresa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+            <!-- Agregar nueva empresa -->
+            <div class="modal fade" id="AgregarEmpresa" tabindex="-1" aria-labelledby="modalAgregarEmpresaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
-      <div class="modal-body">
-        <form id="formAgregarEmpresa" action="procesar_asignar_empresa.php" method="POST" onsubmit="return mostrarAlertaEmpresa()">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAgregarEmpresaLabel">Agregar Empresa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
 
-          <div class="mb-3">
-            <label for="matricula" class="form-label">Matrícula</label>
-            <input type="text" class="form-control" id="matricula" name="matricula" required>
-          </div>
+                        <div class="modal-body">
+                            <form id="formAgregarEmpresa" action="procesar_nueva_empresa.php" method="POST" onsubmit="return mostrarAlertaEmpresa()">
 
-          <div class="mb-3">
-            <label for="empresa" class="form-label">Empresa</label>
-            <input type="text" class="form-control" id="empresa" name="empresa" required>
-          </div>
+                                <div class="mb-3">
+                                    <label for="nombre_empresa" class="form-label">Ingrese el nombre de la empresa</label>
+                                    <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" placeholder="nombre de la empresa" required>
+                                </div>
 
-          <div class="mb-3">
-            <label for="proyecto_asignado" class="form-label">Proyecto Asignado</label>
-            <input type="text" class="form-control" id="proyecto_asignado" name="proyecto_asignado" required>
-          </div>
+                                <div class="mb-3">
+                                    <label for="correo_empresa" class="form-label"> Ingrese el correo de la empresa</label>
+                                    <input type="email" class="form-control" id="correo_empresa" name="correo_empresa" placeholder="empresa@gmail.com">
+                                </div>
 
-          <div class="col-12 col-md-12 mb-3">
-            <label for="carrera" class="form-label">Carrera</label>
-            <select class="form-select" id="carrera" name="carrera" required>
-              <option value="">Selecciona una carrera</option>
-              <option value="Ingeniería en Sistemas Computacionales">
-                Ingeniería en Sistemas Computacionales
-              </option>
-            </select>
-          </div>
+                                <div class="mb-3">
+                                    <label for="contacto_empresa" class="form-label">Ingrese el teléfono de contacto</label>
+                                    <input type="tel" class="form-control" id="contacto_empresa" name="contacto_empresa" placeholder="55-15-25-35-45 ">
+                                </div>
 
-          <div class="mb-3">
-            <label for="ingreso" class="form-label">Fecha de Ingreso</label>
-            <input type="date" class="form-control" id="ingreso" name="ingreso" required>
-          </div>
+                                <div class="mb-3">
+                                    <label for="tutor_asignado" class="form-label">Nombre del tutor asignado de la empresa</label>
+                                    <input type="text" class="form-control" id="tutor_asignado" name="tutor_asignado" placeholder="Armando Chavez Martinez">
+                                </div>
 
-          <div class="mb-3">
-            <label for="egreso" class="form-label">Fecha de Egreso</label>
-            <input type="date" class="form-control" id="egreso" name="egreso" required>
-          </div>
+                                <div class="mb-3">
+                                    <label for="horario_asistencia" class="form-label">Horario de asistencia</label>
+                                    <input type="text" class="form-control" id="horario_asistencia" name="horario_asistencia" placeholder="12:00 am a 5:00 pm">
+                                </div>
 
-          <div class="mb-3">
-            <label for="telefono_alumno" class="form-label">Teléfono del Alumno</label>
-            <input type="tel" class="form-control" id="telefono_alumno" name="telefono_alumno" required>
-          </div>
+                                <div class="mb-3">
+                                    <label for="dias_asistencia" class="form-label">Días de asistencia</label>
+                                    <input type="text" class="form-control" id="dias_asistencia" name="dias_asistencia" placeholder="Lunes - viernes">
+                                </div>
 
-          <div class="mb-3">
-            <label for="telefono_profesor_asignado" class="form-label">Teléfono del Profesor Asignado</label>
-            <input type="tel" class="form-control" id="telefono_profesor_asignado" name="telefono_profesor_asignado" required>
-          </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Registrar Empresa</button>
+                                </div>
 
-          <div class="mb-3">
-            <label for="observaciones" class="form-label">Observaciones</label>
-            <textarea class="form-control" id="observaciones" name="observaciones" rows="3"></textarea>
-          </div>
+                            </form>
+                        </div>
 
-          <div class="mb-3">
-            <label for="horario_asignado" class="form-label">Horario Asignado</label>
-            <input type="text" class="form-control" id="horario_asignado" name="horario_asignado" placeholder="Ej. Lunes a Viernes 9am - 2pm" required>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Registrar</button>
-
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- JavaScript para mostrar el alert -->
-<script>
-  function mostrarAlertaEmpresa() {
-    alert("Registro de empresa exitoso");
-    return true; // permite que el formulario se envíe
-  }
-</script>
+                    </div>
+                </div>
+            </div>
 
 
+            <!-- Eliminar empresa -->
+            <div class="modal fade" id="EliminarEmpresa" tabindex="-1" aria-labelledby="modalEliminarEmpresaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEliminarEmpresaLabel">Eliminar Empresa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="formEliminarEmpresa" action="eliminar_Empresa.php" method="POST" onsubmit="return confirmarEliminacion()">
+
+                                <div class="mb-3">
+                                    <label for="id_o_nombre_empresa" class="form-label">Ingrese el ID o nombre de la empresa a eliminar</label>
+                                    <input type="text" class="form-control" id="id_o_nombre_empresa" name="id_o_nombre_empresa" placeholder="ID o nombre de la empresa" required>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-danger">Eliminar empresa</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
 
-            
+            <!-- fin eliminar empresa -->
+
+
+
+
             <script>
                 // Función para mostrar/ocultar la sección
 
@@ -587,82 +610,83 @@ $result = $conn->query($sql);
             <div class="col-12 col-md-9 mt-2 ps-5" id="SecAlumno">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
-                        <h3>ALUMNOS</h3>                        <div class="container-fluid d-flex justify-content-center">
+                        <h3>ALUMNOS</h3>
+                        <div class="container-fluid d-flex justify-content-center">
                             <div class="shadow-lg rounded" style="width: 100%; max-width: 1350px; margin: 0 auto;">
                                 <!-- Contenedor con el scroll en la tabla -->
-                                 <div style="width: 100%; overflow-x: auto;">
+                                <div style="width: 100%; overflow-x: auto;">
                                     <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%; max-height: 400px; overflow-y: auto;">
                                         <thead class="bg-secondary text-white" style="position: sticky; top: 0; z-index: 1;">
                                             <tr>
-                                            
-                                            <th class="text-center" style="width: auto;  color: white;">ID Alumno</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Matrícula</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Nombre</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Apellido Paterno</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Apellido Materno</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Empresa</th>
 
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 80px; padding-right: 80px; color: white;">Proyecto Asignado</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 70px; padding-right: 70px; color: white;">Carrera</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Ingreso</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Egreso</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Más detalles</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 30px;color: white 50px; padding-right: 50px; color: white; ">Acciones</th>
-                                            
+                                                <th class="text-center" style="width: auto;  color: white;">ID Alumno</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Matrícula</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Nombre</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Apellido Paterno</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Apellido Materno</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Empresa</th>
 
-
-                                           
-                                      
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 80px; padding-right: 80px; color: white;">Proyecto Asignado</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 70px; padding-right: 70px; color: white;">Carrera</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Ingreso</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap; padding-left: 30px; padding-right: 30px; color: white;">Egreso</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Más detalles</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 30px;color: white 50px; padding-right: 50px; color: white; ">Acciones</th>
 
 
-                                        </tr>
-                                    </thead>
-                                    <tbody id="alumnos">
-                                        <?php
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tr>";
-                                            
-                                                echo "<td class='text-center'>" . $row["id_alumno"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["matricula"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["nombre"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["apellido_paterno"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["apellido_materno"] . "</td>";
-                                                echo "<td>" . $row["empresa"] . "</td>";
-                                                echo "<td>" . $row["proyecto_asignado"] . "</td>";
-                                                echo "<td>" . $row["carrera"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["ingreso"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["egreso"] . "</td>";
-                                                
-                                                echo "<td class='text-center'>";
-                                                // Botón para Ver más detalle
-                                                echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#ver_{$row['id_alumno']}'>
+
+
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="alumnos">
+                                            <?php
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<tr>";
+
+                                                    echo "<td class='text-center'>" . $row["id_alumno"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["matricula"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["nombre"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["apellido_paterno"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["apellido_materno"] . "</td>";
+                                                    echo "<td>" . $row["empresa"] . "</td>";
+                                                    echo "<td>" . $row["proyecto_asignado"] . "</td>";
+                                                    echo "<td>" . $row["carrera"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["ingreso"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["egreso"] . "</td>";
+
+                                                    echo "<td class='text-center'>";
+                                                    // Botón para Ver más detalle
+                                                    echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#ver_{$row['id_alumno']}'>
                                                             Ver más detalle
                                                         </button>";
-                                                echo "</td>";
-                                                // Botones con iconos que abren modales
-                                                echo "<td class='text-center'>";
+                                                    echo "</td>";
+                                                    // Botones con iconos que abren modales
+                                                    echo "<td class='text-center'>";
 
-                                                // Botón para editar
-                                                echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#editModal_{$row['id_alumno']}'>
+                                                    // Botón para editar
+                                                    echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#editModal_{$row['id_alumno']}'>
                                                             <i class='bi bi-pencil'></i>
                                                         </button>";
-                                                // Botón para eliminar
-                                                echo "<button class='btn btn-danger btn-sm' title='Eliminar' data-bs-toggle='modal' data-bs-target='#deleteModal_{$row['id_alumno']}'>
+                                                    // Botón para eliminar
+                                                    echo "<button class='btn btn-danger btn-sm' title='Eliminar' data-bs-toggle='modal' data-bs-target='#deleteModal_{$row['id_alumno']}'>
                                        <i class='bi bi-trash'></i>
                                      </button>";
-                                                echo "</td>";
-                                                echo "</tr>";
+                                                    echo "</td>";
+                                                    echo "</tr>";
 
-                                                echo "</td>";
-
-
-                                                echo "</tr>";
+                                                    echo "</td>";
 
 
+                                                    echo "</tr>";
 
-                                                // Modal para Mostrar
-                                                echo "<div class='modal fade' id='ver_{$row['id_alumno']}' tabindex='-1' aria-labelledby='editModalLabel_{$row['id_alumno']}' aria-hidden='true'>
+
+
+                                                    // Modal para Mostrar
+                                                    echo "<div class='modal fade' id='ver_{$row['id_alumno']}' tabindex='-1' aria-labelledby='editModalLabel_{$row['id_alumno']}' aria-hidden='true'>
                                                 <div class='modal-dialog'>
                                                     <div class='modal-content' >
                                                         <div class='modal-header'style='background-color: #56212f; color: white;'>
@@ -675,8 +699,8 @@ $result = $conn->query($sql);
                                                             <p><strong>Horario asignado Tecnológico:</strong> {$row['horario_asignado']}</p>
                                                             <p><strong>Descripción del proyecto:</strong></p>
                                                             <textarea readonly style='width: 100%; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px; text-align: left;'>"
-                                                    . htmlspecialchars($row['observaciones']) .
-                                                    "</textarea>
+                                                        . htmlspecialchars($row['observaciones']) .
+                                                        "</textarea>
                                                         </div>
                                                         <div class='modal-footer' style='justify-content: center;'>
                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' style='width: 150px;'>Cerrar</button>
@@ -686,9 +710,9 @@ $result = $conn->query($sql);
                                                 </div>
                                             </div>";
 
-                                                // Modal para editar información
-                                                // Modal para editar información
-                                                echo "<div class='modal fade' id='editModal_{$row['id_alumno']}' tabindex='-1' aria-labelledby='editModalLabel_{$row['id_alumno']}' aria-hidden='true'>
+                                                    // Modal para editar información
+                                                    // Modal para editar información
+                                                    echo "<div class='modal fade' id='editModal_{$row['id_alumno']}' tabindex='-1' aria-labelledby='editModalLabel_{$row['id_alumno']}' aria-hidden='true'>
                                             <div class='modal-dialog'>
                                                 <div class='modal-content'>
                                                     <div class='modal-header' style='background-color: #56212f; color: white;'>
@@ -751,8 +775,8 @@ $result = $conn->query($sql);
 
 
 
-                                                // Modal de eliminación
-                                                echo "<div class='modal fade' id='deleteModal_{$row['id_alumno']}' tabindex='-1' aria-labelledby='deleteModalLabel_{$row['id_alumno']}' aria-hidden='true'>
+                                                    // Modal de eliminación
+                                                    echo "<div class='modal fade' id='deleteModal_{$row['id_alumno']}' tabindex='-1' aria-labelledby='deleteModalLabel_{$row['id_alumno']}' aria-hidden='true'>
                                         <div class='modal-dialog'>
                                             <div class='modal-content'>
                                                 <div class='modal-header'>
@@ -772,11 +796,11 @@ $result = $conn->query($sql);
                                             </div>
                                         </div>
                                     </div>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='13' class='text-center'>No hay registros</td></tr>";
                                             }
-                                        } else {
-                                            echo "<tr><td colspan='13' class='text-center'>No hay registros</td></tr>";
-                                        }
-                                        ?>
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -822,7 +846,7 @@ ON
 
             $result = $conn->query($sql);
             ?>
-            
+
             <div class="col-12 col-md-9 mt-4 ps-5" id="SecDocente">
                 <div class="card rounded-3">
                     <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
@@ -833,62 +857,62 @@ ON
                                     <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%; max-height: 400px; overflow-y: auto;">
                                         <thead class="bg-secondary text-white" style="position: sticky; top: 0; z-index: 1;">
                                             <tr>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Id docente</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Clave Profesor</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Id docente</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Clave Profesor</th>
 
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Carrera</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Carrera</th>
 
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Teléfono</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Teléfono</th>
 
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Correo Institucional</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Observaciones</th>
-                                            <!-- <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Horario asignado</th> -->
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">ID Usuario</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Nombre</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Apellido Paterno</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Apellido Materno</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Correo Electrónico</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Contraseña</th>
-                                            <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Acciones</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Correo Institucional</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Observaciones</th>
+                                                <!-- <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Horario asignado</th> -->
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">ID Usuario</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Nombre</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Apellido Paterno</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Apellido Materno</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Correo Electrónico</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Contraseña</th>
+                                                <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Acciones</th>
 
 
-                                        </tr>
-                                    </thead>
-                                    <tbody id="profesores">
-                                        <?php
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tr>";
-                                                echo "<td class='text-center'>" . $row["id_docente"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["clave_profesor"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["carrera"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["telefono_docente"] . "</td>";
-                                                echo "<td class='text-center'>" . $row["correo_institucional"] . "</td>";
-                                                // echo "<td class='text-center'>" . $row["observaciones"] . "</td>";
+                                            </tr>
+                                        </thead>
+                                        <tbody id="profesores">
+                                            <?php
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<tr>";
+                                                    echo "<td class='text-center'>" . $row["id_docente"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["clave_profesor"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["carrera"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["telefono_docente"] . "</td>";
+                                                    echo "<td class='text-center'>" . $row["correo_institucional"] . "</td>";
+                                                    // echo "<td class='text-center'>" . $row["observaciones"] . "</td>";
 
-                                                echo "<td class='text-center'>" . $row["horario_asignado"] . "</td>";
-                                                echo "<td class='text-center'>" . ($row["id_usuario"] ?? "N/A") . "</td>";
-                                                echo "<td class='text-center'>" . ($row["nombre"] ?? "N/A") . "</td>";
-                                                echo "<td class='text-center'>" . ($row["apellido_paterno"] ?? "N/A") . "</td>";
-                                                echo "<td class='text-center'>" . ($row["apellido_materno"] ?? "N/A") . "</td>";
-                                                echo "<td class='text-center'>" . ($row["correo_electronico"] ?? "N/A") . "</td>";
-                                                echo "<td class='text-center'>" . ($row["contrasena"] ?? "N/A") . "</td>";
-                                                echo "<td class='text-center'>";
+                                                    echo "<td class='text-center'>" . $row["horario_asignado"] . "</td>";
+                                                    echo "<td class='text-center'>" . ($row["id_usuario"] ?? "N/A") . "</td>";
+                                                    echo "<td class='text-center'>" . ($row["nombre"] ?? "N/A") . "</td>";
+                                                    echo "<td class='text-center'>" . ($row["apellido_paterno"] ?? "N/A") . "</td>";
+                                                    echo "<td class='text-center'>" . ($row["apellido_materno"] ?? "N/A") . "</td>";
+                                                    echo "<td class='text-center'>" . ($row["correo_electronico"] ?? "N/A") . "</td>";
+                                                    echo "<td class='text-center'>" . ($row["contrasena"] ?? "N/A") . "</td>";
+                                                    echo "<td class='text-center'>";
 
-                                                // Botón para editar
-                                                echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#editdocente_{$row['id_docente']}'>
+                                                    // Botón para editar
+                                                    echo "<button class='btn btn-primary btn-sm me-1' title='Editar' data-bs-toggle='modal' data-bs-target='#editdocente_{$row['id_docente']}'>
                                                         <i class='bi bi-pencil'></i>
                                                     </button>";
 
-                                                // Botón para eliminar
-                                                //echo "<button class='btn btn-danger btn-sm' title='Eliminar' data-bs-toggle='modal' data-bs-target='#deletedocente_{$row['id_docente']}'>
-                                                      //      <i class='bi bi-trash'></i>
-                                                     //   </button>";
-                                                echo "</td>";
-                                                echo "</tr>";
+                                                    // Botón para eliminar
+                                                    //echo "<button class='btn btn-danger btn-sm' title='Eliminar' data-bs-toggle='modal' data-bs-target='#deletedocente_{$row['id_docente']}'>
+                                                    //      <i class='bi bi-trash'></i>
+                                                    //   </button>";
+                                                    echo "</td>";
+                                                    echo "</tr>";
 
-                                                // Modal para editar información
-                                                echo "<div class='modal fade' id='editdocente_{$row['id_docente']}' tabindex='-1' aria-labelledby='editModalLabel_{$row['id_docente']}' aria-hidden='true'>
+                                                    // Modal para editar información
+                                                    echo "<div class='modal fade' id='editdocente_{$row['id_docente']}' tabindex='-1' aria-labelledby='editModalLabel_{$row['id_docente']}' aria-hidden='true'>
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header' style='background-color: #56212f; color: white;'>
@@ -959,38 +983,102 @@ ON
                                                         </div>
                                                     </div>
                                                     </div>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='6' class='text-center'>No hay docentes registrados.</td></tr>";
                                             }
-                                        } else {
-                                            echo "<tr><td colspan='6' class='text-center'>No hay docentes registrados.</td></tr>";
-                                        }
-                                        ?>
-                                        
-                                    </tbody>
-                                </table>
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+                        <div class="mb-4"></div> <!-- Espacio adicional en la parte inferior -->
                     </div>
-                    <div class="mb-4"></div> <!-- Espacio adicional en la parte inferior -->
                 </div>
+
+
+                <!-- tabla empresas -->
+                <div class="col-12 col-md-12 mt-4 " id="SecDocente">
+                    <div class="card rounded-3">
+                        <div class="text-center my-2 mb-0 flex-grow-1 fs-6 fs-md-4">
+                            <h2>Empresas registradas</h2>
+                            <div class="container-fluid d-flex justify-content-center">
+                                <div class="shadow-lg rounded" style="width: 100%; max-width: 1350px; margin: 0 auto;">
+                                    <div style="width: 100%; overflow-x: auto;">
+                                                  <table class="table table-bordered table-hover table-striped align-middle" style="width: 100%; max-height: 400px; overflow-y: auto;">
+                                        <thead class="bg-secondary text-white" style="position: sticky; top: 0; z-index: 1;">
+                                                <tr>
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 6px;color: white 50px; padding-right: 6px; color: white; ">ID Empresa</th>
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Nombre</th>
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Correo</th>
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Teléfono</th>
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 20px;color: white 50px; padding-right: 20px; color: white; ">Tutor Asignado</th>
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 60px;color: white 50px; padding-right: 60px; color: white; ">Horario</th>
+
+                                                    <th class="text-center" style="width: auto; white-space: nowrap;  padding-left: 50px;color: white 50px; padding-right: 50px; color: white; ">Días</th>
+
+
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($empresas)): ?>
+                                                    <?php foreach ($empresas as $fila): ?>
+                                                        <tr>
+                                                            <td><?= htmlspecialchars($fila['id_empresa']) ?></td>
+                                                            <td><?= htmlspecialchars($fila['nombre_empresa']) ?></td>
+                                                            <td><?= htmlspecialchars($fila['correo_empresa']) ?></td>
+                                                            <td><?= htmlspecialchars($fila['contacto_empresa']) ?></td>
+                                                            <td><?= htmlspecialchars($fila['tutor_asignado']) ?></td>
+                                                            <td><?= htmlspecialchars($fila['horario_asistencia']) ?></td>
+                                                            <td><?= htmlspecialchars($fila['dias_asistencia']) ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <tr>
+                                                        <td colspan="7" class="text-center">No hay empresas registradas</td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <!-- fin tabal empresas -->
         </div>
 
-            <?php
-            $conn->close();
-            ?>
+
+        <?php
+        $conn->close();
+        ?>
 
 
 
 
-        </div>
+
+
+    </div>
+
     </div>
 
 
 
 
 
+    <div class="container container-crm mt-4">
 
 
+    </div>
 
 
     <!-- Footer -->
